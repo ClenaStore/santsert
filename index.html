@@ -10,8 +10,20 @@
   --muted:#64748b; --card:#fff; --line:#e5e7eb; --accent:#2563eb;
   --shadow:0 10px 30px rgba(0,0,0,.08);
 }
-*{box-sizing:border-box} html,body{margin:0} body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+*{box-sizing:border-box} html,body{margin:0}
+body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
 a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
+
+/* ===== LOADER ===== */
+.loader{position:fixed;inset:0;background:linear-gradient(180deg,var(--blue),var(--blue2));display:grid;place-items:center;z-index:9999;transition:opacity .4s ease,visibility .4s ease}
+.loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader .box{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;padding:24px}
+.loader .brand{width:clamp(140px,22vw,220px);height:auto;filter:drop-shadow(0 10px 25px rgba(0,0,0,.35))}
+.loader .dots{display:flex;gap:10px}
+.loader .dot{width:14px;height:14px;border-radius:999px;background:var(--gold);animation:bounce .9s infinite ease-in-out}
+.loader .dot:nth-child(2){animation-delay:.15s}
+.loader .dot:nth-child(3){animation-delay:.30s}
+@keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.6}40%{transform:scale(1);opacity:1}}
 
 /* Header */
 .header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:var(--shadow)}
@@ -62,6 +74,17 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 </style>
 </head>
 <body>
+
+<!-- LOADER -->
+<div id="app-loader" class="loader" aria-hidden="false">
+  <div class="box">
+    <img class="brand" alt="SIM Contabilidade" src="https://github.com/ClenaStore/santsert/blob/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-20%20%C3%A0(s)%2016.21.40_26238e6c.jpg?raw=true">
+    <div class="dots" aria-label="carregando">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+  </div>
+</div>
+
 <header class="header">
   <div class="bar">
     <a class="logo" href="index.html" aria-label="SIM Contabilidade">
@@ -81,7 +104,6 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 <!-- Slider -->
 <section class="slider" id="slider">
   <div class="overlay"></div>
-  <!-- slides são criados dinamicamente -->
   <div class="caption">
     <h1>Assessoria contábil completa</h1>
     <p>Abertura/encerramento de empresas • Fiscal • Trabalhista • Consultoria</p>
@@ -119,7 +141,20 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 <script>
 const BANNERS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID/exec"; // <-- troque
 
-// Utilitários de Login (modal)
+// ===== Loader control =====
+const Loader = (() => {
+  const el = document.getElementById('app-loader');
+  const MIN_MS = 800; // tempo mínimo visível
+  let start = Date.now();
+  function show(){ start = Date.now(); el.classList.remove('hidden'); }
+  function hide(){
+    const remain = Math.max(0, MIN_MS - (Date.now() - start));
+    setTimeout(()=> el.classList.add('hidden'), remain);
+  }
+  return { show, hide };
+})();
+
+// ===== Login (modal) =====
 const Login = {
   open(){ document.getElementById('login-modal').classList.add('open'); },
   close(){ document.getElementById('login-modal').classList.remove('open'); },
@@ -131,14 +166,13 @@ const Login = {
   }
 };
 
-// Slider
+// ===== Slider =====
 const Slider = (() => {
   let images = [], idx = 0, timer=null, hold=false;
   const root = document.getElementById('slider');
   const dots = document.getElementById('dots');
 
   function render(){
-    // remove slides antigos
     [...root.querySelectorAll('.slide')].forEach(el=>el.remove());
     dots.innerHTML = '';
     images.forEach((src,i)=>{
@@ -167,8 +201,19 @@ const Slider = (() => {
     timer = setInterval(()=>{ if(!hold) next(); }, 5000);
   }
 
+  function preload(src){
+    return new Promise(res=>{
+      if(!src) return res();
+      const im = new Image();
+      im.onload = () => res();
+      im.onerror = () => res();
+      im.src = src;
+    });
+  }
+
   // carrega banners da planilha
   async function load(page){
+    Loader.show();
     try{
       const url = `${BANNERS_ENDPOINT}?page=${encodeURIComponent(page)}`;
       const res = await fetch(url);
@@ -184,10 +229,11 @@ const Slider = (() => {
         "https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1600&auto=format&fit=crop"
       ];
     }
+    await preload(images[0]); // garante primeira imagem
     render(); autoplay();
+    Loader.hide();
   }
 
-  // pausa no hover (desktop)
   root.addEventListener('mouseenter',()=>hold=true);
   root.addEventListener('mouseleave',()=>hold=false);
 
