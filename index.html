@@ -1,0 +1,55 @@
+<!doctype html>
+</div>
+</div>
+</section>
+
+
+<!-- Destaques -->
+<section class="section">
+<div class="grid">
+<article class="card span-4">
+<h3>Contabilidade Gerencial</h3>
+<p>Informações claras e tempestivas para decisões estratégicas.</p>
+<a class="btn" href="servicos.html">Conhecer serviços</a>
+</article>
+<article class="card span-4">
+<h3>Controle Fiscal</h3>
+<p>Conformidade tributária e planejamento para pagar menos impostos dentro da lei.</p>
+<a class="btn" href="servicos.html#fiscal">Saiba mais</a>
+</article>
+<article class="card span-4">
+<h3>Área do Cliente</h3>
+<p>Documentos, solicitações e informativos específicos.</p>
+<button class="btn" onclick="Login.open()">Entrar</button>
+</article>
+</div>
+</section>
+
+
+<footer class="footer">
+<div class="inner">
+<small>© <span id="year"></span> SIM Contabilidade. Todos os direitos reservados.</small>
+</div>
+</footer>
+
+
+<!-- Modal Login (reutilizado em todas as páginas) -->
+<div id="login-modal" class="modal" aria-hidden="true">
+<div class="box" role="dialog" aria-modal="true" aria-label="Login">
+<h2>Área do Cliente</h2>
+<form onsubmit="Login.submit(event)">
+<input class="input" id="login" placeholder="Login" required />
+<input class="input" id="senha" type="password" placeholder="Senha" required />
+<div class="actions">
+<button type="button" class="btn outline" onclick="Login.close()">Cancelar</button>
+<button class="btn" type="submit">Entrar</button>
+</div>
+</form>
+</div>
+</div>
+
+
+<script src="script.js"></script>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
