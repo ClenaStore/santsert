@@ -1,61 +1,58 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SIM Contabilidade – Empresa</title>
-<link rel="stylesheet" href="styles.css" />
+<style>
+:root{--blue:#103a6f;--blue2:#0e2b50;--bg:#f7fafc;--text:#0f172a;--muted:#64748b;--card:#fff;--line:#e5e7eb;--accent:#2563eb;--shadow:0 10px 30px rgba(0,0,0,.08)}
+*{box-sizing:border-box} html,body{margin:0} body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+.header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:var(--shadow)}
+.header .bar{max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center;padding:14px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800}.logo img{width:40px;height:40px}
+.nav{display:flex;gap:14px;flex:1;flex-wrap:wrap}.nav a{padding:8px 10px;border-radius:10px;color:#e6eefb}.nav a:hover{background:rgba(255,255,255,.12)}.nav a.active{background:rgba(255,255,255,.18)}
+.login-wrap{margin-left:auto}.login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer}
+.section{max-width:1100px;margin:28px auto;padding:0 20px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+@media(min-width:900px){.span-8{grid-column:span 8}.span-4{grid-column:span 4}}
+.list{display:grid;gap:10px}
+.item{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.footer{margin-top:40px;background:#0e223f;color:#e6eefb}.footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px}
+</style>
 </head>
 <body>
-<header class="header">
-<div class="bar">
-<a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a>
-<nav class="nav">
-<a href="index.html">Home</a>
-<a href="empresa.html">Empresa</a>
-<a href="servicos.html">Serviços</a>
-<a href="noticias.html">Notícias</a>
-<a href="informativo.html">Informativo SM</a>
-<a href="links.html">Links Úteis</a>
-<a href="contato.html">Contato</a>
-</nav>
-<div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div>
-</div>
-</header>
-
+<header class="header"><div class="bar">
+  <a class="logo" href="index.html"><img src="https://i.imgur.com/3qkKf7S.png" alt=""><span>SIM • Contabilidade Inteligente</span></a>
+  <nav class="nav">
+    <a href="index.html">Home</a><a class="active" href="empresa.html">Empresa</a><a href="servicos.html">Serviços</a><a href="informacoes.html">Informações</a><a href="contatos.html">Contato</a>
+  </nav>
+  <div class="login-wrap"><button class="login-btn" onclick="alert('Use a Área do Cliente')">Área do Cliente</button></div>
+</div></header>
 
 <section class="section">
-<div class="grid">
-<article class="card span-8">
-<h1>Conheça mais a Santana Morais Contabilidade</h1>
-<p>
-Fundada em 2001, nossa equipe atende micro e pequenas empresas, condomínios e
-entidades do Oeste Baiano, oferecendo serviços contábeis com foco em qualidade,
-segurança das informações e geração de resultados.
-</p>
-<h3>Missão</h3>
-<p>Prestar assessoria contábil com alto padrão de qualidade, otimizando processos e resultados.</p>
-<h3>Visão</h3>
-<p>Ser referência regional em serviços contábeis e consultivos.</p>
-<h3>Valores</h3>
-<ul class="list">
-<li class="item">Compromisso com o cliente</li>
-<li class="item">Ética e transparência</li>
-<li class="item">Inovação com responsabilidade</li>
-</ul>
-</article>
-<aside class="card span-4">
-<h3>Contábil Data</h3>
-<p>Área exclusiva de clientes para documentos e solicitações.</p>
-<button class="btn" onclick="Login.open()">Entrar</button>
-</aside>
-</div>
+  <div class="grid">
+    <article class="card span-8">
+      <h1>Conheça mais a Santana Morais Contabilidade</h1>
+      <p>Fundada em 2001 em Barreiras-BA, atendemos micro e pequenas empresas, condomínios e entidades sem fins lucrativos, com foco em excelência e segurança da informação.</p>
+      <h3>Missão</h3><p>Prestar assessoria contábil com alto padrão de qualidade, otimizando processos e resultados.</p>
+      <h3>Visão</h3><p>Ser referência regional em serviços contábeis e consultivos.</p>
+      <h3>Valores</h3>
+      <ul class="list">
+        <li class="item">Compromisso com o cliente</li>
+        <li class="item">Ética e transparência</li>
+        <li class="item">Inovação com responsabilidade</li>
+      </ul>
+    </article>
+    <aside class="card span-4">
+      <h3>Contábil Data</h3>
+      <p>Área exclusiva de clientes para documentos e solicitações.</p>
+      <a class="btn" href="areacliente.html">Entrar</a>
+    </aside>
+  </div>
 </section>
 
-
 <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
-<div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
-<script src="script.js"></script>
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
