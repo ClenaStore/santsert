@@ -1,0 +1,510 @@
+# Repositório do site (arquivos)
+
+Abaixo estão **todos os arquivos** do mesmo repositório. Copie cada bloco para um arquivo com o nome indicado.
+
+---
+
+## `styles.css`
+
+```css
+:root{
+  --blue:#103a6f; --blue-2:#0e2b50; --gold:#d4aa00; --text:#0f172a; --muted:#6b7280; --bg:#f7fafc;
+  --card:#ffffff; --line:#e5e7eb; --accent:#2563eb; --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* Header */
+.header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--blue),var(--blue-2));color:#fff;box-shadow:var(--shadow)}
+.bar{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:24px;padding:14px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+.logo img{width:42px;height:42px;object-fit:contain}
+
+.nav{display:flex;gap:18px;flex:1;flex-wrap:wrap}
+.nav a{padding:8px 10px;border-radius:10px;color:#e6eefb;opacity:.95}
+.nav a:hover{background:rgba(255,255,255,.10)}
+.nav a.active{background:rgba(255,255,255,.16);color:#fff;font-weight:700}
+
+/* Login no topo (canto superior direito) */
+.login-wrap{margin-left:auto}
+.login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #b69100}
+.login-btn:active{transform:translateY(1px)}
+
+/* Hero */
+.hero{background:url('https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;min-height:340px;display:grid;place-items:center}
+.hero .overlay{background:linear-gradient(180deg,rgba(16,58,111,.75),rgba(16,58,111,.85));padding:50px 24px;width:100%}
+.hero .inner{max-width:1000px;margin:0 auto;color:#fff}
+.hero h1{margin:0 0 12px;font-size:clamp(26px,4.5vw,44px)}
+.hero p{margin:0;opacity:.95;font-size:clamp(14px,2vw,18px)}
+
+/* Cards */
+.section{max-width:1100px;margin:40px auto;padding:0 20px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+@media(min-width:900px){.card.span-4{grid-column:span 4}.card.span-6{grid-column:span 6}.card.span-8{grid-column:span 8}}
+.card h3{margin:4px 0 10px}
+.card p{color:var(--muted)}
+.btn{display:inline-block;margin-top:8px;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px}
+.btn:hover{filter:brightness(.95)}
+
+/* Listas */
+.list{display:grid;gap:10px}
+.list .item{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff}
+
+/* Footer */
+.footer{margin-top:50px;background:#0e223f;color:#e6eefb}
+.footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px;display:grid;gap:12px}
+.footer small{opacity:.9}
+
+/* Modal de Login */
+.modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(2px)}
+.modal.open{display:grid}
+.modal .box{width:min(420px,94vw);background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.modal h2{margin:6px 0 14px}
+.input{width:100%;padding:12px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
+.actions{display:flex;gap:10px;justify-content:flex-end}
+.outline{background:#fff;border:1px solid var(--line);color:#111}
+```
+
+---
+
+## `script.js`
+
+```js
+// Marca link ativo no menu
+(function(){
+  const here = location.pathname.split('/').pop() || 'index.html';
+  const links = document.querySelectorAll('.nav a');
+  links.forEach(a=>{ if(a.getAttribute('href')===here) a.classList.add('active'); });
+})();
+
+// Modal simples de Login
+const Login = {
+  open(){ document.getElementById('login-modal').classList.add('open'); },
+  close(){ document.getElementById('login-modal').classList.remove('open'); },
+  submit(ev){
+    ev.preventDefault();
+    const login = document.getElementById('login');
+    const senha = document.getElementById('senha');
+    // Aqui você conecta no seu endpoint/validação
+    alert(`Login: ${login.value}\nSenha: ${senha.value}`);
+    Login.close();
+  }
+}
+```
+
+---
+
+## `partials-header.html` (opcional para referência – copie o trecho para cada página)
+
+```html
+<header class="header">
+  <div class="bar">
+    <a class="logo" href="index.html" aria-label="SIM Contabilidade">
+      <img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" />
+      <span>SIM • Contabilidade Inteligente</span>
+    </a>
+
+    <nav class="nav" aria-label="principal">
+      <a href="index.html">Home</a>
+      <a href="empresa.html">Empresa</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="noticias.html">Notícias</a>
+      <a href="informativo.html">Informativo SM</a>
+      <a href="links.html">Links Úteis</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+
+    <div class="login-wrap">
+      <button class="login-btn" onclick="Login.open()">Área do Cliente</button>
+    </div>
+  </div>
+</header>
+```
+
+> Observação: o botão **Área do Cliente** fica no topo, canto superior direito, em todas as páginas.
+
+---
+
+## `index.html`
+
+```html
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIM Contabilidade – Home</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="bar">
+      <a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a>
+      <nav class="nav" aria-label="principal">
+        <a href="index.html">Home</a>
+        <a href="empresa.html">Empresa</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="noticias.html">Notícias</a>
+        <a href="informativo.html">Informativo SM</a>
+        <a href="links.html">Links Úteis</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="overlay">
+      <div class="inner">
+        <h1>Assessoria contábil completa para sua empresa</h1>
+        <p>Abertura e encerramento de empresas, consultoria, fiscal, trabalhista e mais.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destaques -->
+  <section class="section">
+    <div class="grid">
+      <article class="card span-4">
+        <h3>Contabilidade Gerencial</h3>
+        <p>Informações claras e tempestivas para decisões estratégicas.</p>
+        <a class="btn" href="servicos.html">Conhecer serviços</a>
+      </article>
+      <article class="card span-4">
+        <h3>Controle Fiscal</h3>
+        <p>Conformidade tributária e planejamento para pagar menos impostos dentro da lei.</p>
+        <a class="btn" href="servicos.html#fiscal">Saiba mais</a>
+      </article>
+      <article class="card span-4">
+        <h3>Área do Cliente</h3>
+        <p>Documentos, solicitações e informativos específicos.</p>
+        <button class="btn" onclick="Login.open()">Entrar</button>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="inner">
+      <small>© <span id="year"></span> SIM Contabilidade. Todos os direitos reservados.</small>
+    </div>
+  </footer>
+
+  <!-- Modal Login (reutilizado em todas as páginas) -->
+  <div id="login-modal" class="modal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-label="Login">
+      <h2>Área do Cliente</h2>
+      <form onsubmit="Login.submit(event)">
+        <input class="input" id="login" placeholder="Login" required />
+        <input class="input" id="senha" type="password" placeholder="Senha" required />
+        <div class="actions">
+          <button type="button" class="btn outline" onclick="Login.close()">Cancelar</button>
+          <button class="btn" type="submit">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+```
+
+---
+
+## `empresa.html`
+
+```html
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIM Contabilidade – Empresa</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="bar">
+      <a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="empresa.html">Empresa</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="noticias.html">Notícias</a>
+        <a href="informativo.html">Informativo SM</a>
+        <a href="links.html">Links Úteis</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="grid">
+      <article class="card span-8">
+        <h1>Conheça mais a Santana Morais Contabilidade</h1>
+        <p>
+          Fundada em 2001, nossa equipe atende micro e pequenas empresas, condomínios e
+          entidades do Oeste Baiano, oferecendo serviços contábeis com foco em qualidade,
+          segurança das informações e geração de resultados.
+        </p>
+        <h3>Missão</h3>
+        <p>Prestar assessoria contábil com alto padrão de qualidade, otimizando processos e resultados.</p>
+        <h3>Visão</h3>
+        <p>Ser referência regional em serviços contábeis e consultivos.</p>
+        <h3>Valores</h3>
+        <ul class="list">
+          <li class="item">Compromisso com o cliente</li>
+          <li class="item">Ética e transparência</li>
+          <li class="item">Inovação com responsabilidade</li>
+        </ul>
+      </article>
+      <aside class="card span-4">
+        <h3>Contábil Data</h3>
+        <p>Área exclusiva de clientes para documentos e solicitações.</p>
+        <button class="btn" onclick="Login.open()">Entrar</button>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
+  <div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+```
+
+---
+
+## `servicos.html`
+
+```html
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIM Contabilidade – Serviços</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="bar">
+      <a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="empresa.html">Empresa</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="noticias.html">Notícias</a>
+        <a href="informativo.html">Informativo SM</a>
+        <a href="links.html">Links Úteis</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div>
+    </div>
+  </header>
+
+  <section class="section">
+    <h1>Confira nossos serviços</h1>
+    <div class="grid">
+      <article class="card span-6"><h3>Abertura, Legalização e Baixa de Empresas</h3><p>Planejamento do melhor regime e acompanhamento de todo o processo.</p></article>
+      <article class="card span-6"><h3>Contabilidade Gerencial</h3><p>Relatórios e indicadores para gestão.</p></article>
+      <article class="card span-6"><h3>Controles Internos</h3><p>Padronização de processos e governança.</p></article>
+      <article class="card span-6"><h3>Assessoria Empresarial</h3><p>Consultoria financeira, tributária e operacional.</p></article>
+      <article id="fiscal" class="card span-6"><h3>Assessoria Fiscal</h3><p>Obrigações, SPEDs, apurações e planejamento.</p></article>
+      <article class="card span-6"><h3>Assessoria Trabalhista</h3><p>Folha, eSocial e rotinas de RH.</p></article>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
+  <div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+```
+
+---
+
+## `noticias.html`
+
+```html
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIM Contabilidade – Notícias</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header"><div class="bar"><a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a><nav class="nav"><a href="index.html">Home</a><a href="empresa.html">Empresa</a><a href="servicos.html">Serviços</a><a href="noticias.html">Notícias</a><a href="informativo.html">Informativo SM</a><a href="links.html">Links Úteis</a><a href="contato.html">Contato</a></nav><div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div></div></header>
+  <section class="section">
+    <h1>Notícias</h1>
+    <div class="list">
+      <div class="item"><strong>Atualização da Agenda Tributária</strong><br><small class="muted">Prazo de envio do eSocial – confira as datas.</small></div>
+      <div class="item"><strong>Nova Tabela do Simples Nacional</strong><br><small class="muted">Entenda os impactos e limites de faturamento.</small></div>
+    </div>
+  </section>
+  <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
+  <div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+```
+
+---
+
+## `informativo.html`
+
+```html
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIM Contabilidade – Informativo SM</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header"><div class="bar"><a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a><nav class="nav"><a href="index.html">Home</a><a href="empresa.html">Empresa</a><a href="servicos.html">Serviços</a><a href="noticias.html">Notícias</a><a href="informativo.html">Informativo SM</a><a href="links.html">Links Úteis</a><a href="contato.html">Contato</a></nav><div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div></div></header>
+  <section class="section">
+    <h1>Informativo SM</h1>
+    <p>Publicações mensais com as principais mudanças fiscais, trabalhistas e contábeis.</p>
+    <div class="grid">
+      <article class="card span-6"><h3>Edição 01</h3><p>Resumo das obrigações do mês.</p><a class="btn" href="#">Baixar PDF</a></article>
+      <article class="card span-6"><h3>Edição 02</h3><p>Atualizações do eSocial.</p><a class="btn" href="#">Baixar PDF</a></article>
+    </div>
+  </section>
+  <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
+  <div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+```
+
+---
+
+## `links.html`
+
+```html
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIM Contabilidade – Links Úteis</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header"><div class="bar"><a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a><nav class="nav"><a href="index.html">Home</a><a href="empresa.html">Empresa</a><a href="servicos.html">Serviços</a><a href="noticias.html">Notícias</a><a href="informativo.html">Informativo SM</a><a href="links.html">Links Úteis</a><a href="contato.html">Contato</a></nav><div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div></div></header>
+  <section class="section">
+    <h1>Links Úteis</h1>
+    <div class="list">
+      <a class="item" href="#" target="_blank">Receita Federal</a>
+      <a class="item" href="#" target="_blank">eSocial</a>
+      <a class="item" href="#" target="_blank">Simples Nacional</a>
+    </div>
+  </section>
+  <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
+  <div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+```
+
+---
+
+## `contato.html`
+
+```html
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIM Contabilidade – Contato</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header"><div class="bar"><a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a><nav class="nav"><a href="index.html">Home</a><a href="empresa.html">Empresa</a><a href="servicos.html">Serviços</a><a href="noticias.html">Notícias</a><a href="informativo.html">Informativo SM</a><a href="links.html">Links Úteis</a><a href="contato.html">Contato</a></nav><div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div></div></header>
+  <section class="section">
+    <h1>Entre em contato</h1>
+    <div class="grid">
+      <article class="card span-6">
+        <h3>Endereço</h3>
+        <p>Rua Domingos Marmoré, 119 - JK<br>Barreiras/BA - CEP 47800-384</p>
+        <p><strong>Telefone:</strong> (77) 3611-0640<br><strong>E-mail:</strong> contato@contabilidadesm.com.br</p>
+      </article>
+      <article class="card span-6">
+        <h3>Envie sua mensagem</h3>
+        <form onsubmit="event.preventDefault();alert('Mensagem enviada!');">
+          <input class="input" placeholder="Nome" required />
+          <input class="input" type="email" placeholder="E-mail" required />
+          <input class="input" placeholder="Assunto" required />
+          <textarea class="input" placeholder="Mensagem" rows="6" required></textarea>
+          <div class="actions"><button class="btn" type="submit">Enviar</button></div>
+        </form>
+      </article>
+    </div>
+  </section>
+  <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
+  <div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+```
+
+---
+
+## `area-cliente.html` (opcional se preferir página em vez de modal)
+
+```html
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIM Contabilidade – Área do Cliente</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header"><div class="bar"><a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a><nav class="nav"><a href="index.html">Home</a><a href="empresa.html">Empresa</a><a href="servicos.html">Serviços</a><a href="noticias.html">Notícias</a><a href="informativo.html">Informativo SM</a><a href="links.html">Links Úteis</a><a href="contato.html">Contato</a></nav><div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div></div></header>
+  <section class="section">
+    <h1>Área do Cliente</h1>
+    <p>Autentique-se para acessar seus documentos.</p>
+    <form class="card" onsubmit="Login.submit(event)">
+      <input class="input" id="login" placeholder="Login" required />
+      <input class="input" id="senha" type="password" placeholder="Senha" required />
+      <div class="actions"><button class="btn" type="submit">Entrar</button></div>
+    </form>
+  </section>
+  <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
+  <div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+```
+
+---
+
+### Como usar
+
+1. Crie uma pasta vazia e salve cada trecho acima como arquivo.
+2. Abra `index.html` no navegador.
+3. O botão **Área do Cliente** aparece no topo direito em todas as páginas (modal). Se preferir página dedicada, use `area-cliente.html` e troque o botão para um link.
+
+Se quiser, eu já adapto o **login** para chamar seu endpoint (Google Apps Script) com `fetch` e validar credenciais. Basta me dizer a URL e o formato esperado.
