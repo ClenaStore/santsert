@@ -60,17 +60,42 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .btn{display:inline-block;margin-top:8px;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px}
 .btn:hover{filter:brightness(.95)}
 
+/* Certificados – Promo */
+.cert-hero{position:relative;border-radius:20px;overflow:hidden;background:linear-gradient(120deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%);color:#fff;display:grid;grid-template-columns:1fr;gap:16px;padding:26px;border:1px solid rgba(255,255,255,.1);box-shadow:var(--shadow)}
+@media(min-width:900px){.cert-hero{grid-template-columns:1.2fr .8fr}}
+.cert-hero .left h2{font-size:clamp(22px,4vw,36px);margin:0 0 8px}
+.cert-hero .left p{margin:0 0 10px;color:#e8eefc}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:8px 10px;border-radius:999px;font-weight:600}
+.cta{display:flex;gap:10px;align-items:center;margin-top:12px}
+.cta .price{background:#f3c63a;color:#111;font-weight:900;padding:10px 12px;border-radius:10px}
+.cta .btn{background:#22c55e}
+.cert-hero .right{position:relative;min-height:220px;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04))}
+.cert-hero .right::before{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1400&auto=format&fit=crop') center/cover;opacity:.36;mix-blend:screen}
+.ribbons{position:absolute;top:14px;right:14px;display:flex;gap:8px}
+.ribbon{background:#f3c63a;color:#111;font-weight:800;padding:6px 10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.stamp{position:absolute;bottom:14px;left:14px;background:rgba(255,255,255,.12);border:2px dashed rgba(255,255,255,.5);padding:10px 12px;border-radius:12px;font-weight:700}
+
 /* Footer */
 .footer{margin-top:50px;background:#0e223f;color:#e6eefb}
 .footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px}
 
-/* Modal Login */
-.modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(2px)}
+/* Modal (Login & Cert) */
+.modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(2px);z-index:60}
 .modal.open{display:grid}
-.modal .box{width:min(420px,94vw);background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.modal .box{width:min(520px,94vw);background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
 .input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
+.row{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:680px){.row{grid-template-columns:1fr 1fr}}
 .actions{display:flex;gap:10px;justify-content:flex-end}
 .outline{background:#fff;border:1px solid var(--line);color:#111}
+.helper{font-size:.9rem;color:var(--muted);margin-top:4px}
+label{font-weight:600;font-size:.95rem;margin:6px 0 4px;display:block}
+select.input{appearance:auto}
+
+/* Toast */
+.toast{position:fixed;bottom:18px;right:18px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s}
+.toast.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
@@ -94,6 +119,7 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
       <a class="active" href="index.html">Home</a>
       <a href="empresa.html">Empresa</a>
       <a href="servicos.html">Serviços</a>
+      <a href="#certificados">Certificados</a>
       <a href="informacoes.html">Informações</a>
       <a href="contatos.html">Contato</a>
     </nav>
@@ -113,11 +139,53 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   <div class="dots" id="dots"></div>
 </section>
 
+<!-- Certificados Digitais – PROPAGANDA + CTA -->
+<section id="certificados" class="section">
+  <div class="cert-hero">
+    <div class="left">
+      <h2>Certificados Digitais com emissão imediata</h2>
+      <p>Emita seu <strong>A1</strong> (arquivo) ou <strong>A3</strong> (cartão/token) com suporte especializado SIM Contabilidade.</p>
+      <div class="badges">
+        <span class="badge">✔️ Validade 12 a 36 meses</span>
+        <span class="badge">⚡ Emissão rápida</span>
+        <span class="badge">🔒 Segurança e conformidade ICP-Brasil</span>
+        <span class="badge">👨‍💼 PF e PJ</span>
+      </div>
+      <div class="cta">
+        <span class="price">A partir de R$ 149</span>
+        <button class="btn" onclick="CertModal.open()">Emitir agora</button>
+      </div>
+      <p class="helper">Precisa renovar? Emitimos em poucos minutos após a validação dos dados.</p>
+    </div>
+    <div class="right">
+      <div class="ribbons">
+        <span class="ribbon">PROMO</span>
+        <span class="ribbon">12x sem juros*</span>
+      </div>
+      <div class="stamp">Atendimento online e presencial</div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="grid">
-    <article class="card span-4"><h3>Contabilidade Gerencial</h3><p>Relatórios e indicadores para decisões assertivas.</p><a class="btn" href="servicos.html">Conhecer serviços</a></article>
-    <article class="card span-4"><h3>Planejamento Tributário</h3><p>Pague menos impostos dentro da lei.</p><a class="btn" href="servicos.html#fiscal">Saiba mais</a></article>
-    <article class="card span-4"><h3>Área do Cliente</h3><p>Documentos e solicitações personalizadas.</p><button class="btn" onclick="Login.open()">Entrar</button></article>
+    <article class="card span-4">
+      <h3>Contabilidade Gerencial</h3>
+      <p>Relatórios e indicadores para decisões assertivas.</p>
+      <a class="btn" href="servicos.html">Conhecer serviços</a>
+    </article>
+
+    <article class="card span-4">
+      <h3>Planejamento Tributário</h3>
+      <p>Pague menos impostos dentro da lei.</p>
+      <a class="btn" href="servicos.html#fiscal">Saiba mais</a>
+    </article>
+
+    <article class="card span-4">
+      <h3>Certificados Digitais</h3>
+      <p>A1 e A3 • PF e PJ • Suporte total na validação.</p>
+      <button class="btn" onclick="CertModal.open()">Emitir Certificado</button>
+    </article>
   </div>
 </section>
 
@@ -138,31 +206,157 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   </div>
 </div>
 
+<!-- Modal Emitir Certificado -->
+<div id="cert-modal" class="modal" aria-hidden="true">
+  <div class="box" role="dialog" aria-modal="true" aria-label="Emitir Certificado">
+    <h2>Emitir Certificado Digital</h2>
+    <form id="cert-form" onsubmit="CertModal.submit(event)">
+      <div class="row">
+        <div>
+          <label for="tipo">Tipo</label>
+          <select id="tipo" class="input" required>
+            <option value="">Selecione…</option>
+            <option value="A1">A1 (arquivo)</option>
+            <option value="A3">A3 (cartão/token)</option>
+          </select>
+        </div>
+        <div>
+          <label for="pessoa">Pessoa</label>
+          <select id="pessoa" class="input" required>
+            <option value="">Selecione…</option>
+            <option value="PF">Física (CPF)</option>
+            <option value="PJ">Jurídica (CNPJ)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="doc">CPF/CNPJ</label>
+          <input id="doc" class="input" placeholder="Somente números" inputmode="numeric" maxlength="14" required>
+        </div>
+        <div>
+          <label for="validade">Validade</label>
+          <select id="validade" class="input" required>
+            <option value="">Selecione…</option>
+            <option value="12">12 meses</option>
+            <option value="24">24 meses</option>
+            <option value="36">36 meses</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="nome">Nome/Razão Social</label>
+      <input id="nome" class="input" required>
+
+      <div class="row">
+        <div>
+          <label for="email">E-mail</label>
+          <input id="email" type="email" class="input" required>
+        </div>
+        <div>
+          <label for="fone">Telefone (WhatsApp)</label>
+          <input id="fone" class="input" placeholder="(00) 00000-0000" required>
+        </div>
+      </div>
+
+      <label for="anexo">Documento (RG/Contrato Social) — opcional</label>
+      <input id="anexo" class="input" type="file" accept=".pdf,.jpg,.jpeg,.png">
+
+      <p class="helper">Após o envio, nossa equipe fará a validação e retornará com as instruções para a videoconferência (quando aplicável).</p>
+
+      <div class="actions">
+        <button type="button" class="btn outline" onclick="CertModal.close()">Cancelar</button>
+        <button class="btn" type="submit">Solicitar Emissão</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
 <script>
 const BANNERS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID/exec"; // <-- troque
+const CERT_ENDPOINT    = "https://script.google.com/macros/s/SEU_ID_CERTIFICADOS/exec"; // <-- troque
 
 // ===== Loader control =====
 const Loader = (() => {
   const el = document.getElementById('app-loader');
-  const MIN_MS = 2000; // 2 segundos de exibição mínima
+  const MIN_MS = 2000;
   let start = Date.now();
   function show(){ start = Date.now(); el.classList.remove('hidden'); }
-  function hide(){
-    const remain = Math.max(0, MIN_MS - (Date.now() - start));
-    setTimeout(()=> el.classList.add('hidden'), remain);
-  }
+  function hide(){ const remain = Math.max(0, MIN_MS - (Date.now() - start)); setTimeout(()=> el.classList.add('hidden'), remain); }
   return { show, hide };
 })();
+
+// ===== Toast =====
+function toast(msg, ok=true){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.style.background = ok ? '#111' : '#b91c1c';
+  el.classList.add('show');
+  setTimeout(()=> el.classList.remove('show'), 3500);
+}
 
 // ===== Login (modal) =====
 const Login = {
   open(){ document.getElementById('login-modal').classList.add('open'); },
   close(){ document.getElementById('login-modal').classList.remove('open'); },
   submit(ev){ ev.preventDefault();
-    const u = document.getElementById('login').value;
+    const u = document.getElementById('login').value.trim();
     const p = document.getElementById('senha').value;
-    alert("Autenticar: " + u); // troque por fetch() do seu Apps Script
+    // Trocar por fetch() do seu Apps Script
+    alert("Autenticar: " + u);
     Login.close();
+  }
+};
+
+// ===== Certificados (modal + submit) =====
+const CertModal = {
+  open(){ document.getElementById('cert-modal').classList.add('open'); },
+  close(){ document.getElementById('cert-modal').classList.remove('open'); },
+  async submit(ev){
+    ev.preventDefault();
+    const tipo = document.getElementById('tipo').value;
+    const pessoa = document.getElementById('pessoa').value;
+    const doc = (document.getElementById('doc').value||'').replace(/\D/g,'');
+    const validade = document.getElementById('validade').value;
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const fone = document.getElementById('fone').value.trim();
+    const file = document.getElementById('anexo').files[0];
+
+    // validações simples
+    if(!/^\d{11}$|^\d{14}$/.test(doc)){ toast('Informe CPF (11) ou CNPJ (14) válido (apenas números).', false); return; }
+
+    const form = new FormData();
+    form.append('tipo', tipo);
+    form.append('pessoa', pessoa);
+    form.append('documento', doc);
+    form.append('validade', validade);
+    form.append('nome', nome);
+    form.append('email', email);
+    form.append('fone', fone);
+    if(file) form.append('anexo', file);
+    form.append('origem', 'site_home');
+
+    Loader.show();
+    try{
+      const res = await fetch(CERT_ENDPOINT, { method:'POST', body: form });
+      const data = await res.json().catch(()=>({ok:false}));
+      if(res.ok && (data.ok!==false)){
+        toast('Solicitação enviada! Em breve entraremos em contato.');
+        CertModal.close();
+        document.getElementById('cert-form').reset();
+      }else{
+        toast(data.message || 'Não foi possível enviar. Tente novamente.', false);
+      }
+    }catch(e){
+      console.error(e);
+      toast('Falha de conexão. Verifique sua internet.', false);
+    }finally{
+      Loader.hide();
+    }
   }
 };
 
@@ -187,7 +381,6 @@ const Slider = (() => {
       dots.appendChild(d);
     });
   }
-
   function go(i){
     idx = (i+images.length)%images.length;
     root.querySelectorAll('.slide').forEach((s,k)=>s.classList.toggle('active',k===idx));
@@ -195,23 +388,8 @@ const Slider = (() => {
   }
   function next(){ go(idx+1) }
   function prev(){ go(idx-1) }
-
-  function autoplay(){
-    clearInterval(timer);
-    timer = setInterval(()=>{ if(!hold) next(); }, 5000);
-  }
-
-  function preload(src){
-    return new Promise(res=>{
-      if(!src) return res();
-      const im = new Image();
-      im.onload = () => res();
-      im.onerror = () => res();
-      im.src = src;
-    });
-  }
-
-  // carrega banners da planilha
+  function autoplay(){ clearInterval(timer); timer = setInterval(()=>{ if(!hold) next(); }, 5000); }
+  function preload(src){ return new Promise(res=>{ if(!src) return res(); const im=new Image(); im.onload=()=>res(); im.onerror=()=>res(); im.src=src; }); }
   async function load(page){
     Loader.show();
     try{
@@ -229,16 +407,15 @@ const Slider = (() => {
         "https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1600&auto=format&fit=crop"
       ];
     }
-    await preload(images[0]); // garante primeira imagem carregada
+    await preload(images[0]);
     render(); autoplay();
     Loader.hide();
   }
-
   root.addEventListener('mouseenter',()=>hold=true);
   root.addEventListener('mouseleave',()=>hold=false);
-
   return { next, prev, load };
 })();
+
 document.getElementById('year').textContent = new Date().getFullYear();
 Slider.load("home");
 </script>
