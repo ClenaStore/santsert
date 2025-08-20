@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SIM Contabilidade – Links Úteis</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="header"><div class="bar"><a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a><nav class="nav"><a href="index.html">Home</a><a href="empresa.html">Empresa</a><a href="servicos.html">Serviços</a><a href="noticias.html">Notícias</a><a href="informativo.html">Informativo SM</a><a href="links.html">Links Úteis</a><a href="contato.html">Contato</a></nav><div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div></div></header>
+<section class="section">
+<h1>Links Úteis</h1>
+<div class="list">
+<a class="item" href="#" target="_blank">Receita Federal</a>
+<a class="item" href="#" target="_blank">eSocial</a>
+<a class="item" href="#" target="_blank">Simples Nacional</a>
+</div>
+</section>
+<footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
+<div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
+<script src="script.js"></script>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
