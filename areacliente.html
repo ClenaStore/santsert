@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIM Contabilidade – Área do Cliente</title>
+<style>
+:root{--blue:#103a6f;--blue2:#0e2b50;--bg:#f7fafc;--text:#0f172a;--muted:#64748b;--card:#fff;--line:#e5e7eb;--accent:#2563eb;--shadow:0 10px 30px rgba(0,0,0,.08)}
+*{box-sizing:border-box} html,body{margin:0} body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+.header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:var(--shadow)}
+.header .bar{max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center;padding:14px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800}.logo img{width:40px;height:40px}
+.nav{display:flex;gap:14px;flex:1;flex-wrap:wrap}.nav a{padding:8px 10px;border-radius:10px;color:#e6eefb}.nav a:hover{background:rgba(255,255,255,.12)}.nav a.active{background:rgba(255,255,255,.18)}
+.login-wrap{margin-left:auto}.login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer}
+.section{max-width:900px;margin:28px auto;padding:0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
+.btn{display:inline-block;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px}
+.note{color:var(--muted);font-size:.95rem}
+</style>
+</head>
+<body>
+<header class="header"><div class="bar">
+  <a class="logo" href="index.html"><img src="https://i.imgur.com/3qkKf7S.png" alt=""><span>SIM • Contabilidade Inteligente</span></a>
+  <nav class="nav">
+    <a href="index.html">Home</a><a href="empresa.html">Empresa</a><a href="servicos.html">Serviços</a><a href="informacoes.html">Informações</a><a href="contatos.html">Contato</a>
+  </nav>
+  <div class="login-wrap"><button class="login-btn" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Área do Cliente</button></div>
+</div></header>
+
+<section class="section">
+  <h1>Área do Cliente</h1>
+  <p class="note">Autentique-se para acessar documentos, solicitações e informativos específicos.</p>
+  <form id="form" class="card" onsubmit="entrar(event)">
+    <input class="input" id="login" placeholder="Login" required>
+    <input class="input" id="senha" type="password" placeholder="Senha" required>
+    <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn" type="submit">Entrar</button></div>
+  </form>
+
+  <div id="area" style="display:none;margin-top:18px" class="card">
+    <h3>Bem-vindo!</h3>
+    <p>Seus últimos documentos aparecerão aqui após autenticação.</p>
+  </div>
+</section>
+
+<script>
+async function entrar(e){
+  e.preventDefault();
+  const u=document.getElementById('login').value, p=document.getElementById('senha').value;
+  // Exemplo: validar via Apps Script
+  // const res = await fetch('https://script.google.com/macros/s/SEU_ID/exec',{method:'POST',body:JSON.stringify({login:u,senha:p})});
+  // const ok = (await res.json()).ok;
+  const ok = !!u && !!p; // simulação
+  if(ok){ document.getElementById('area').style.display='block'; alert('Login OK'); }
+  else{ alert('Credenciais inválidas'); }
+}
+</script>
+</body>
+</html>
