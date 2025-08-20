@@ -1,45 +1,71 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SIM Contabilidade – Serviços</title>
-<link rel="stylesheet" href="styles.css" />
+<style>
+:root{--blue:#103a6f;--blue2:#0e2b50;--bg:#f7fafc;--text:#0f172a;--muted:#64748b;--card:#fff;--line:#e5e7eb;--accent:#2563eb;--shadow:0 10px 30px rgba(0,0,0,.08)}
+*{box-sizing:border-box} html,body{margin:0} body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+.header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:var(--shadow)}
+.header .bar{max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center;padding:14px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800}.logo img{width:40px;height:40px}
+.nav{display:flex;gap:14px;flex:1;flex-wrap:wrap}.nav a{padding:8px 10px;border-radius:10px;color:#e6eefb}.nav a:hover{background:rgba(255,255,255,.12)}.nav a.active{background:rgba(255,255,255,.18)}
+.login-wrap{margin-left:auto}.login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer}
+.slider{position:relative;height:36vh;min-height:220px;background:#0c2346;display:grid;place-items:center;overflow:hidden}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease}
+.slide.active{opacity:1}
+.slider .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.35))}
+.ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;padding:8px 10px;border-radius:10px;cursor:pointer}
+.prev{left:12px}.next{right:12px}
+.dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}.dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9)}.dot.active{background:#fff}
+.section{max-width:1100px;margin:28px auto;padding:0 20px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+@media(min-width:900px){.span-6{grid-column:span 6}}
+.card h3{margin:4px 0 8px} .card p{color:var(--muted)}
+.footer{margin-top:40px;background:#0e223f;color:#e6eefb}.footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px}
+</style>
 </head>
 <body>
-<header class="header">
-<div class="bar">
-<a class="logo" href="index.html"><img alt="Logo" src="https://i.imgur.com/3qkKf7S.png" /><span>SIM • Contabilidade Inteligente</span></a>
-<nav class="nav">
-<a href="index.html">Home</a>
-<a href="empresa.html">Empresa</a>
-<a href="servicos.html">Serviços</a>
-<a href="noticias.html">Notícias</a>
-<a href="informativo.html">Informativo SM</a>
-<a href="links.html">Links Úteis</a>
-<a href="contato.html">Contato</a>
-</nav>
-<div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div>
-</div>
-</header>
+<header class="header"><div class="bar">
+  <a class="logo" href="index.html"><img src="https://i.imgur.com/3qkKf7S.png" alt=""><span>SIM • Contabilidade Inteligente</span></a>
+  <nav class="nav">
+    <a href="index.html">Home</a><a href="empresa.html">Empresa</a><a class="active" href="servicos.html">Serviços</a><a href="informacoes.html">Informações</a><a href="contatos.html">Contato</a>
+  </nav>
+  <div class="login-wrap"><button class="login-btn" onclick="alert('Use a Área do Cliente')">Área do Cliente</button></div>
+</div></header>
 
-
-<section class="section">
-<h1>Confira nossos serviços</h1>
-<div class="grid">
-<article class="card span-6"><h3>Abertura, Legalização e Baixa de Empresas</h3><p>Planejamento do melhor regime e acompanhamento de todo o processo.</p></article>
-<article class="card span-6"><h3>Contabilidade Gerencial</h3><p>Relatórios e indicadores para gestão.</p></article>
-<article class="card span-6"><h3>Controles Internos</h3><p>Padronização de processos e governança.</p></article>
-<article class="card span-6"><h3>Assessoria Empresarial</h3><p>Consultoria financeira, tributária e operacional.</p></article>
-<article id="fiscal" class="card span-6"><h3>Assessoria Fiscal</h3><p>Obrigações, SPEDs, apurações e planejamento.</p></article>
-<article class="card span-6"><h3>Assessoria Trabalhista</h3><p>Folha, eSocial e rotinas de RH.</p></article>
-</div>
+<section class="slider" id="slider"><div class="overlay"></div>
+  <button class="ctrl prev" onclick="Slider.prev()">❮</button>
+  <button class="ctrl next" onclick="Slider.next()">❯</button>
+  <div class="dots" id="dots"></div>
 </section>
 
+<section class="section">
+  <h1>Confira nossos serviços</h1>
+  <div class="grid">
+    <article class="card span-6"><h3>Abertura, Legalização e Baixa de Empresas</h3><p>Planejamento do regime tributário e condução de todo o processo.</p></article>
+    <article class="card span-6"><h3>Contabilidade Gerencial</h3><p>Indicadores e relatórios para apoiar a gestão.</p></article>
+    <article class="card span-6"><h3>Controles Internos</h3><p>Padronização de processos e governança.</p></article>
+    <article class="card span-6"><h3>Assessoria Empresarial</h3><p>Consultoria financeira, tributária e operacional.</p></article>
+    <article id="fiscal" class="card span-6"><h3>Assessoria Fiscal</h3><p>Obrigações, SPEDs, apurações e planejamento tributário.</p></article>
+    <article class="card span-6"><h3>Assessoria Trabalhista</h3><p>Folha, eSocial e rotinas de RH.</p></article>
+  </div>
+</section>
 
 <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
-<div id="login-modal" class="modal"><div class="box"><h2>Área do Cliente</h2><form onsubmit="Login.submit(event)"><input class="input" id="login" placeholder="Login" required /><input class="input" id="senha" type="password" placeholder="Senha" required /><div class="actions"><button type="button" class="btn outline" onclick="Login.close()">Cancelar</button><button class="btn" type="submit">Entrar</button></div></form></div></div>
-<script src="script.js"></script>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+
+<script>
+const BANNERS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID/exec";
+const Slider = (()=>{ let images=[],idx=0,timer; const root=document.getElementById('slider'); const dots=document.getElementById('dots');
+function render(){ [...root.querySelectorAll('.slide')].forEach(n=>n.remove()); dots.innerHTML=''; images.forEach((src,i)=>{ const s=document.createElement('div'); s.className='slide'+(i===idx?' active':''); s.style.backgroundImage=`url('${src}')`; root.appendChild(s); const d=document.createElement('div'); d.className='dot'+(i===idx?' active':''); d.onclick=()=>go(i); dots.appendChild(d); }); }
+function go(i){ idx=(i+images.length)%images.length; root.querySelectorAll('.slide').forEach((s,k)=>s.classList.toggle('active',k===idx)); dots.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('active',k===idx)); }
+function next(){go(idx+1)} function prev(){go(idx-1)}
+async function load(){ try{ const r=await fetch(`${BANNERS_ENDPOINT}?page=servicos`); images=await r.json(); if(!images.length) throw 0; }catch(_){ images=[ "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1600&auto=format&fit=crop", "https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1600&auto=format&fit=crop" ]; } render(); clearInterval(timer); timer=setInterval(next,5000); }
+return {next,prev,load}; })();
+document.getElementById('year').textContent=new Date().getFullYear();
+Slider.load();
+</script>
 </body>
 </html>
