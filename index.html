@@ -26,12 +26,8 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .login-wrap{margin-left:auto}
 .login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #b69100}
 
-/* ===== HERO GRID (principal + certificados) ===== */
-.hero-grid{max-width:1400px;margin:28px auto;padding:0 20px;display:grid;gap:20px}
-@media(min-width:980px){.hero-grid{grid-template-columns:3fr 2fr}}
-
-/* Hero Principal */
-.hero-main{position:relative;height:70vh;min-height:380px;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);background:#0c2346}
+/* ===== HERO FULL-WIDTH ===== */
+.hero-main{position:relative;width:100%;height:70vh;min-height:380px;overflow:hidden;background:#0c2346}
 .hero-main .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease}
 .hero-main .slide.active{opacity:1}
 .hero-main .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55))}
@@ -44,27 +40,28 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .hero-main .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
 .hero-main .dot.active{background:#fff}
 
-/* Certificados – vertical ao lado (mais alto) */
-.cert-side{position:relative;height:78vh;min-height:420px;border-radius:20px;overflow:hidden;
+/* ===== CERTIFICADOS (vertical abaixo do hero) ===== */
+.cert-vertical{position:relative;margin:28px auto;max-width:1200px;border-radius:20px;overflow:hidden;
   background:linear-gradient(120deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%);color:#fff;
-  display:flex;flex-direction:column;justify-content:space-between;padding:26px;box-shadow:var(--shadow)}
-.cert-side::after{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1400&auto=format&fit=crop') center/cover;opacity:.25;mix-blend:screen}
-.cert-side .content{position:relative;z-index:2}
-.cert-side h2{margin:0 0 10px;font-size:clamp(22px,3vw,34px)}
-.cert-side p{margin:0 0 12px;color:#e8eefc}
+  display:flex;flex-direction:column;justify-content:space-between;padding:26px;box-shadow:var(--shadow);
+  height:78vh;min-height:420px}
+.cert-vertical::after{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1400&auto=format&fit=crop') center/cover;opacity:.25;mix-blend:screen}
+.cert-vertical .content{position:relative;z-index:2}
+.cert-vertical h2{margin:0 0 10px;font-size:clamp(22px,3vw,34px)}
+.cert-vertical p{margin:0 0 12px;color:#e8eefc}
 .badges{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
 .badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:6px 10px;border-radius:999px;font-weight:600}
 .cta{display:flex;gap:10px;align-items:center;margin-top:12px}
 .cta .price{background:var(--gold);color:#111;font-weight:900;padding:10px 12px;border-radius:10px}
 .cta .btn{background:var(--ok);color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
-.cert-side .foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center}
+.cert-vertical .foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:20px}
 .ribbon{background:var(--gold);color:#111;font-weight:800;padding:6px 10px;border-radius:8px}
 .stamp{background:rgba(255,255,255,.15);border:2px dashed rgba(255,255,255,.5);padding:8px 12px;border-radius:10px;font-weight:700}
 
 /* ===== SEÇÕES ===== */
 .section{max-width:1200px;margin:36px auto;padding:0 20px}
 
-/* Cards de Serviços (mais opções) */
+/* Cards de Serviços (6 opções) */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
 .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
 @media(min-width:900px){.span-3{grid-column:span 3} .span-4{grid-column:span 4} .span-6{grid-column:span 6}}
@@ -91,7 +88,7 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .footer{margin:50px 0 0;background:#0e223f;color:#e6eefb}
 .footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px}
 
-/* Modais + Toast */
+/* Modais + Toast + WhatsApp */
 .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(2px);z-index:80}
 .modal.open{display:grid}
 .modal .box{width:min(520px,94vw);background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
@@ -102,8 +99,6 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .outline{background:#fff;border:1px solid var(--line);color:#111}
 .toast{position:fixed;bottom:18px;right:18px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s;z-index:90}
 .toast.show{opacity:1;transform:translateY(0)}
-
-/* WhatsApp floating */
 .whats{position:fixed;right:18px;bottom:90px;background:#25d366;color:#fff;border:none;border-radius:999px;padding:14px 16px;font-weight:800;box-shadow:var(--shadow);cursor:pointer;z-index:85}
 </style>
 </head>
@@ -126,50 +121,47 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   </div>
 </header>
 
-<!-- ===== HERO GRID ===== -->
-<section class="hero-grid">
-  <!-- Banner Principal (esquerda) -->
-  <div class="hero-main" id="hero">
-    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?q=80&w=1800&auto=format&fit=crop')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1800&auto=format&fit=crop')"></div>
-    <div class="overlay"></div>
-    <div class="caption">
-      <h1>Assessoria contábil completa</h1>
-      <p>Abertura/encerramento de empresas • Fiscal • Trabalhista • Consultoria</p>
-    </div>
-    <button class="ctrl prev" onclick="Hero.prev()">❮</button>
-    <button class="ctrl next" onclick="Hero.next()">❯</button>
-    <div class="dots" id="hero-dots"></div>
+<!-- ===== HERO (FULL-WIDTH) ===== -->
+<section class="hero-main" id="hero">
+  <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?q=80&w=1800&auto=format&fit=crop')"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1800&auto=format&fit=crop')"></div>
+  <div class="overlay"></div>
+  <div class="caption">
+    <h1>Assessoria contábil completa</h1>
+    <p>Abertura/encerramento de empresas • Fiscal • Trabalhista • Consultoria</p>
   </div>
-
-  <!-- Banner Certificados (direita) -->
-  <aside class="cert-side" id="certificados" aria-label="Certificados Digitais">
-    <div class="content">
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-        <span class="ribbon">PROMO</span>
-        <span class="ribbon">12x sem juros*</span>
-      </div>
-      <h2>Certificados Digitais com liberação imediata</h2>
-      <p>Emita seu <strong>A1</strong> (arquivo) ou <strong>A3</strong> (cartão/token) com suporte especializado SIM Contabilidade.</p>
-      <div class="badges">
-        <span class="badge">✔️ 12 a 36 meses</span>
-        <span class="badge">⚡ Emissão rápida</span>
-        <span class="badge">🔒 ICP-Brasil</span>
-        <span class="badge">👨‍💼 PF e PJ</span>
-      </div>
-      <div class="cta">
-        <span class="price">A partir de R$ 149</span>
-        <button class="btn" onclick="CertModal.open()">Emitir agora</button>
-      </div>
-    </div>
-    <div class="foot">
-      <span class="stamp">Atendimento online e presencial</span>
-      <small>*Consulte condições</small>
-    </div>
-  </aside>
+  <button class="ctrl prev" onclick="Hero.prev()">❮</button>
+  <button class="ctrl next" onclick="Hero.next()">❯</button>
+  <div class="dots" id="hero-dots"></div>
 </section>
 
-<!-- ===== MAIS OPÇÕES: Cards ===== -->
+<!-- ===== CERTIFICADOS (VERTICAL ABAIXO) ===== -->
+<section class="cert-vertical" id="certificados" aria-label="Certificados Digitais">
+  <div class="content">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+      <span class="ribbon">PROMO</span>
+      <span class="ribbon">12x sem juros*</span>
+    </div>
+    <h2>Certificados Digitais com liberação imediata</h2>
+    <p>Emita seu <strong>A1</strong> (arquivo) ou <strong>A3</strong> (cartão/token) com suporte especializado SIM Contabilidade.</p>
+    <div class="badges">
+      <span class="badge">✔️ 12 a 36 meses</span>
+      <span class="badge">⚡ Emissão rápida</span>
+      <span class="badge">🔒 ICP-Brasil</span>
+      <span class="badge">👨‍💼 PF e PJ</span>
+    </div>
+    <div class="cta">
+      <span class="price">A partir de R$ 149</span>
+      <button class="btn" onclick="CertModal.open()">Emitir agora</button>
+    </div>
+  </div>
+  <div class="foot">
+    <span class="stamp">Atendimento online e presencial</span>
+    <small>*Consulte condições</small>
+  </div>
+</section>
+
+<!-- ===== SERVIÇOS (mais opções) ===== -->
 <section class="section" aria-label="Serviços">
   <div class="grid">
     <article class="card span-4">
@@ -179,27 +171,27 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
     </article>
     <article class="card span-4">
       <h3>Planejamento Tributário</h3>
-      <p>Escolha do regime, reenquadramento e revisão fiscal.</p>
+      <p>Regime ideal, reenquadramento e revisão fiscal.</p>
       <a class="btn-link" href="servicos.html#fiscal">Ver detalhes</a>
     </article>
     <article class="card span-4">
       <h3>Departamento Pessoal</h3>
-      <p>Folha, admissões, rescisões, eSocial e obrigações.</p>
+      <p>Folha, admissões, rescisões e eSocial.</p>
       <a class="btn-link" href="servicos.html#dp">Conhecer</a>
     </article>
     <article class="card span-4">
       <h3>Abertura/Encerramento</h3>
-      <p>Do contrato social ao CNPJ, rápida e sem dor de cabeça.</p>
+      <p>Do contrato social ao CNPJ, rápido e sem dor de cabeça.</p>
       <a class="btn-link" href="servicos.html#empresas">Começar</a>
     </article>
     <article class="card span-4">
       <h3>BPO Financeiro</h3>
-      <p>Contas a pagar/receber, conciliações e relatórios.</p>
+      <p>Contas a pagar/receber, conciliação e relatórios.</p>
       <a class="btn-link" href="servicos.html#bpo">Solicitar</a>
     </article>
     <article class="card span-4">
       <h3>Certificados Digitais</h3>
-      <p>A1 e A3 • PF e PJ • Suporte na validação e videoconferência.</p>
+      <p>A1 e A3 • PF e PJ • Suporte total na validação.</p>
       <a class="btn-link" href="#certificados">Emitir Certificado</a>
     </article>
   </div>
@@ -219,7 +211,7 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 <section class="section faq" aria-label="Perguntas frequentes">
   <div class="item">
     <div class="q" onclick="FAQ.toggle(this)"><span>Qual a diferença entre A1 e A3?</span><span>▾</span></div>
-    <div class="a"><p>O A1 é um arquivo digital instalado no computador/dispositivo. O A3 é armazenado em cartão/token físico. Ambos têm validade ICP-Brasil; a escolha depende do uso e da segurança desejada.</p></div>
+    <div class="a"><p>O A1 é um arquivo instalado no dispositivo; o A3 é um cartão/token físico. Ambos seguem a ICP-Brasil — escolha depende do uso e da segurança desejada.</p></div>
   </div>
   <div class="item">
     <div class="q" onclick="FAQ.toggle(this)"><span>Posso parcelar a emissão?</span><span>▾</span></div>
@@ -227,7 +219,7 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   </div>
   <div class="item">
     <div class="q" onclick="FAQ.toggle(this)"><span>Quanto tempo leva para liberar?</span><span>▾</span></div>
-    <div class="a"><p>Após validação e videoconferência (quando aplicável), liberamos geralmente no mesmo dia.</p></div>
+    <div class="a"><p>Após validação e videoconferência (quando aplicável), geralmente liberamos no mesmo dia.</p></div>
   </div>
 </section>
 
@@ -249,10 +241,10 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
   <div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div>
 </footer>
 
-<!-- FLOAT WhatsApp -->
+<!-- WhatsApp -->
 <button class="whats" onclick="window.open('https://wa.me/5599999999999','_blank')">WhatsApp</button>
 
-<!-- ===== MODALS ===== -->
+<!-- ===== MODAIS ===== -->
 <div id="login-modal" class="modal" aria-hidden="true">
   <div class="box" role="dialog" aria-modal="true" aria-label="Login">
     <h2>Área do Cliente</h2>
@@ -387,7 +379,7 @@ const CertModal = {
   }
 };
 
-/* ===== Slider Hero ===== */
+/* ===== SLIDER (Hero) ===== */
 const Hero=(()=>{
   const root=document.getElementById('hero');
   const dotsEl=document.getElementById('hero-dots');
@@ -418,14 +410,9 @@ const Hero=(()=>{
 })();
 
 /* ===== FAQ ===== */
-const FAQ = {
-  toggle(el){
-    const item = el.closest('.item');
-    item.classList.toggle('open');
-  }
-};
+const FAQ = { toggle(el){ el.closest('.item').classList.toggle('open'); } };
 
-/* ===== Init ===== */
+/* Init */
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
