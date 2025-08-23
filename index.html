@@ -1,34 +1,22 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>SIM Contabilidade – Home</title>
 <style>
 :root{
   --blue:#103a6f; --blue2:#0e2b50; --gold:#f3c63a; --bg:#f7fafc; --text:#0f172a;
-  --muted:#64748b; --card:#fff; --line:#e5e7eb; --accent:#2563eb;
-  --ok:#22c55e; --shadow:0 10px 30px rgba(0,0,0,.08);
+  --muted:#64748b; --card:#fff; --line:#e5e7eb; --accent:#2563eb; --ok:#22c55e;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
 }
 *{box-sizing:border-box} html,body{margin:0}
 body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
 a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 
-/* ===== LOADER ===== */
-.loader{position:fixed;inset:0;background:#fff;display:grid;place-items:center;z-index:9999;transition:opacity .4s ease,visibility .4s ease}
-.loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.loader .box{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;padding:24px}
-.loader .brand{width:clamp(160px,24vw,260px);height:auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.18))}
-.loader .dots{display:flex;gap:10px}
-.loader .dot{width:14px;height:14px;border-radius:999px;background:var(--gold);animation:bounce .9s infinite ease-in-out}
-.loader .dot:nth-child(2){animation-delay:.15s}
-.loader .dot:nth-child(3){animation-delay:.30s}
-@keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.6}40%{transform:scale(1);opacity:1}}
-
 /* ===== HEADER ===== */
 .header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:var(--shadow)}
 .header .bar{max-width:1200px;margin:0 auto;display:flex;gap:18px;align-items:center;padding:14px 20px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800}
 .logo img{width:40px;height:40px;object-fit:contain}
 .nav{display:flex;gap:14px;flex:1;flex-wrap:wrap}
 .nav a{padding:8px 10px;border-radius:10px;color:#e6eefb}
@@ -37,81 +25,57 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .login-wrap{margin-left:auto}
 .login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #b69100}
 
-/* ===== HERO VERTICAL (slider em cima + certificados embaixo) ===== */
-.hero-vertical{max-width:1200px;margin:26px auto;padding:0 20px;display:flex;flex-direction:column;gap:20px}
-.hero-slider,.cert-hero{height:54vh;min-height:320px;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+/* ===== HERO FULL ===== */
+.hero-full{position:relative;min-height:100vh;width:100%;background:#0c2346;display:grid;place-items:center;overflow:hidden}
+.hero-full .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease}
+.hero-full .slide.active{opacity:1}
+.hero-full .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.5))}
+.hero-full .caption{position:relative;z-index:2;color:#fff;text-align:center;padding:0 20px}
+.hero-full h1{font-size:clamp(32px,6vw,64px);margin:0 0 10px}
+.hero-full p{margin:0;opacity:.95;font-size:clamp(14px,2.2vw,20px)}
+.hero-full .ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;padding:12px;border-radius:12px;cursor:pointer}
+.hero-full .prev{left:16px} .hero-full .next{right:16px}
+.hero-full .dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.hero-full .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
+.hero-full .dot.active{background:#fff}
 
-/* Slider */
-.hero-slider{position:relative;background:#0c2346;display:grid;place-items:center}
-.hero-slider .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45))}
-.hero-slider .caption{position:relative;z-index:2;color:#fff;text-align:center;padding:0 20px}
-.hero-slider h1{font-size:clamp(26px,5vw,44px);margin:0 0 6px}
-.hero-slider p{margin:0;opacity:.95}
-.hero-slider .ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;padding:10px 12px;border-radius:10px;cursor:pointer}
-.hero-slider .prev{left:14px} .hero-slider .next{right:14px}
-.hero-slider .dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
-.hero-slider .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
-.hero-slider .dot.active{background:#fff}
+/* ===== MAIN GRID: banner vert. à esquerda + cards à direita ===== */
+.main{max-width:1200px;margin:36px auto;padding:0 20px}
+.main-grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:980px){.main-grid{grid-template-columns:5fr 7fr}}
 
-/* Certificados */
-.cert-hero{position:relative;background:linear-gradient(120deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%);color:#fff;display:grid;
-  grid-template-columns:1.2fr .8fr;gap:16px;padding:26px;border:1px solid rgba(255,255,255,.1)}
-@media(max-width:800px){.cert-hero{grid-template-columns:1fr}}
-.cert-hero .left h2{font-size:clamp(22px,4vw,36px);margin:0 0 8px}
-.cert-hero .left p{margin:0 0 10px;color:#e8eefc}
-.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:8px 10px;border-radius:999px;font-weight:600}
-.cta{display:flex;gap:10px;align-items:center;margin-top:12px}
+/* Banner vertical Certificados (esquerda) */
+.cert-vertical{position:relative;display:flex;flex-direction:column;justify-content:space-between;height:72vh;min-height:420px;
+  background:linear-gradient(120deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%); color:#fff;border-radius:18px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow);padding:24px}
+.cert-vertical::after{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1400&auto=format&fit=crop') center/cover;
+  opacity:.22;mix-blend:screen;pointer-events:none}
+.cert-vertical .top{position:relative;z-index:2}
+.cert-vertical h2{margin:0 0 8px;font-size:clamp(22px,3.4vw,36px)}
+.cert-vertical p{margin:0;color:#e8eefc}
+.badges{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:8px 10px;border-radius:999px;font-weight:600}
+.cta{position:relative;z-index:2;display:flex;gap:10px;align-items:center;margin-top:14px}
 .cta .price{background:var(--gold);color:#111;font-weight:900;padding:10px 12px;border-radius:10px}
-.cta .btn{background:var(--ok)}
-.cert-hero .right{position:relative;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04))}
-.cert-hero .right::before{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1400&auto=format&fit=crop') center/cover;opacity:.36;mix-blend:screen}
-.ribbons{position:absolute;top:14px;right:14px;display:flex;gap:8px}
-.ribbon{background:var(--gold);color:#111;font-weight:800;padding:6px 10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
-.stamp{position:absolute;bottom:14px;left:14px;background:rgba(255,255,255,.12);border:2px dashed rgba(255,255,255,.5);padding:10px 12px;border-radius:12px;font-weight:700}
+.btn{display:inline-block;padding:10px 14px;background:var(--ok);color:#fff;border-radius:10px;border:none;cursor:pointer}
+.cert-vertical .foot{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between}
+.ribbon{background:var(--gold);color:#111;font-weight:800;padding:6px 10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.18);margin-right:8px}
+.stamp{background:rgba(255,255,255,.12);border:2px dashed rgba(255,255,255,.5);padding:10px 12px;border-radius:12px;font-weight:700}
 
-/* ===== SEÇÕES E CARDS ===== */
-.section{max-width:1100px;margin:36px auto;padding:0 20px}
+/* Cards (direita) */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
 .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
-@media(min-width:900px){.span-4{grid-column:span 4} .span-6{grid-column:span 6}}
+@media(min-width:900px){.span-6{grid-column:span 6} .span-4{grid-column:span 4}}
 .card h3{margin:4px 0 8px}
 .card p{color:var(--muted)}
-.btn{display:inline-block;margin-top:8px;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px}
-.btn:hover{filter:brightness(.95)}
+.card .btn-link{display:inline-block;margin-top:8px;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px}
 
-/* ===== FOOTER ===== */
-.footer{margin-top:50px;background:#0e223f;color:#e6eefb}
+/* Footer */
+.footer{margin:50px 0 0;background:#0e223f;color:#e6eefb}
 .footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px}
-
-/* ===== MODAIS E TOAST ===== */
-.modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(2px);z-index:60}
-.modal.open{display:grid}
-.modal .box{width:min(520px,94vw);background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
-.input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
-.row{display:grid;gap:10px;grid-template-columns:1fr}
-@media(min-width:680px){.row{grid-template-columns:1fr 1fr}}
-.actions{display:flex;gap:10px;justify-content:flex-end}
-.outline{background:#fff;border:1px solid var(--line);color:#111}
-.helper{font-size:.9rem;color:var(--muted);margin-top:4px}
-label{font-weight:600;font-size:.95rem;margin:6px 0 4px;display:block}
-select.input{appearance:auto}
-
-.toast{position:fixed;bottom:18px;right:18px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s}
-.toast.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
-
-<!-- LOADER -->
-<div id="app-loader" class="loader" aria-hidden="false">
-  <div class="box">
-    <img class="brand" alt="SIM Contabilidade" src="https://github.com/ClenaStore/santsert/blob/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-20%20%C3%A0(s)%2016.21.40_26238e6c.jpg?raw=true">
-    <div class="dots" aria-label="carregando">
-      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-    </div>
-  </div>
-</div>
 
 <header class="header">
   <div class="bar">
@@ -126,293 +90,124 @@ select.input{appearance:auto}
       <a href="informacoes.html">Informações</a>
       <a href="contatos.html">Contato</a>
     </nav>
-    <div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div>
+    <div class="login-wrap"><button class="login-btn">Área do Cliente</button></div>
   </div>
 </header>
 
-<!-- ===== HERO VERTICAL ===== -->
-<section class="hero-vertical" aria-label="Destaques">
-  <!-- Slider -->
-  <div class="hero-slider" id="slider">
-    <div class="overlay"></div>
-    <div class="caption">
-      <h1>Assessoria contábil completa</h1>
-      <p>Abertura/encerramento de empresas • Fiscal • Trabalhista • Consultoria</p>
-    </div>
-    <button class="ctrl prev" onclick="Slider.prev()">❮</button>
-    <button class="ctrl next" onclick="Slider.next()">❯</button>
-    <div class="dots" id="dots"></div>
+<!-- ===== HERO FULLSCREEN ===== -->
+<section class="hero-full" id="hero">
+  <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?q=80&w=1800&auto=format&fit=crop')"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1800&auto=format&fit=crop')"></div>
+  <div class="overlay"></div>
+  <div class="caption">
+    <h1>Assessoria contábil completa</h1>
+    <p>Abertura/encerramento de empresas • Fiscal • Trabalhista • Consultoria</p>
   </div>
-
-  <!-- Certificados -->
-  <div id="certificados" class="cert-hero" role="complementary" aria-label="Certificados Digitais">
-    <div class="left">
-      <h2>Certificados Digitais com liberação imediata</h2>
-      <p>Emita seu <strong>A1</strong> (arquivo) ou <strong>A3</strong> (cartão/token) com suporte especializado SIM Contabilidade.</p>
-      <div class="badges">
-        <span class="badge">✔️ Validade 12 a 36 meses</span>
-        <span class="badge">⚡ Emissão rápida</span>
-        <span class="badge">🔒 Conformidade ICP-Brasil</span>
-        <span class="badge">👨‍💼 PF e PJ</span>
-      </div>
-      <div class="cta">
-        <span class="price">A partir de R$ 149</span>
-        <button class="btn" onclick="CertModal.open()">Emitir agora</button>
-      </div>
-      <p class="helper">Precisa renovar? Emitimos em poucos minutos após a validação dos dados.</p>
-    </div>
-    <div class="right">
-      <div class="ribbons">
-        <span class="ribbon">PROMO</span>
-        <span class="ribbon">12x sem juros*</span>
-      </div>
-      <div class="stamp">Atendimento online e presencial</div>
-    </div>
-  </div>
+  <button class="ctrl prev" onclick="Hero.prev()">❮</button>
+  <button class="ctrl next" onclick="Hero.next()">❯</button>
+  <div class="dots" id="hero-dots"></div>
 </section>
 
-<!-- ===== CARDS DE SERVIÇOS ===== -->
-<section class="section">
-  <div class="grid">
-    <article class="card span-4">
-      <h3>Contabilidade Gerencial</h3>
-      <p>Relatórios e indicadores para decisões assertivas.</p>
-      <a class="btn" href="servicos.html">Conhecer serviços</a>
-    </article>
+<!-- ===== MAIN: banner vertical à esquerda + cards ===== -->
+<main class="main">
+  <div class="main-grid">
+    <!-- Banner vertical Certificados (ESQUERDA) -->
+    <section id="certificados" class="cert-vertical" aria-label="Certificados Digitais">
+      <div class="top">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <span class="ribbon">PROMO</span>
+          <span class="ribbon">12x sem juros*</span>
+        </div>
+        <h2>Certificados Digitais com liberação imediata</h2>
+        <p>Emita seu <strong>A1</strong> (arquivo) ou <strong>A3</strong> (cartão/token) com suporte especializado SIM Contabilidade.</p>
+        <div class="badges">
+          <span class="badge">✔️ Validade 12 a 36 meses</span>
+          <span class="badge">⚡ Emissão rápida</span>
+          <span class="badge">🔒 ICP-Brasil</span>
+          <span class="badge">👨‍💼 PF e PJ</span>
+        </div>
+        <div class="cta">
+          <span class="price">A partir de R$ 149</span>
+          <button class="btn" onclick="alert('Abrir modal de emissão')">Emitir agora</button>
+        </div>
+      </div>
+      <div class="foot">
+        <span class="stamp">Atendimento online e presencial</span>
+        <small>*Consulte condições.</small>
+      </div>
+    </section>
 
-    <article class="card span-4">
-      <h3>Planejamento Tributário</h3>
-      <p>Pague menos impostos dentro da lei.</p>
-      <a class="btn" href="servicos.html#fiscal">Saiba mais</a>
-    </article>
+    <!-- Cards (DIREITA) -->
+    <section>
+      <div class="grid">
+        <article class="card span-6">
+          <h3>Contabilidade Gerencial</h3>
+          <p>Relatórios e indicadores para decisões assertivas.</p>
+          <a class="btn-link" href="servicos.html">Conhecer serviços</a>
+        </article>
 
-    <article class="card span-4">
-      <h3>Certificados Digitais</h3>
-      <p>A1 e A3 • PF e PJ • Suporte total na validação.</p>
-      <button class="btn" onclick="CertModal.open()">Emitir Certificado</button>
-    </article>
+        <article class="card span-6">
+          <h3>Planejamento Tributário</h3>
+          <p>Pague menos impostos dentro da lei.</p>
+          <a class="btn-link" href="servicos.html#fiscal">Saiba mais</a>
+        </article>
+
+        <article class="card span-6">
+          <h3>Departamento Pessoal</h3>
+          <p>Folha, admissões, rescisões e eSocial sem dor de cabeça.</p>
+          <a class="btn-link" href="servicos.html#dp">Ver detalhes</a>
+        </article>
+
+        <article class="card span-6">
+          <h3>Certificados Digitais</h3>
+          <p>A1 e A3 • PF e PJ • Suporte total na validação.</p>
+          <a class="btn-link" href="#certificados">Emitir Certificado</a>
+        </article>
+      </div>
+    </section>
   </div>
-</section>
+</main>
 
-<footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
-
-<!-- ===== MODAL LOGIN ===== -->
-<div id="login-modal" class="modal" aria-hidden="true">
-  <div class="box" role="dialog" aria-modal="true" aria-label="Login">
-    <h2>Área do Cliente</h2>
-    <form onsubmit="Login.submit(event)">
-      <input class="input" id="login" placeholder="Login" required>
-      <input class="input" id="senha" type="password" placeholder="Senha" required>
-      <div class="actions">
-        <button type="button" class="btn outline" onclick="Login.close()">Cancelar</button>
-        <button class="btn" type="submit">Entrar</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- ===== MODAL CERTIFICADOS ===== -->
-<div id="cert-modal" class="modal" aria-hidden="true">
-  <div class="box" role="dialog" aria-modal="true" aria-label="Emitir Certificado">
-    <h2>Emitir Certificado Digital</h2>
-    <form id="cert-form" onsubmit="CertModal.submit(event)">
-      <div class="row">
-        <div>
-          <label for="tipo">Tipo</label>
-          <select id="tipo" class="input" required>
-            <option value="">Selecione…</option>
-            <option value="A1">A1 (arquivo)</option>
-            <option value="A3">A3 (cartão/token)</option>
-          </select>
-        </div>
-        <div>
-          <label for="pessoa">Pessoa</label>
-          <select id="pessoa" class="input" required>
-            <option value="">Selecione…</option>
-            <option value="PF">Física (CPF)</option>
-            <option value="PJ">Jurídica (CNPJ)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label for="doc">CPF/CNPJ</label>
-          <input id="doc" class="input" placeholder="Somente números" inputmode="numeric" maxlength="14" required>
-        </div>
-        <div>
-          <label for="validade">Validade</label>
-          <select id="validade" class="input" required>
-            <option value="">Selecione…</option>
-            <option value="12">12 meses</option>
-            <option value="24">24 meses</option>
-            <option value="36">36 meses</option>
-          </select>
-        </div>
-      </div>
-
-      <label for="nome">Nome/Razão Social</label>
-      <input id="nome" class="input" required>
-
-      <div class="row">
-        <div>
-          <label for="email">E-mail</label>
-          <input id="email" type="email" class="input" required>
-        </div>
-        <div>
-          <label for="fone">Telefone (WhatsApp)</label>
-          <input id="fone" class="input" placeholder="(00) 00000-0000" required>
-        </div>
-      </div>
-
-      <label for="anexo">Documento (RG/Contrato Social) — opcional</label>
-      <input id="anexo" class="input" type="file" accept=".pdf,.jpg,.jpeg,.png">
-
-      <p class="helper">Após o envio, nossa equipe fará a validação e retornará com as instruções para a videoconferência (quando aplicável).</p>
-
-      <div class="actions">
-        <button type="button" class="btn outline" onclick="CertModal.close()">Cancelar</button>
-        <button class="btn" type="submit">Solicitar Emissão</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<footer class="footer">
+  <div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div>
+</footer>
 
 <script>
-const BANNERS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID/exec"; // <-- troque
-const CERT_ENDPOINT    = "https://script.google.com/macros/s/SEU_ID_CERTIFICADOS/exec"; // <-- troque
+/* HERO full – autoplay + dots */
+const Hero = (() => {
+  const root = document.getElementById('hero');
+  const slides = [...root.querySelectorAll('.slide')];
+  const dotsEl = document.getElementById('hero-dots');
+  let idx = 0, timer=null, hold=false;
 
-/* ===== Loader ===== */
-const Loader = (() => {
-  const el = document.getElementById('app-loader');
-  const MIN_MS = 1200; let start = Date.now();
-  function show(){ start = Date.now(); el.classList.remove('hidden'); }
-  function hide(){ const remain = Math.max(0, MIN_MS - (Date.now()-start)); setTimeout(()=>el.classList.add('hidden'), remain); }
-  return { show, hide };
-})();
-
-/* ===== Toast ===== */
-function toast(msg, ok=true){
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.style.background = ok ? '#111' : '#b91c1c';
-  el.classList.add('show');
-  setTimeout(()=> el.classList.remove('show'), 3500);
-}
-
-/* ===== Login ===== */
-const Login = {
-  open(){ document.getElementById('login-modal').classList.add('open'); },
-  close(){ document.getElementById('login-modal').classList.remove('open'); },
-  submit(ev){ ev.preventDefault();
-    const u = document.getElementById('login').value.trim();
-    const p = document.getElementById('senha').value;
-    alert("Autenticar: " + u); // troque por fetch() do seu Apps Script
-    Login.close();
-  }
-};
-
-/* ===== Certificados ===== */
-const CertModal = {
-  open(){ document.getElementById('cert-modal').classList.add('open'); },
-  close(){ document.getElementById('cert-modal').classList.remove('open'); },
-  async submit(ev){
-    ev.preventDefault();
-    const tipo = document.getElementById('tipo').value;
-    const pessoa = document.getElementById('pessoa').value;
-    const doc = (document.getElementById('doc').value||'').replace(/\D/g,'');
-    const validade = document.getElementById('validade').value;
-    const nome = document.getElementById('nome').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const fone = document.getElementById('fone').value.trim();
-    const file = document.getElementById('anexo').files[0];
-
-    if(!/^\d{11}$|^\d{14}$/.test(doc)){ toast('Informe CPF (11) ou CNPJ (14) válido (apenas números).', false); return; }
-
-    const form = new FormData();
-    form.append('tipo', tipo); form.append('pessoa', pessoa); form.append('documento', doc);
-    form.append('validade', validade); form.append('nome', nome); form.append('email', email);
-    form.append('fone', fone); if(file) form.append('anexo', file); form.append('origem','site_home');
-
-    Loader.show();
-    try{
-      const res = await fetch(CERT_ENDPOINT, { method:'POST', body: form });
-      const data = await res.json().catch(()=>({ok:false}));
-      if(res.ok && (data.ok!==false)){
-        toast('Solicitação enviada! Em breve entraremos em contato.');
-        CertModal.close(); document.getElementById('cert-form').reset();
-      }else{ toast(data.message || 'Não foi possível enviar. Tente novamente.', false); }
-    }catch(e){ console.error(e); toast('Falha de conexão. Verifique sua internet.', false); }
-    finally{ Loader.hide(); }
-  }
-};
-
-/* ===== Slider com autoplay ===== */
-const Slider = (() => {
-  let images = [], idx = 0, timer=null, hold=false;
-  const root = document.getElementById('slider');
-  const dots = document.getElementById('dots');
-
-  function render(){
-    [...root.querySelectorAll('.slide')].forEach(el=>el.remove());
-    dots.innerHTML = '';
-    images.forEach((src,i)=>{
-      const s = document.createElement('div');
-      s.className = 'slide';
-      Object.assign(s.style,{
-        position:'absolute', inset:'0', backgroundSize:'cover', backgroundPosition:'center',
-        opacity: i===idx ? '1':'0', transition:'opacity .9s ease', zIndex:'1',
-        backgroundImage:`url('${src}')`
-      });
-      root.appendChild(s);
-
+  function paint(){
+    dotsEl.innerHTML = '';
+    slides.forEach((_,i)=>{
       const d = document.createElement('div');
       d.className = 'dot' + (i===idx?' active':'');
       d.onclick = ()=>go(i);
-      dots.appendChild(d);
+      dotsEl.appendChild(d);
     });
     go(0);
   }
   function go(i){
-    idx = (i+images.length)%images.length;
-    const slides = root.querySelectorAll('.slide');
-    const points = dots.querySelectorAll('.dot');
-    slides.forEach((s,k)=> s.style.opacity = k===idx ? '1':'0');
-    points.forEach((d,k)=> d.classList.toggle('active', k===idx));
+    idx = (i+slides.length)%slides.length;
+    slides.forEach((s,k)=> s.classList.toggle('active', k===idx));
+    [...dotsEl.children].forEach((d,k)=> d.classList.toggle('active', k===idx));
   }
   function next(){ go(idx+1) }
   function prev(){ go(idx-1) }
   function autoplay(){ clearInterval(timer); timer = setInterval(()=>{ if(!hold) next(); }, 5000); }
-  function preload(src){ return new Promise(res=>{ if(!src) return res(); const im=new Image(); im.onload=()=>res(); im.onerror=()=>res(); im.src=src; }); }
-  async function load(page){
-    Loader.show();
-    try{
-      const url = `${BANNERS_ENDPOINT}?page=${encodeURIComponent(page)}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      images = Array.isArray(data) && data.length ? data : [
-        "https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1600&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1600&auto=format&fit=crop"
-      ];
-    }catch(e){
-      console.warn("Banners fallback:", e);
-      images = [
-        "https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1600&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1600&auto=format&fit=crop"
-      ];
-    }
-    await preload(images[0]); render(); autoplay(); Loader.hide();
-  }
+
   root.addEventListener('mouseenter',()=>hold=true);
   root.addEventListener('mouseleave',()=>hold=false);
-  return { next, prev, load };
+
+  // init
+  paint(); autoplay();
+  return { next, prev };
 })();
 
-/* ===== Init ===== */
 document.getElementById('year').textContent = new Date().getFullYear();
-Slider.load("home");
 </script>
 </body>
 </html>
