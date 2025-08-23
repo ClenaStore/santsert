@@ -37,21 +37,22 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .login-wrap{margin-left:auto}
 .login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #b69100}
 
-/* Banner (slider) */
-.slider{position:relative;height:54vh;min-height:320px;background:#0c2346;display:grid;place-items:center;overflow:hidden}
-.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease}
-.slide.active{opacity:1}
-.slider .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45))}
-.slider .caption{position:relative;z-index:2;color:#fff;text-align:center;padding:0 20px}
-.slider h1{font-size:clamp(26px,5vw,44px);margin:0 0 6px}
-.slider p{margin:0;opacity:.95}
-.ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;padding:10px 12px;border-radius:10px;cursor:pointer}
-.prev{left:14px} .next{right:14px}
-.dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
-.dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
-.dot.active{background:#fff}
+/* ===== HERO: Slider + Certificados lado a lado ===== */
+.hero-grid{max-width:1200px;margin:26px auto 0;padding:0 20px;display:grid;gap:18px}
+@media(min-width:980px){.hero-grid{grid-template-columns:1.4fr .9fr}}
 
-/* Sections */
+.hero-slider{position:relative;height:54vh;min-height:320px;background:#0c2346;display:grid;place-items:center;overflow:hidden;border-radius:16px;box-shadow:var(--shadow)}
+.hero-slider .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45))}
+.hero-slider .caption{position:relative;z-index:2;color:#fff;text-align:center;padding:0 20px}
+.hero-slider h1{font-size:clamp(26px,5vw,44px);margin:0 0 6px}
+.hero-slider p{margin:0;opacity:.95}
+.hero-slider .ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;padding:10px 12px;border-radius:10px;cursor:pointer}
+.hero-slider .prev{left:14px} .hero-slider .next{right:14px}
+.hero-slider .dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.hero-slider .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
+.hero-slider .dot.active{background:#fff}
+
+/* Sections gerais */
 .section{max-width:1100px;margin:36px auto;padding:0 20px}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
 .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
@@ -63,6 +64,7 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 /* Certificados – Promo */
 .cert-hero{position:relative;border-radius:20px;overflow:hidden;background:linear-gradient(120deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%);color:#fff;display:grid;grid-template-columns:1fr;gap:16px;padding:26px;border:1px solid rgba(255,255,255,.1);box-shadow:var(--shadow)}
 @media(min-width:900px){.cert-hero{grid-template-columns:1.2fr .8fr}}
+@media(min-width:980px){.cert-hero{height:54vh;min-height:320px}}
 .cert-hero .left h2{font-size:clamp(22px,4vw,36px);margin:0 0 8px}
 .cert-hero .left p{margin:0 0 10px;color:#e8eefc}
 .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
@@ -127,21 +129,22 @@ select.input{appearance:auto}
   </div>
 </header>
 
-<!-- Slider -->
-<section class="slider" id="slider">
-  <div class="overlay"></div>
-  <div class="caption">
-    <h1>Assessoria contábil completa</h1>
-    <p>Abertura/encerramento de empresas • Fiscal • Trabalhista • Consultoria</p>
+<!-- HERO: Slider (esquerda) + Certificados (direita) -->
+<section class="hero-grid" aria-label="Destaques">
+  <!-- Slider -->
+  <div class="hero-slider" id="slider">
+    <div class="overlay"></div>
+    <div class="caption">
+      <h1>Assessoria contábil completa</h1>
+      <p>Abertura/encerramento de empresas • Fiscal • Trabalhista • Consultoria</p>
+    </div>
+    <button class="ctrl prev" onclick="Slider.prev()">❮</button>
+    <button class="ctrl next" onclick="Slider.next()">❯</button>
+    <div class="dots" id="dots"></div>
   </div>
-  <button class="ctrl prev" onclick="Slider.prev()">❮</button>
-  <button class="ctrl next" onclick="Slider.next()">❯</button>
-  <div class="dots" id="dots"></div>
-</section>
 
-<!-- Certificados Digitais – PROPAGANDA + CTA -->
-<section id="certificados" class="section">
-  <div class="cert-hero">
+  <!-- Certificados -->
+  <div id="certificados" class="cert-hero" role="complementary" aria-label="Certificados Digitais">
     <div class="left">
       <h2>Certificados Digitais com liberação imediata</h2>
       <p>Emita seu <strong>A1</strong> (arquivo) ou <strong>A3</strong> (cartão/token) com suporte especializado SIM Contabilidade.</p>
@@ -167,6 +170,7 @@ select.input{appearance:auto}
   </div>
 </section>
 
+<!-- Serviços Cards -->
 <section class="section">
   <div class="grid">
     <article class="card span-4">
@@ -326,7 +330,6 @@ const CertModal = {
     const fone = document.getElementById('fone').value.trim();
     const file = document.getElementById('anexo').files[0];
 
-    // validações simples
     if(!/^\d{11}$|^\d{14}$/.test(doc)){ toast('Informe CPF (11) ou CNPJ (14) válido (apenas números).', false); return; }
 
     const form = new FormData();
@@ -372,19 +375,39 @@ const Slider = (() => {
     images.forEach((src,i)=>{
       const s = document.createElement('div');
       s.className = 'slide' + (i===idx?' active':'');
+
+      /* slide usa o mesmo estilo base da hero, só definimos aqui o background */
+      s.style.position='absolute';
+      s.style.inset='0';
+      s.style.backgroundSize='cover';
+      s.style.backgroundPosition='center';
+      s.style.opacity = i===idx ? '1' : '0';
+      s.style.transition='opacity .9s ease';
       s.style.backgroundImage = `url('${src}')`;
       root.appendChild(s);
 
       const d = document.createElement('div');
       d.className = 'dot' + (i===idx?' active':'');
+
+      d.style.width='10px'; d.style.height='10px'; d.style.borderRadius='999px';
+      d.style.background = i===idx ? '#fff' : 'rgba(255,255,255,.6)';
+      d.style.border='1px solid rgba(255,255,255,.9)';
+      d.style.cursor='pointer';
+
       d.onclick = ()=>go(i);
       dots.appendChild(d);
     });
   }
   function go(i){
     idx = (i+images.length)%images.length;
-    root.querySelectorAll('.slide').forEach((s,k)=>s.classList.toggle('active',k===idx));
-    dots.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('active',k===idx));
+    const slides = root.querySelectorAll('.slide');
+    const points = dots.querySelectorAll('.dot');
+    slides.forEach((s,k)=>{
+      s.style.opacity = k===idx ? '1' : '0';
+    });
+    points.forEach((d,k)=>{
+      d.style.background = k===idx ? '#fff' : 'rgba(255,255,255,.6)';
+    });
   }
   function next(){ go(idx+1) }
   function prev(){ go(idx-1) }
