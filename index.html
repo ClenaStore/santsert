@@ -8,7 +8,7 @@
 :root{
   --blue:#103a6f; --blue2:#0e2b50; --gold:#f3c63a; --bg:#f7fafc; --text:#0f172a;
   --muted:#64748b; --card:#fff; --line:#e5e7eb; --accent:#2563eb;
-  --shadow:0 10px 30px rgba(0,0,0,.08);
+  --ok:#22c55e; --shadow:0 10px 30px rgba(0,0,0,.08);
 }
 *{box-sizing:border-box} html,body{margin:0}
 body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
@@ -25,7 +25,7 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .loader .dot:nth-child(3){animation-delay:.30s}
 @keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.6}40%{transform:scale(1);opacity:1}}
 
-/* Header */
+/* ===== HEADER ===== */
 .header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:var(--shadow)}
 .header .bar{max-width:1200px;margin:0 auto;display:flex;gap:18px;align-items:center;padding:14px 20px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800}
@@ -37,11 +37,12 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .login-wrap{margin-left:auto}
 .login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #b69100}
 
-/* ===== HERO: Slider + Certificados lado a lado ===== */
-.hero-grid{max-width:1200px;margin:26px auto 0;padding:0 20px;display:grid;gap:18px}
-@media(min-width:980px){.hero-grid{grid-template-columns:1.4fr .9fr}}
+/* ===== HERO VERTICAL (slider em cima + certificados embaixo) ===== */
+.hero-vertical{max-width:1200px;margin:26px auto;padding:0 20px;display:flex;flex-direction:column;gap:20px}
+.hero-slider,.cert-hero{height:54vh;min-height:320px;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
 
-.hero-slider{position:relative;height:54vh;min-height:320px;background:#0c2346;display:grid;place-items:center;overflow:hidden;border-radius:16px;box-shadow:var(--shadow)}
+/* Slider */
+.hero-slider{position:relative;background:#0c2346;display:grid;place-items:center}
 .hero-slider .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45))}
 .hero-slider .caption{position:relative;z-index:2;color:#fff;text-align:center;padding:0 20px}
 .hero-slider h1{font-size:clamp(26px,5vw,44px);margin:0 0 6px}
@@ -52,37 +53,38 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .hero-slider .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
 .hero-slider .dot.active{background:#fff}
 
-/* Sections gerais */
-.section{max-width:1100px;margin:36px auto;padding:0 20px}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
-.card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
-@media(min-width:900px){.span-4{grid-column:span 4} .span-6{grid-column:span 6}}
-.card h3{margin:4px 0 8px} .card p{color:var(--muted)}
-.btn{display:inline-block;margin-top:8px;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px}
-.btn:hover{filter:brightness(.95)}
-
-/* Certificados – Promo */
-.cert-hero{position:relative;border-radius:20px;overflow:hidden;background:linear-gradient(120deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%);color:#fff;display:grid;grid-template-columns:1fr;gap:16px;padding:26px;border:1px solid rgba(255,255,255,.1);box-shadow:var(--shadow)}
-@media(min-width:900px){.cert-hero{grid-template-columns:1.2fr .8fr}}
-@media(min-width:980px){.cert-hero{height:54vh;min-height:320px}}
+/* Certificados */
+.cert-hero{position:relative;background:linear-gradient(120deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%);color:#fff;display:grid;
+  grid-template-columns:1.2fr .8fr;gap:16px;padding:26px;border:1px solid rgba(255,255,255,.1)}
+@media(max-width:800px){.cert-hero{grid-template-columns:1fr}}
 .cert-hero .left h2{font-size:clamp(22px,4vw,36px);margin:0 0 8px}
 .cert-hero .left p{margin:0 0 10px;color:#e8eefc}
 .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 .badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:8px 10px;border-radius:999px;font-weight:600}
 .cta{display:flex;gap:10px;align-items:center;margin-top:12px}
-.cta .price{background:#f3c63a;color:#111;font-weight:900;padding:10px 12px;border-radius:10px}
-.cta .btn{background:#22c55e}
-.cert-hero .right{position:relative;min-height:220px;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04))}
+.cta .price{background:var(--gold);color:#111;font-weight:900;padding:10px 12px;border-radius:10px}
+.cta .btn{background:var(--ok)}
+.cert-hero .right{position:relative;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04))}
 .cert-hero .right::before{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1400&auto=format&fit=crop') center/cover;opacity:.36;mix-blend:screen}
 .ribbons{position:absolute;top:14px;right:14px;display:flex;gap:8px}
-.ribbon{background:#f3c63a;color:#111;font-weight:800;padding:6px 10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.ribbon{background:var(--gold);color:#111;font-weight:800;padding:6px 10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
 .stamp{position:absolute;bottom:14px;left:14px;background:rgba(255,255,255,.12);border:2px dashed rgba(255,255,255,.5);padding:10px 12px;border-radius:12px;font-weight:700}
 
-/* Footer */
+/* ===== SEÇÕES E CARDS ===== */
+.section{max-width:1100px;margin:36px auto;padding:0 20px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+@media(min-width:900px){.span-4{grid-column:span 4} .span-6{grid-column:span 6}}
+.card h3{margin:4px 0 8px}
+.card p{color:var(--muted)}
+.btn{display:inline-block;margin-top:8px;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px}
+.btn:hover{filter:brightness(.95)}
+
+/* ===== FOOTER ===== */
 .footer{margin-top:50px;background:#0e223f;color:#e6eefb}
 .footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px}
 
-/* Modal (Login & Cert) */
+/* ===== MODAIS E TOAST ===== */
 .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(2px);z-index:60}
 .modal.open{display:grid}
 .modal .box{width:min(520px,94vw);background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
@@ -95,7 +97,6 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 label{font-weight:600;font-size:.95rem;margin:6px 0 4px;display:block}
 select.input{appearance:auto}
 
-/* Toast */
 .toast{position:fixed;bottom:18px;right:18px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s}
 .toast.show{opacity:1;transform:translateY(0)}
 </style>
@@ -129,8 +130,8 @@ select.input{appearance:auto}
   </div>
 </header>
 
-<!-- HERO: Slider (esquerda) + Certificados (direita) -->
-<section class="hero-grid" aria-label="Destaques">
+<!-- ===== HERO VERTICAL ===== -->
+<section class="hero-vertical" aria-label="Destaques">
   <!-- Slider -->
   <div class="hero-slider" id="slider">
     <div class="overlay"></div>
@@ -151,7 +152,7 @@ select.input{appearance:auto}
       <div class="badges">
         <span class="badge">✔️ Validade 12 a 36 meses</span>
         <span class="badge">⚡ Emissão rápida</span>
-        <span class="badge">🔒 Segurança e conformidade ICP-Brasil</span>
+        <span class="badge">🔒 Conformidade ICP-Brasil</span>
         <span class="badge">👨‍💼 PF e PJ</span>
       </div>
       <div class="cta">
@@ -170,7 +171,7 @@ select.input{appearance:auto}
   </div>
 </section>
 
-<!-- Serviços Cards -->
+<!-- ===== CARDS DE SERVIÇOS ===== -->
 <section class="section">
   <div class="grid">
     <article class="card span-4">
@@ -195,7 +196,7 @@ select.input{appearance:auto}
 
 <footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
 
-<!-- Modal Login -->
+<!-- ===== MODAL LOGIN ===== -->
 <div id="login-modal" class="modal" aria-hidden="true">
   <div class="box" role="dialog" aria-modal="true" aria-label="Login">
     <h2>Área do Cliente</h2>
@@ -210,7 +211,7 @@ select.input{appearance:auto}
   </div>
 </div>
 
-<!-- Modal Emitir Certificado -->
+<!-- ===== MODAL CERTIFICADOS ===== -->
 <div id="cert-modal" class="modal" aria-hidden="true">
   <div class="box" role="dialog" aria-modal="true" aria-label="Emitir Certificado">
     <h2>Emitir Certificado Digital</h2>
@@ -283,17 +284,16 @@ select.input{appearance:auto}
 const BANNERS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID/exec"; // <-- troque
 const CERT_ENDPOINT    = "https://script.google.com/macros/s/SEU_ID_CERTIFICADOS/exec"; // <-- troque
 
-// ===== Loader control =====
+/* ===== Loader ===== */
 const Loader = (() => {
   const el = document.getElementById('app-loader');
-  const MIN_MS = 2000;
-  let start = Date.now();
+  const MIN_MS = 1200; let start = Date.now();
   function show(){ start = Date.now(); el.classList.remove('hidden'); }
-  function hide(){ const remain = Math.max(0, MIN_MS - (Date.now() - start)); setTimeout(()=> el.classList.add('hidden'), remain); }
+  function hide(){ const remain = Math.max(0, MIN_MS - (Date.now()-start)); setTimeout(()=>el.classList.add('hidden'), remain); }
   return { show, hide };
 })();
 
-// ===== Toast =====
+/* ===== Toast ===== */
 function toast(msg, ok=true){
   const el = document.getElementById('toast');
   el.textContent = msg;
@@ -302,20 +302,19 @@ function toast(msg, ok=true){
   setTimeout(()=> el.classList.remove('show'), 3500);
 }
 
-// ===== Login (modal) =====
+/* ===== Login ===== */
 const Login = {
   open(){ document.getElementById('login-modal').classList.add('open'); },
   close(){ document.getElementById('login-modal').classList.remove('open'); },
   submit(ev){ ev.preventDefault();
     const u = document.getElementById('login').value.trim();
     const p = document.getElementById('senha').value;
-    // Trocar por fetch() do seu Apps Script
-    alert("Autenticar: " + u);
+    alert("Autenticar: " + u); // troque por fetch() do seu Apps Script
     Login.close();
   }
 };
 
-// ===== Certificados (modal + submit) =====
+/* ===== Certificados ===== */
 const CertModal = {
   open(){ document.getElementById('cert-modal').classList.add('open'); },
   close(){ document.getElementById('cert-modal').classList.remove('open'); },
@@ -333,15 +332,9 @@ const CertModal = {
     if(!/^\d{11}$|^\d{14}$/.test(doc)){ toast('Informe CPF (11) ou CNPJ (14) válido (apenas números).', false); return; }
 
     const form = new FormData();
-    form.append('tipo', tipo);
-    form.append('pessoa', pessoa);
-    form.append('documento', doc);
-    form.append('validade', validade);
-    form.append('nome', nome);
-    form.append('email', email);
-    form.append('fone', fone);
-    if(file) form.append('anexo', file);
-    form.append('origem', 'site_home');
+    form.append('tipo', tipo); form.append('pessoa', pessoa); form.append('documento', doc);
+    form.append('validade', validade); form.append('nome', nome); form.append('email', email);
+    form.append('fone', fone); if(file) form.append('anexo', file); form.append('origem','site_home');
 
     Loader.show();
     try{
@@ -349,21 +342,14 @@ const CertModal = {
       const data = await res.json().catch(()=>({ok:false}));
       if(res.ok && (data.ok!==false)){
         toast('Solicitação enviada! Em breve entraremos em contato.');
-        CertModal.close();
-        document.getElementById('cert-form').reset();
-      }else{
-        toast(data.message || 'Não foi possível enviar. Tente novamente.', false);
-      }
-    }catch(e){
-      console.error(e);
-      toast('Falha de conexão. Verifique sua internet.', false);
-    }finally{
-      Loader.hide();
-    }
+        CertModal.close(); document.getElementById('cert-form').reset();
+      }else{ toast(data.message || 'Não foi possível enviar. Tente novamente.', false); }
+    }catch(e){ console.error(e); toast('Falha de conexão. Verifique sua internet.', false); }
+    finally{ Loader.hide(); }
   }
 };
 
-// ===== Slider =====
+/* ===== Slider com autoplay ===== */
 const Slider = (() => {
   let images = [], idx = 0, timer=null, hold=false;
   const root = document.getElementById('slider');
@@ -374,40 +360,27 @@ const Slider = (() => {
     dots.innerHTML = '';
     images.forEach((src,i)=>{
       const s = document.createElement('div');
-      s.className = 'slide' + (i===idx?' active':'');
-
-      /* slide usa o mesmo estilo base da hero, só definimos aqui o background */
-      s.style.position='absolute';
-      s.style.inset='0';
-      s.style.backgroundSize='cover';
-      s.style.backgroundPosition='center';
-      s.style.opacity = i===idx ? '1' : '0';
-      s.style.transition='opacity .9s ease';
-      s.style.backgroundImage = `url('${src}')`;
+      s.className = 'slide';
+      Object.assign(s.style,{
+        position:'absolute', inset:'0', backgroundSize:'cover', backgroundPosition:'center',
+        opacity: i===idx ? '1':'0', transition:'opacity .9s ease', zIndex:'1',
+        backgroundImage:`url('${src}')`
+      });
       root.appendChild(s);
 
       const d = document.createElement('div');
       d.className = 'dot' + (i===idx?' active':'');
-
-      d.style.width='10px'; d.style.height='10px'; d.style.borderRadius='999px';
-      d.style.background = i===idx ? '#fff' : 'rgba(255,255,255,.6)';
-      d.style.border='1px solid rgba(255,255,255,.9)';
-      d.style.cursor='pointer';
-
       d.onclick = ()=>go(i);
       dots.appendChild(d);
     });
+    go(0);
   }
   function go(i){
     idx = (i+images.length)%images.length;
     const slides = root.querySelectorAll('.slide');
     const points = dots.querySelectorAll('.dot');
-    slides.forEach((s,k)=>{
-      s.style.opacity = k===idx ? '1' : '0';
-    });
-    points.forEach((d,k)=>{
-      d.style.background = k===idx ? '#fff' : 'rgba(255,255,255,.6)';
-    });
+    slides.forEach((s,k)=> s.style.opacity = k===idx ? '1':'0');
+    points.forEach((d,k)=> d.classList.toggle('active', k===idx));
   }
   function next(){ go(idx+1) }
   function prev(){ go(idx-1) }
@@ -430,15 +403,14 @@ const Slider = (() => {
         "https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1600&auto=format&fit=crop"
       ];
     }
-    await preload(images[0]);
-    render(); autoplay();
-    Loader.hide();
+    await preload(images[0]); render(); autoplay(); Loader.hide();
   }
   root.addEventListener('mouseenter',()=>hold=true);
   root.addEventListener('mouseleave',()=>hold=false);
   return { next, prev, load };
 })();
 
+/* ===== Init ===== */
 document.getElementById('year').textContent = new Date().getFullYear();
 Slider.load("home");
 </script>
