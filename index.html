@@ -8,87 +8,71 @@
 :root{
   --blue:#103a6f; --blue2:#0e2b50; --gold:#f3c63a; --bg:#f7fafc; --text:#0f172a;
   --muted:#64748b; --card:#fff; --line:#e5e7eb; --accent:#2563eb; --ok:#22c55e;
-  --danger:#ef4444; --shadow:0 10px 30px rgba(0,0,0,.08);
+  --shadow:0 10px 30px rgba(0,0,0,.08);
 }
 *{box-sizing:border-box} html,body{margin:0}
 body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
 
 /* ===== HEADER ===== */
 .header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:var(--shadow)}
 .header .bar{max-width:1200px;margin:0 auto;display:flex;gap:18px;align-items:center;padding:14px 20px}
-.logo{display:flex;align-items:center;gap:10px}
-.logo img{width:40px;height:40px;object-fit:contain;border-radius:8px}
+.logo img{width:40px;height:40px;border-radius:8px;object-fit:contain}
 .nav{display:flex;gap:14px;flex:1;flex-wrap:wrap}
 .nav a{padding:8px 10px;border-radius:10px;color:#e6eefb}
-.nav a:hover{background:rgba(255,255,255,.12)}
 .nav a.active{background:rgba(255,255,255,.18);color:#fff;font-weight:700}
-.login-wrap{margin-left:auto}
 .login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #b69100}
 
-/* ===== HERO FULL-WIDTH ===== */
-.hero-main{position:relative;width:100%;height:70vh;min-height:380px;overflow:hidden;background:#0c2346}
-.hero-main .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease}
-.hero-main .slide.active{opacity:1}
-.hero-main .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55))}
-.hero-main .caption{position:relative;z-index:2;color:#fff;text-align:center;padding:0 20px;top:50%;transform:translateY(-50%)}
-.hero-main h1{font-size:clamp(28px,5vw,54px);margin:0 0 12px}
-.hero-main p{margin:0;opacity:.95}
-.hero-main .ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;padding:12px;border-radius:12px;cursor:pointer;z-index:3}
-.hero-main .prev{left:14px} .hero-main .next{right:14px}
-.hero-main .dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
-.hero-main .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
-.hero-main .dot.active{background:#fff}
+/* ===== HERO (FULL WIDTH) ===== */
+.hero{position:relative;width:100%;height:66vh;min-height:360px;overflow:hidden;background:#0c2346}
+.hero .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease}
+.hero .slide.active{opacity:1}
+.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.55))}
+.hero .caption{position:relative;z-index:2;color:#fff;text-align:center;padding:0 20px;top:50%;transform:translateY(-50%)}
+.hero h1{font-size:clamp(28px,5vw,54px);margin:0 0 10px}
+.hero p{margin:0;opacity:.95}
+.hero .ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;padding:12px;border-radius:12px;cursor:pointer;z-index:3}
+.hero .prev{left:14px} .hero .next{right:14px}
+.hero .dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.hero .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
+.hero .dot.active{background:#fff}
 
-/* ===== CERTIFICADOS (vertical abaixo do hero) ===== */
-.cert-vertical{position:relative;margin:28px auto;max-width:1200px;border-radius:20px;overflow:hidden;
-  background:linear-gradient(120deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%);color:#fff;
-  display:flex;flex-direction:column;justify-content:space-between;padding:26px;box-shadow:var(--shadow);
-  height:78vh;min-height:420px}
-.cert-vertical::after{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1400&auto=format&fit=crop') center/cover;opacity:.25;mix-blend:screen}
-.cert-vertical .content{position:relative;z-index:2}
-.cert-vertical h2{margin:0 0 10px;font-size:clamp(22px,3vw,34px)}
-.cert-vertical p{margin:0 0 12px;color:#e8eefc}
-.badges{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+/* ===== FAIXA DE BANNERS SECUNDÁRIOS ===== */
+.banner-row{max-width:1200px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:980px){ .banner-row{grid-template-columns:420px 1fr} } /* coluna esquerda fixinha */
+
+.banner-cert{
+  position:relative;height:74vh;min-height:440px;border-radius:20px;overflow:hidden;
+  background:linear-gradient(135deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%);color:#fff;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between
+}
+.banner-cert::after{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1400&auto=format&fit=crop') center/cover;opacity:.20;mix-blend:screen}
+.banner-cert .inner{position:relative;z-index:2;padding:22px}
+.banner-cert h2{margin:6px 0 8px;font-size:clamp(22px,3.2vw,32px)}
+.banner-cert p{margin:0 0 10px;color:#e8eefc}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
 .badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:6px 10px;border-radius:999px;font-weight:600}
 .cta{display:flex;gap:10px;align-items:center;margin-top:12px}
-.cta .price{background:var(--gold);color:#111;font-weight:900;padding:10px 12px;border-radius:10px}
-.cta .btn{background:var(--ok);color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
-.cert-vertical .foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.price{background:var(--gold);color:#111;font-weight:900;padding:10px 12px;border-radius:10px}
+.btn{background:var(--ok);border:none;color:#fff;padding:10px 14px;border-radius:10px;cursor:pointer}
+.ribbon-bar{position:relative;z-index:2;display:flex;gap:8px;flex-wrap:wrap;padding:0 22px 10px}
 .ribbon{background:var(--gold);color:#111;font-weight:800;padding:6px 10px;border-radius:8px}
-.stamp{background:rgba(255,255,255,.15);border:2px dashed rgba(255,255,255,.5);padding:8px 12px;border-radius:10px;font-weight:700}
+.stamp{position:relative;z-index:2;margin:0 22px 18px;background:rgba(255,255,255,.14);border:2px dashed rgba(255,255,255,.5);padding:8px 12px;border-radius:10px;font-weight:700}
 
-/* ===== SEÇÕES ===== */
-.section{max-width:1200px;margin:36px auto;padding:0 20px}
+/* espaço à direita (para manter igual ao print; você pode preencher depois) */
+.banner-space{border:2px dashed #e5e7eb;border-radius:18px;min-height:320px;background:#fff;display:grid;place-items:center;color:#64748b}
 
-/* Cards de Serviços (6 opções) */
+/* ===== CARDS ===== */
+.section{max-width:1200px;margin:28px auto;padding:0 20px}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
 .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
-@media(min-width:900px){.span-3{grid-column:span 3} .span-4{grid-column:span 4} .span-6{grid-column:span 6}}
+@media(min-width:900px){.span-4{grid-column:span 4}}
 .card h3{margin:4px 0 8px}
 .card p{color:var(--muted)}
 .btn-link{display:inline-block;margin-top:8px;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px}
 
-/* Atalhos rápidos */
-.quick{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-.quick a{grid-column:span 6;display:flex;align-items:center;gap:10px;background:#f1f5f9;border:1px solid #e2e8f0;padding:12px;border-radius:12px;color:#0f172a}
-@media(min-width:800px){.quick a{grid-column:span 3}}
-.quick a:hover{filter:brightness(.98)}
-
-/* FAQ */
-.faq .item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
-.faq .q{display:flex;justify-content:space-between;gap:8px;cursor:pointer;font-weight:700}
-.faq .a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted)}
-.faq .item.open .a{max-height:300px;margin-top:8px}
-
-/* CTA final */
-.cta-final{background:linear-gradient(90deg,#0e2b50,#103a6f);color:#fff;border-radius:16px;padding:22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
-
-/* Footer */
-.footer{margin:50px 0 0;background:#0e223f;color:#e6eefb}
-.footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px}
-
-/* Modais + Toast + WhatsApp */
+/* ===== MODAIS / TOAST / WHATS ===== */
 .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(2px);z-index:80}
 .modal.open{display:grid}
 .modal .box{width:min(520px,94vw);background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
@@ -96,20 +80,21 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
 .row{display:grid;gap:10px;grid-template-columns:1fr}
 @media(min-width:680px){.row{grid-template-columns:1fr 1fr}}
 .actions{display:flex;gap:10px;justify-content:flex-end}
-.outline{background:#fff;border:1px solid var(--line);color:#111}
 .toast{position:fixed;bottom:18px;right:18px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s;z-index:90}
 .toast.show{opacity:1;transform:translateY(0)}
 .whats{position:fixed;right:18px;bottom:90px;background:#25d366;color:#fff;border:none;border-radius:999px;padding:14px 16px;font-weight:800;box-shadow:var(--shadow);cursor:pointer;z-index:85}
+
+/* FOOTER */
+.footer{margin:40px 0 0;background:#0e223f;color:#e6eefb}
+.footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px}
 </style>
 </head>
 <body>
 
 <header class="header">
   <div class="bar">
-    <a class="logo" href="index.html" aria-label="SIM Contabilidade">
-      <img src="https://github.com/ClenaStore/santsert/blob/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-20%20%C3%A0(s)%2016.21.40_26238e6c.jpg?raw=true" alt="Logo">
-    </a>
-    <nav class="nav" aria-label="principal">
+    <a class="logo" href="index.html"><img src="https://github.com/ClenaStore/santsert/blob/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-20%20%C3%A0(s)%2016.21.40_26238e6c.jpg?raw=true" alt="Logo"></a>
+    <nav class="nav">
       <a class="active" href="index.html">Home</a>
       <a href="empresa.html">Empresa</a>
       <a href="servicos.html">Serviços</a>
@@ -117,56 +102,63 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
       <a href="informacoes.html">Informações</a>
       <a href="contatos.html">Contato</a>
     </nav>
-    <div class="login-wrap"><button class="login-btn" onclick="Login.open()">Área do Cliente</button></div>
+    <button class="login-btn" onclick="Login.open()">Área do Cliente</button>
   </div>
 </header>
 
-<!-- ===== HERO (FULL-WIDTH) ===== -->
-<section class="hero-main" id="hero">
+<!-- ===== HERO PRINCIPAL FULL WIDTH ===== -->
+<section class="hero" id="hero">
   <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?q=80&w=1800&auto=format&fit=crop')"></div>
   <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1800&auto=format&fit=crop')"></div>
   <div class="overlay"></div>
   <div class="caption">
     <h1>Assessoria contábil completa</h1>
     <p>Abertura/encerramento de empresas • Fiscal • Trabalhista • Consultoria</p>
+    <div style="margin-top:14px;display:flex;gap:10px;justify-content:center">
+      <a href="servicos.html" class="btn" style="background:#0ea5e9">Conhecer serviços</a>
+      <a href="#certificados" class="btn">Emitir certificado</a>
+    </div>
   </div>
   <button class="ctrl prev" onclick="Hero.prev()">❮</button>
   <button class="ctrl next" onclick="Hero.next()">❯</button>
   <div class="dots" id="hero-dots"></div>
 </section>
 
-<!-- ===== CERTIFICADOS (VERTICAL ABAIXO) ===== -->
-<section class="cert-vertical" id="certificados" aria-label="Certificados Digitais">
-  <div class="content">
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-      <span class="ribbon">PROMO</span>
-      <span class="ribbon">12x sem juros*</span>
+<!-- ===== LINHA DOS BANNERS (como no print) ===== -->
+<section class="banner-row">
+  <!-- Banner vertical à ESQUERDA -->
+  <aside class="banner-cert" id="certificados" aria-label="Certificado Digital">
+    <div class="ribbon-bar"><span class="ribbon">PROMO</span><span class="ribbon">12x sem juros*</span></div>
+    <div class="inner">
+      <h2>Certificado Digital<br>com liberação imediata</h2>
+      <p>Emita seu <strong>A1</strong> (arquivo) ou <strong>A3</strong> (cartão/token) com suporte especializado SIM Contabilidade.</p>
+      <div class="badges">
+        <span class="badge">✔️ 12 a 36 meses</span>
+        <span class="badge">⚡ Emissão rápida</span>
+        <span class="badge">🔒 ICP-Brasil</span>
+        <span class="badge">👨‍💼 PF e PJ</span>
+      </div>
+      <div class="cta">
+        <span class="price">a partir de R$ 149</span>
+        <button class="btn" onclick="CertModal.open()">Emitir agora</button>
+        <button class="btn" style="background:#0ea5e9" onclick="window.open('https://wa.me/5599999999999','_blank')">Tirar dúvidas</button>
+      </div>
     </div>
-    <h2>Certificados Digitais com liberação imediata</h2>
-    <p>Emita seu <strong>A1</strong> (arquivo) ou <strong>A3</strong> (cartão/token) com suporte especializado SIM Contabilidade.</p>
-    <div class="badges">
-      <span class="badge">✔️ 12 a 36 meses</span>
-      <span class="badge">⚡ Emissão rápida</span>
-      <span class="badge">🔒 ICP-Brasil</span>
-      <span class="badge">👨‍💼 PF e PJ</span>
-    </div>
-    <div class="cta">
-      <span class="price">A partir de R$ 149</span>
-      <button class="btn" onclick="CertModal.open()">Emitir agora</button>
-    </div>
-  </div>
-  <div class="foot">
-    <span class="stamp">Atendimento online e presencial</span>
-    <small>*Consulte condições</small>
+    <div class="stamp">Atendimento online e presencial</div>
+  </aside>
+
+  <!-- Espaço/branco à DIREITA (igual ao print; pode virar cards/anúncio depois) -->
+  <div class="banner-space">
+    <small>Área livre para outro banner, vídeo ou cards</small>
   </div>
 </section>
 
-<!-- ===== SERVIÇOS (mais opções) ===== -->
-<section class="section" aria-label="Serviços">
+<!-- ===== CARDS ===== -->
+<section class="section">
   <div class="grid">
     <article class="card span-4">
       <h3>Contabilidade Gerencial</h3>
-      <p>Indicadores, DRE gerencial e dashboards para decisões.</p>
+      <p>Indicadores, DRE e dashboards para decisões.</p>
       <a class="btn-link" href="servicos.html#gerencial">Saiba mais</a>
     </article>
     <article class="card span-4">
@@ -179,70 +171,10 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
       <p>Folha, admissões, rescisões e eSocial.</p>
       <a class="btn-link" href="servicos.html#dp">Conhecer</a>
     </article>
-    <article class="card span-4">
-      <h3>Abertura/Encerramento</h3>
-      <p>Do contrato social ao CNPJ, rápido e sem dor de cabeça.</p>
-      <a class="btn-link" href="servicos.html#empresas">Começar</a>
-    </article>
-    <article class="card span-4">
-      <h3>BPO Financeiro</h3>
-      <p>Contas a pagar/receber, conciliação e relatórios.</p>
-      <a class="btn-link" href="servicos.html#bpo">Solicitar</a>
-    </article>
-    <article class="card span-4">
-      <h3>Certificados Digitais</h3>
-      <p>A1 e A3 • PF e PJ • Suporte total na validação.</p>
-      <a class="btn-link" href="#certificados">Emitir Certificado</a>
-    </article>
   </div>
 </section>
 
-<!-- ===== ATALHOS RÁPIDOS ===== -->
-<section class="section" aria-label="Atalhos">
-  <div class="quick">
-    <a href="#certificados">📄 Emissão de Certificado</a>
-    <a href="informacoes.html">📚 Informações Úteis</a>
-    <a href="contatos.html">📞 Fale Conosco</a>
-    <a href="empresa.html">🏢 Sobre a SIM</a>
-  </div>
-</section>
-
-<!-- ===== FAQ ===== -->
-<section class="section faq" aria-label="Perguntas frequentes">
-  <div class="item">
-    <div class="q" onclick="FAQ.toggle(this)"><span>Qual a diferença entre A1 e A3?</span><span>▾</span></div>
-    <div class="a"><p>O A1 é um arquivo instalado no dispositivo; o A3 é um cartão/token físico. Ambos seguem a ICP-Brasil — escolha depende do uso e da segurança desejada.</p></div>
-  </div>
-  <div class="item">
-    <div class="q" onclick="FAQ.toggle(this)"><span>Posso parcelar a emissão?</span><span>▾</span></div>
-    <div class="a"><p>Sim, parcelamos em até 12x (consulte condições vigentes).</p></div>
-  </div>
-  <div class="item">
-    <div class="q" onclick="FAQ.toggle(this)"><span>Quanto tempo leva para liberar?</span><span>▾</span></div>
-    <div class="a"><p>Após validação e videoconferência (quando aplicável), geralmente liberamos no mesmo dia.</p></div>
-  </div>
-</section>
-
-<!-- ===== CTA FINAL ===== -->
-<section class="section">
-  <div class="cta-final">
-    <div>
-      <h3 style="margin:0 0 6px">Precisa de ajuda para escolher o certificado?</h3>
-      <p style="margin:0;opacity:.9">Nossa equipe orienta você na escolha entre A1 e A3, PF ou PJ.</p>
-    </div>
-    <div>
-      <button class="btn" onclick="CertModal.open()">Emitir agora</button>
-      <button class="btn" style="background:#0ea5e9;margin-left:8px" onclick="location.href='contatos.html'">Falar com especialista</button>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div>
-</footer>
-
-<!-- WhatsApp -->
-<button class="whats" onclick="window.open('https://wa.me/5599999999999','_blank')">WhatsApp</button>
+<footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
 
 <!-- ===== MODAIS ===== -->
 <div id="login-modal" class="modal" aria-hidden="true">
@@ -252,8 +184,8 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
       <input class="input" id="login" placeholder="Login" required>
       <input class="input" id="senha" type="password" placeholder="Senha" required>
       <div class="actions">
-        <button type="button" class="btn outline" onclick="Login.close()">Cancelar</button>
-        <button class="btn" type="submit" style="background:var(--accent);color:#fff">Entrar</button>
+        <button type="button" class="btn" style="background:#fff;border:1px solid var(--line);color:#111" onclick="Login.close()">Cancelar</button>
+        <button class="btn" type="submit">Entrar</button>
       </div>
     </form>
   </div>
@@ -310,80 +242,48 @@ a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
       </div>
       <label for="anexo">Documento (RG/Contrato Social) — opcional</label>
       <input id="anexo" class="input" type="file" accept=".pdf,.jpg,.jpeg,.png">
-      <p style="color:var(--muted);font-size:.95rem">Após o envio, validamos os dados e retornamos com as instruções de videoconferência (quando aplicável).</p>
       <div class="actions">
-        <button type="button" class="btn outline" onclick="CertModal.close()">Cancelar</button>
-        <button class="btn" type="submit" style="background:var(--ok);color:#fff">Solicitar Emissão</button>
+        <button type="button" class="btn" style="background:#fff;border:1px solid var(--line);color:#111" onclick="CertModal.close()">Cancelar</button>
+        <button class="btn" type="submit">Solicitar Emissão</button>
       </div>
     </form>
   </div>
 </div>
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<button class="whats" onclick="window.open('https://wa.me/5599999999999','_blank')">WhatsApp</button>
 
 <script>
-const BANNERS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID_BANNERS/exec"; // troque
-const CERT_ENDPOINT    = "https://script.google.com/macros/s/SEU_ID_CERT/exec";     // troque
-
-/* ===== Toast ===== */
+/* ===== Helpers ===== */
 function toast(msg, ok=true){
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.style.background = ok ? '#111' : '#b91c1c';
-  el.classList.add('show');
-  setTimeout(()=> el.classList.remove('show'), 3200);
+  const el=document.getElementById('toast');
+  el.textContent=msg;
+  el.style.background= ok ? '#111' : '#b91c1c';
+  el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),3200);
 }
 
-/* ===== Login ===== */
-const Login = {
-  open(){ document.getElementById('login-modal').classList.add('open'); },
-  close(){ document.getElementById('login-modal').classList.remove('open'); },
-  submit(ev){ ev.preventDefault();
-    const u = document.getElementById('login').value.trim();
-    const p = document.getElementById('senha').value;
-    alert("Autenticar: " + u); // troque por fetch() ao seu Apps Script
-    Login.close();
+/* ===== Modais ===== */
+const Login={
+  open(){document.getElementById('login-modal').classList.add('open')},
+  close(){document.getElementById('login-modal').classList.remove('open')},
+  submit(e){e.preventDefault(); toast('Login enviado (exemplo)'); Login.close();}
+};
+const CertModal={
+  open(){document.getElementById('cert-modal').classList.add('open')},
+  close(){document.getElementById('cert-modal').classList.remove('open')},
+  async submit(e){
+    e.preventDefault();
+    const doc=(document.getElementById('doc').value||'').replace(/\D/g,'');
+    if(!/^\d{11}$|^\d{14}$/.test(doc)){ toast('Informe CPF (11) ou CNPJ (14).',false); return; }
+    toast('Solicitação enviada! 👌'); CertModal.close(); document.getElementById('cert-form').reset();
   }
 };
 
-/* ===== Certificados ===== */
-const CertModal = {
-  open(){ document.getElementById('cert-modal').classList.add('open'); },
-  close(){ document.getElementById('cert-modal').classList.remove('open'); },
-  async submit(ev){
-    ev.preventDefault();
-    const tipo = document.getElementById('tipo').value;
-    const pessoa = document.getElementById('pessoa').value;
-    const doc = (document.getElementById('doc').value||'').replace(/\D/g,'');
-    const validade = document.getElementById('validade').value;
-    const nome = document.getElementById('nome').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const fone = document.getElementById('fone').value.trim();
-    const file = document.getElementById('anexo').files[0];
-
-    if(!/^\d{11}$|^\d{14}$/.test(doc)){ toast('Informe CPF (11) ou CNPJ (14) válido.', false); return; }
-
-    const form = new FormData();
-    form.append('tipo', tipo); form.append('pessoa', pessoa); form.append('documento', doc);
-    form.append('validade', validade); form.append('nome', nome); form.append('email', email);
-    form.append('fone', fone); if(file) form.append('anexo', file); form.append('origem','site_home');
-
-    try{
-      const res = await fetch(CERT_ENDPOINT, { method:'POST', body: form });
-      const data = await res.json().catch(()=>({ok:false}));
-      if(res.ok && (data.ok!==false)){
-        toast('Solicitação enviada! Em breve entraremos em contato.');
-        CertModal.close(); document.getElementById('cert-form').reset();
-      }else{ toast(data.message || 'Não foi possível enviar. Tente novamente.', false); }
-    }catch(e){ console.error(e); toast('Falha de conexão. Verifique sua internet.', false); }
-  }
-};
-
-/* ===== SLIDER (Hero) ===== */
+/* ===== Slider do HERO ===== */
 const Hero=(()=>{
   const root=document.getElementById('hero');
-  const dotsEl=document.getElementById('hero-dots');
   const slides=[...root.querySelectorAll('.slide')];
+  const dotsEl=document.getElementById('hero-dots');
   let idx=0,timer=null,hold=false;
 
   function buildDots(){
@@ -401,19 +301,17 @@ const Hero=(()=>{
     [...dotsEl.children].forEach((d,k)=>d.classList.toggle('active',k===idx));
   }
   function next(){go(idx+1)} function prev(){go(idx-1)}
-  function autoplay(){clearInterval(timer);timer=setInterval(()=>{if(!hold)next()},5000);}
+  function autoplay(){clearInterval(timer); timer=setInterval(()=>{ if(!hold) next(); }, 5000);}
+
   root.addEventListener('mouseenter',()=>hold=true);
   root.addEventListener('mouseleave',()=>hold=false);
-
   buildDots(); go(0); autoplay();
-  return { next, prev };
+
+  return {next,prev};
 })();
 
-/* ===== FAQ ===== */
-const FAQ = { toggle(el){ el.closest('.item').classList.toggle('open'); } };
-
-/* Init */
-document.getElementById('year').textContent = new Date().getFullYear();
+/* ===== Init ===== */
+document.getElementById('year').textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
