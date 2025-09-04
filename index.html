@@ -1,317 +1,356 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SIM Contabilidade – Home</title>
-<style>
-:root{
-  --blue:#103a6f; --blue2:#0e2b50; --gold:#f3c63a; --bg:#f7fafc; --text:#0f172a;
-  --muted:#64748b; --card:#fff; --line:#e5e7eb; --accent:#2563eb; --ok:#22c55e;
-  --shadow:0 10px 30px rgba(0,0,0,.08);
-}
-*{box-sizing:border-box} html,body{margin:0}
-body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SIM Contabilidade • Assessoria completa</title>
+  <meta name="description" content="Abertura e encerramento de empresas, fiscal, DP, consultoria e certificado digital. Formulários integrados ao Google Sheets e e-mail."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020; --surface:#0f172a; --card:#0b1223; --muted:#93a4c8; --text:#e6ecff;
+      --line:#1f2a44; --brand:#5b8cff; --brand2:#6ee7b7; --warn:#f59e0b; --danger:#ef4444;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#0d1730 40%, #0a1328 100%);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
 
-/* ===== HEADER ===== */
-.header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:var(--shadow)}
-.header .bar{max-width:1200px;margin:0 auto;display:flex;gap:18px;align-items:center;padding:14px 20px}
-.logo img{width:40px;height:40px;border-radius:8px;object-fit:contain}
-.nav{display:flex;gap:14px;flex:1;flex-wrap:wrap}
-.nav a{padding:8px 10px;border-radius:10px;color:#e6eefb}
-.nav a.active{background:rgba(255,255,255,.18);color:#fff;font-weight:700}
-.login-btn{background:linear-gradient(180deg,#ffd84d,#f0c000);color:#111;font-weight:700;border:none;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #b69100}
+    /* Container */
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
 
-/* ===== HERO (FULL WIDTH) ===== */
-.hero{position:relative;width:100%;height:66vh;min-height:360px;overflow:hidden;background:#0c2346}
-.hero .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .9s ease}
-.hero .slide.active{opacity:1}
-.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.55))}
-.hero .caption{position:relative;z-index:2;color:#fff;text-align:center;padding:0 20px;top:50%;transform:translateY(-50%)}
-.hero h1{font-size:clamp(28px,5vw,54px);margin:0 0 10px}
-.hero p{margin:0;opacity:.95}
-.hero .ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;padding:12px;border-radius:12px;cursor:pointer;z-index:3}
-.hero .prev{left:14px} .hero .next{right:14px}
-.hero .dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
-.hero .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
-.hero .dot.active{background:#fff}
+    /* Header */
+    .header{position:sticky;top:0;z-index:50;background:rgba(8,12,24,.7);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
+    .bar{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:14px 20px}
+    .logo{display:flex;gap:10px;align-items:center;font-weight:800}
+    .logo img{width:42px;height:42px;border-radius:10px;object-fit:cover;border:1px solid var(--line)}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .nav a{padding:10px 12px;border-radius:12px;color:#cfd8ff}
+    .nav a.active,.nav a:hover{background:linear-gradient(180deg,rgba(91,140,255,.25),rgba(91,140,255,.05));color:#fff;border:1px solid rgba(91,140,255,.35)}
+    .cta{display:flex;gap:10px}
+    .btn{appearance:none;border:none;cursor:pointer;font-weight:700;border-radius:12px;padding:10px 14px}
+    .btn-brand{background:linear-gradient(180deg,#6fa1ff,#3d78ff);color:#0b1020;border:1px solid #6fa1ff;box-shadow:0 3px 0 #2f59c7}
+    .btn-ghost{background:transparent;border:1px solid var(--line);color:#cfe0ff}
 
-/* ===== FAIXA DE BANNERS SECUNDÁRIOS ===== */
-.banner-row{max-width:1200px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:1fr;gap:18px}
-@media(min-width:980px){ .banner-row{grid-template-columns:420px 1fr} } /* coluna esquerda fixinha */
+    /* Hero */
+    .hero{position:relative;overflow:hidden}
+    .hero .inner{display:grid;grid-template-columns:1.2fr 1fr;gap:26px;align-items:center;padding:40px 0}
+    @media(max-width:980px){.hero .inner{grid-template-columns:1fr}}
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .chip{background:linear-gradient(180deg,#111a33,#0b142b);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
 
-.banner-cert{
-  position:relative;height:74vh;min-height:440px;border-radius:20px;overflow:hidden;
-  background:linear-gradient(135deg,#0e2b50 0%, #103a6f 45%, #1e3a8a 100%);color:#fff;
-  box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between
-}
-.banner-cert::after{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1400&auto=format&fit=crop') center/cover;opacity:.20;mix-blend:screen}
-.banner-cert .inner{position:relative;z-index:2;padding:22px}
-.banner-cert h2{margin:6px 0 8px;font-size:clamp(22px,3.2vw,32px)}
-.banner-cert p{margin:0 0 10px;color:#e8eefc}
-.badges{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
-.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:6px 10px;border-radius:999px;font-weight:600}
-.cta{display:flex;gap:10px;align-items:center;margin-top:12px}
-.price{background:var(--gold);color:#111;font-weight:900;padding:10px 12px;border-radius:10px}
-.btn{background:var(--ok);border:none;color:#fff;padding:10px 14px;border-radius:10px;cursor:pointer}
-.ribbon-bar{position:relative;z-index:2;display:flex;gap:8px;flex-wrap:wrap;padding:0 22px 10px}
-.ribbon{background:var(--gold);color:#111;font-weight:800;padding:6px 10px;border-radius:8px}
-.stamp{position:relative;z-index:2;margin:0 22px 18px;background:rgba(255,255,255,.14);border:2px dashed rgba(255,255,255,.5);padding:8px 12px;border-radius:10px;font-weight:700}
+    /* Sections */
+    .section{padding:40px 0;border-top:1px solid var(--line)}
+    .title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px}
+    .title h2{margin:0;font-size:clamp(22px,3.2vw,30px)}
+    .subtitle{color:var(--muted);margin-top:4px}
 
-/* espaço à direita (para manter igual ao print; você pode preencher depois) */
-.banner-space{border:2px dashed #e5e7eb;border-radius:18px;min-height:320px;background:#fff;display:grid;place-items:center;color:#64748b}
+    /* Cards grid */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{grid-column:span 6;background:linear-gradient(180deg,#0c152e,#0a1328);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+    @media(max-width:900px){.card{grid-column:span 12}}
+    .card h3{margin:6px 0 8px}
+    .card p{color:var(--muted)}
+    .card .actions{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
 
-/* ===== CARDS ===== */
-.section{max-width:1200px;margin:28px auto;padding:0 20px}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
-.card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
-@media(min-width:900px){.span-4{grid-column:span 4}}
-.card h3{margin:4px 0 8px}
-.card p{color:var(--muted)}
-.btn-link{display:inline-block;margin-top:8px;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px}
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media(max-width:980px){.pricing{grid-template-columns:1fr}}
+    .plan{background:linear-gradient(180deg,#0c162d,#0a142b);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+    .plan h3{margin:0 0 6px}
+    .plan .price{font-size:28px;font-weight:800;margin:10px 0}
+    .plan ul{margin:0;padding-left:18px;line-height:1.8;color:var(--muted)}
 
-/* ===== MODAIS / TOAST / WHATS ===== */
-.modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(2px);z-index:80}
-.modal.open{display:grid}
-.modal .box{width:min(520px,94vw);background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
-.input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
-.row{display:grid;gap:10px;grid-template-columns:1fr}
-@media(min-width:680px){.row{grid-template-columns:1fr 1fr}}
-.actions{display:flex;gap:10px;justify-content:flex-end}
-.toast{position:fixed;bottom:18px;right:18px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s;z-index:90}
-.toast.show{opacity:1;transform:translateY(0)}
-.whats{position:fixed;right:18px;bottom:90px;background:#25d366;color:#fff;border:none;border-radius:999px;padding:14px 16px;font-weight:800;box-shadow:var(--shadow);cursor:pointer;z-index:85}
+    /* Forms */
+    .form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form .full{grid-column:1/-1}
+    .input,.select,.textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#0a1328;color:#e8efff}
+    .textarea{min-height:100px;resize:vertical}
+    .hint{color:var(--muted);font-size:12px}
 
-/* FOOTER */
-.footer{margin:40px 0 0;background:#0e223f;color:#e6eefb}
-.footer .inner{max-width:1100px;margin:0 auto;padding:24px 20px}
-</style>
+    /* Footer */
+    .footer{padding:28px 0;border-top:1px solid var(--line);color:#bfd2ff}
+
+    /* Toast */
+    .toast{position:fixed;right:18px;bottom:18px;background:#0b1223;border:1px solid var(--line);box-shadow:var(--shadow);color:#fff;padding:12px 14px;border-radius:12px;opacity:0;transform:translateY(10px);transition:.25s;z-index:99}
+    .toast.show{opacity:1;transform:translateY(0)}
+
+    .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:#cfe0ff}
+  </style>
 </head>
 <body>
-
-<header class="header">
-  <div class="bar">
-    <a class="logo" href="index.html"><img src="https://github.com/ClenaStore/santsert/blob/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-20%20%C3%A0(s)%2016.21.40_26238e6c.jpg?raw=true" alt="Logo"></a>
-    <nav class="nav">
-      <a class="active" href="index.html">Home</a>
-      <a href="empresa.html">Empresa</a>
-      <a href="servicos.html">Serviços</a>
-      <a href="#certificados">Certificados</a>
-      <a href="informacoes.html">Informações</a>
-      <a href="contatos.html">Contato</a>
-    </nav>
-    <button class="login-btn" onclick="Login.open()">Área do Cliente</button>
-  </div>
-</header>
-
-<!-- ===== HERO PRINCIPAL FULL WIDTH ===== -->
-<section class="hero" id="hero">
-  <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?q=80&w=1800&auto=format&fit=crop')"></div>
-  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1800&auto=format&fit=crop')"></div>
-  <div class="overlay"></div>
-  <div class="caption">
-    <h1>Assessoria contábil completa</h1>
-    <p>Abertura/encerramento de empresas • Fiscal • Trabalhista • Consultoria</p>
-    <div style="margin-top:14px;display:flex;gap:10px;justify-content:center">
-      <a href="servicos.html" class="btn" style="background:#0ea5e9">Conhecer serviços</a>
-      <a href="#certificados" class="btn">Emitir certificado</a>
-    </div>
-  </div>
-  <button class="ctrl prev" onclick="Hero.prev()">❮</button>
-  <button class="ctrl next" onclick="Hero.next()">❯</button>
-  <div class="dots" id="hero-dots"></div>
-</section>
-
-<!-- ===== LINHA DOS BANNERS (como no print) ===== -->
-<section class="banner-row">
-  <!-- Banner vertical à ESQUERDA -->
-  <aside class="banner-cert" id="certificados" aria-label="Certificado Digital">
-    <div class="ribbon-bar"><span class="ribbon">PROMO</span><span class="ribbon">12x sem juros*</span></div>
-    <div class="inner">
-      <h2>Certificado Digital<br>com liberação imediata</h2>
-      <p>Emita seu <strong>A1</strong> (arquivo) ou <strong>A3</strong> (cartão/token) com suporte especializado SIM Contabilidade.</p>
-      <div class="badges">
-        <span class="badge">✔️ 12 a 36 meses</span>
-        <span class="badge">⚡ Emissão rápida</span>
-        <span class="badge">🔒 ICP-Brasil</span>
-        <span class="badge">👨‍💼 PF e PJ</span>
-      </div>
+  <header class="header">
+    <div class="container bar">
+      <a class="logo" href="#home" aria-label="SIM Contabilidade">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop" alt="Logo">
+        <span>SIM Contabilidade</span>
+      </a>
+      <nav class="nav">
+        <a class="active" href="#home">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#formularios">Formulários</a>
+        <a href="#certificado">Certificado</a>
+        <a href="#planos">Planos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contato">Contato</a>
+      </nav>
       <div class="cta">
-        <span class="price">a partir de R$ 149</span>
-        <button class="btn" onclick="CertModal.open()">Emitir agora</button>
-        <button class="btn" style="background:#0ea5e9" onclick="window.open('https://wa.me/5599999999999','_blank')">Tirar dúvidas</button>
+        <button class="btn btn-ghost" onclick="openWhats()">WhatsApp</button>
+        <button class="btn btn-brand" onclick="scrollToId('formularios')">Área do Cliente</button>
       </div>
     </div>
-    <div class="stamp">Atendimento online e presencial</div>
-  </aside>
+  </header>
 
-  <!-- Espaço/branco à DIREITA (igual ao print; pode virar cards/anúncio depois) -->
-  <div class="banner-space">
-    <small>Área livre para outro banner, vídeo ou cards</small>
-  </div>
-</section>
+  <main id="home" class="hero">
+    <div class="container inner">
+      <section>
+        <p class="tag">⚡ Atendimento ágil • 🔒 Dados seguros • 🧮 BPO Financeiro</p>
+        <h1 style="font-size:clamp(28px,5vw,48px);margin:10px 0 8px">Assessoria contábil completa para quem empreende</h1>
+        <p class="subtitle">Abertura e regularização de empresas, fiscal, DP, consultoria e certificado digital com integração direta aos seus processos.</p>
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-brand" onclick="scrollToId('planos')">Ver planos</button>
+          <button class="btn btn-ghost" onclick="scrollToId('formularios')">Solicitar agora</button>
+        </div>
+        <div class="kpi">
+          <div class="chip">📈 Relatórios financeiros e DRE</div>
+          <div class="chip">🧾 Apurações e obrigações em dia</div>
+          <div class="chip">👥 Folha, eSocial e benefícios</div>
+        </div>
+      </section>
+      <section aria-hidden="true">
+        <img style="border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow)" src="https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1800&auto=format&fit=crop" alt="Escritório contábil">
+      </section>
+    </div>
+  </main>
 
-<!-- ===== CARDS ===== -->
-<section class="section">
-  <div class="grid">
-    <article class="card span-4">
-      <h3>Contabilidade Gerencial</h3>
-      <p>Indicadores, DRE e dashboards para decisões.</p>
-      <a class="btn-link" href="servicos.html#gerencial">Saiba mais</a>
+  <section class="section container" id="servicos">
+    <div class="title"><h2>Serviços</h2><span class="subtitle">Tudo que sua empresa precisa em um só lugar</span></div>
+    <div class="grid">
+      <article class="card" aria-labelledby="s1"><h3 id="s1">Contabilidade Gerencial</h3><p>Indicadores, DRE, fluxo de caixa e dashboards para decisões mais rápidas.</p><div class="actions"><button class="btn btn-ghost" onclick="scrollToId('formularios')">Solicitar</button></div></article>
+      <article class="card" aria-labelledby="s2"><h3 id="s2">Fiscal & Tributário</h3><p>Planejamento, apuração de impostos, reenquadramento e revisão fiscal.</p><div class="actions"><button class="btn btn-ghost" onclick="scrollToId('formularios')">Pedir análise</button></div></article>
+      <article class="card" aria-labelledby="s3"><h3 id="s3">Departamento Pessoal</h3><p>Folha, admissões, rescisões, benefícios e eSocial com suporte dedicado.</p><div class="actions"><button class="btn btn-ghost" onclick="scrollToId('formularios')">Abrir chamado</button></div></article>
+      <article class="card" aria-labelledby="s4"><h3 id="s4">Regularizações</h3><p>Abertura/alteração/baixa de empresas, certidões negativas e licenças.</p><div class="actions"><button class="btn btn-ghost" onclick="scrollToId('formularios')">Solicitar</button></div></article>
+      <article class="card" aria-labelledby="s5"><h3 id="s5">Certificado Digital</h3><p>Emissão A1 e A3 com liberação imediata, presencial ou online.</p><div class="actions"><button class="btn btn-ghost" onclick="scrollToId('certificado')">Emitir agora</button></div></article>
+      <article class="card" aria-labelledby="s6"><h3 id="s6">BPO Financeiro</h3><p>Contas a pagar/receber, conciliação, notas e relatórios gerenciais.</p><div class="actions"><button class="btn btn-ghost" onclick="scrollToId('formularios')">Começar</button></div></article>
+    </div>
+  </section>
+
+  <section class="section container" id="formularios">
+    <div class="title"><h2>Formulários</h2><span class="subtitle">Os envios já chegam na planilha e por e‑mail ao setor da contabilidade</span></div>
+
+    <!-- 1) Solicitação de Abertura/Alteração/Encerramento de Empresa -->
+    <article class="plan" style="margin-bottom:18px">
+      <h3 style="margin:0 0 10px">🧾 Abertura/Alteração/Encerramento</h3>
+      <form class="form" data-form="societario" onsubmit="submitForm(event)">
+        <input class="input" name="empresa" placeholder="Nome/Razão Social" required>
+        <input class="input" name="responsavel" placeholder="Responsável" required>
+        <input class="input" name="email" type="email" placeholder="E‑mail" required>
+        <input class="input" name="fone" placeholder="Telefone (WhatsApp)" required>
+        <select class="select" name="tipo_solicitacao" required>
+          <option value="">Tipo de solicitação…</option>
+          <option>Abertura</option><option>Alteração</option><option>Encerramento</option>
+        </select>
+        <input class="input" name="cpf_cnpj" placeholder="CPF/CNPJ (somente números)" maxlength="14" inputmode="numeric" required>
+        <textarea class="textarea full" name="detalhes" placeholder="Descreva sua necessidade"></textarea>
+        <label class="full hint">Anexos (Contrato, RG, etc.) — opcional</label>
+        <input class="input full" type="file" name="anexos" multiple accept=".pdf,.jpg,.jpeg,.png">
+        <div class="full" style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn btn-ghost" type="reset">Limpar</button>
+          <button class="btn btn-brand" type="submit">Enviar</button>
+        </div>
+      </form>
     </article>
-    <article class="card span-4">
-      <h3>Planejamento Tributário</h3>
-      <p>Regime ideal, reenquadramento e revisão fiscal.</p>
-      <a class="btn-link" href="servicos.html#fiscal">Ver detalhes</a>
-    </article>
-    <article class="card span-4">
-      <h3>Departamento Pessoal</h3>
-      <p>Folha, admissões, rescisões e eSocial.</p>
-      <a class="btn-link" href="servicos.html#dp">Conhecer</a>
-    </article>
-  </div>
-</section>
 
-<footer class="footer"><div class="inner"><small>© <span id="year"></span> SIM Contabilidade</small></div></footer>
+    <!-- 2) Departamento Pessoal: admissões/folha -->
+    <article class="plan" style="margin-bottom:18px">
+      <h3 style="margin:0 0 10px">👥 Departamento Pessoal</h3>
+      <form class="form" data-form="dp" onsubmit="submitForm(event)">
+        <input class="input" name="empresa" placeholder="Empresa" required>
+        <select class="select" name="assunto" required>
+          <option value="">Assunto…</option>
+          <option>Admissão</option><option>Rescisão</option><option>Folha de Pagamento</option><option>Férias</option>
+        </select>
+        <input class="input" name="colaborador" placeholder="Colaborador (se houver)">
+        <input class="input" name="email" type="email" placeholder="E‑mail" required>
+        <input class="input" name="fone" placeholder="Telefone (WhatsApp)" required>
+        <textarea class="textarea full" name="detalhes" placeholder="Detalhes"></textarea>
+        <label class="full hint">Enviar documentos — opcional</label>
+        <input class="input full" type="file" name="anexos" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        <div class="full" style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn btn-ghost" type="reset">Limpar</button>
+          <button class="btn btn-brand" type="submit">Enviar</button>
+        </div>
+      </form>
+    </article>
 
-<!-- ===== MODAIS ===== -->
-<div id="login-modal" class="modal" aria-hidden="true">
-  <div class="box" role="dialog" aria-modal="true" aria-label="Login">
-    <h2>Área do Cliente</h2>
-    <form onsubmit="Login.submit(event)">
-      <input class="input" id="login" placeholder="Login" required>
-      <input class="input" id="senha" type="password" placeholder="Senha" required>
-      <div class="actions">
-        <button type="button" class="btn" style="background:#fff;border:1px solid var(--line);color:#111" onclick="Login.close()">Cancelar</button>
-        <button class="btn" type="submit">Entrar</button>
+    <!-- 3) Fiscal: envio de notas/guia/contestação -->
+    <article class="plan" style="margin-bottom:18px">
+      <h3 style="margin:0 0 10px">🧮 Fiscal</h3>
+      <form class="form" data-form="fiscal" onsubmit="submitForm(event)">
+        <input class="input" name="empresa" placeholder="Empresa" required>
+        <select class="select" name="assunto" required>
+          <option value="">Assunto…</option>
+          <option>Envio de Notas</option><option>Solicitar Guia</option><option>Contestação/Explicação</option>
+        </select>
+        <input class="input" name="email" type="email" placeholder="E‑mail" required>
+        <input class="input" name="fone" placeholder="Telefone (WhatsApp)" required>
+        <textarea class="textarea full" name="mensagem" placeholder="Mensagem"></textarea>
+        <label class="full hint">Anexar XML/Notas/Comprovantes</label>
+        <input class="input full" type="file" name="anexos" multiple accept=".xml,.pdf,.jpg,.png,.zip">
+        <div class="full" style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn btn-ghost" type="reset">Limpar</button>
+          <button class="btn btn-brand" type="submit">Enviar</button>
+        </div>
+      </form>
+    </article>
+
+    <!-- 4) Financeiro/BPO: contas a pagar/receber -->
+    <article class="plan" style="margin-bottom:18px">
+      <h3 style="margin:0 0 10px">💳 Financeiro (BPO)</h3>
+      <form class="form" data-form="bpo" onsubmit="submitForm(event)">
+        <input class="input" name="empresa" placeholder="Empresa" required>
+        <select class="select" name="tipo" required>
+          <option value="">Tipo…</option>
+          <option>Contas a Pagar</option><option>Contas a Receber</option><option>Conciliação</option>
+        </select>
+        <input class="input" name="valor" inputmode="decimal" placeholder="Valor (R$)" required>
+        <input class="input" name="vencimento" type="date" placeholder="Vencimento">
+        <input class="input" name="email" type="email" placeholder="E‑mail" required>
+        <input class="input" name="fone" placeholder="Telefone (WhatsApp)" required>
+        <textarea class="textarea full" name="observacoes" placeholder="Observações"></textarea>
+        <label class="full hint">Enviar notas/boletos/comprovantes</label>
+        <input class="input full" type="file" name="anexos" multiple>
+        <div class="full" style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn btn-ghost" type="reset">Limpar</button>
+          <button class="btn btn-brand" type="submit">Enviar</button>
+        </div>
+      </form>
+    </article>
+
+  </section>
+
+  <!-- Certificado Digital destaque -->
+  <section class="section container" id="certificado">
+    <div class="title"><h2>Certificado Digital</h2><span class="subtitle">A1 (arquivo) e A3 (cartão/token) com liberação rápida</span></div>
+    <div class="grid">
+      <article class="card" style="grid-column:span 7"><h3>Solicitar Certificado</h3><p>Atendimento online e presencial. Documentos conferidos por equipe credenciada ICP-Brasil.</p><div class="actions"><button class="btn btn-brand" onclick="openCertModal()">Emitir agora</button><button class="btn btn-ghost" onclick="openWhats()">Tirar dúvidas</button></div></article>
+      <article class="card" style="grid-column:span 5"><h3>O que levar?</h3><ul class="subtitle"><li>PF: Documento com foto e comprovante de residência</li><li>PJ: Contrato/Estatuto + documentos dos responsáveis</li><li>Validades: 12, 24 ou 36 meses</li></ul></article>
+    </div>
+  </section>
+
+  <!-- Planos -->
+  <section class="section container" id="planos">
+    <div class="title"><h2>Planos</h2><span class="subtitle">Valores indicativos — personalizamos conforme a sua realidade</span></div>
+    <div class="pricing">
+      <div class="plan"><h3>Essencial</h3><div class="price">R$ 349/mês</div><ul><li>Fiscal e DP até 3 colaboradores</li><li>DRE mensal simplificada</li><li>Atendimento em horário comercial</li></ul><div class="actions" style="margin-top:14px"><button class="btn btn-brand" onclick="scrollToId('formularios')">Quero esse</button></div></div>
+      <div class="plan" style="border-color:#3d78ff;outline:2px solid rgba(61,120,255,.25)"><h3>Profissional</h3><div class="price">R$ 699/mês</div><ul><li>Fiscal e DP até 10 colaboradores</li><li>DRE e fluxo de caixa</li><li>Suporte priorizado</li></ul><div class="actions" style="margin-top:14px"><button class="btn btn-brand" onclick="scrollToId('formularios')">Assinar</button></div></div>
+      <div class="plan"><h3>Corporativo</h3><div class="price">Sob consulta</div><ul><li>Times e filiais</li><li>BPO Financeiro completo</li><li>Relatórios avançados</li></ul><div class="actions" style="margin-top:14px"><button class="btn btn-brand" onclick="scrollToId('formularios')">Falar com vendas</button></div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section container" id="faq">
+    <div class="title"><h2>FAQ</h2><span class="subtitle">Perguntas frequentes</span></div>
+    <details class="plan" style="margin-bottom:8px"><summary><strong>Como meus dados chegam na contabilidade?</strong></summary><div class="subtitle" style="margin-top:10px">Cada formulário envia os dados para uma planilha no Google Sheets e dispara um e‑mail automático para o setor responsável.</div></details>
+    <details class="plan" style="margin-bottom:8px"><summary><strong>Posso anexar documentos?</strong></summary><div class="subtitle" style="margin-top:10px">Sim. Aceitamos PDF, imagens e XML (notas) e salvamos em uma pasta do Google Drive vinculada à sua linha na planilha.</div></details>
+    <details class="plan" style="margin-bottom:8px"><summary><strong>É seguro?</strong></summary><div class="subtitle" style="margin-top:10px">Usamos HTTPS do Google Apps Script, restrições de origem (CORS) e armazenamento no Google Workspace.</div></details>
+  </section>
+
+  <footer class="footer">
+    <div class="container" id="contato">
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px">
+        <div>
+          <h3>Fale conosco</h3>
+          <p class="subtitle">(00) 00000-0000 • atendimento@simcontabilidade.com.br</p>
+          <p class="subtitle">Av. Exemplo, 123 – Centro – Sua Cidade/UF</p>
+          <p class="subtitle">© <span id="year"></span> SIM Contabilidade</p>
+        </div>
+        <div>
+          <button class="btn btn-brand" onclick="openWhats()">WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Certificado Modal -->
+  <dialog id="certDialog" style="border:none;border-radius:16px;max-width:560px;width:94vw;padding:0;background:linear-gradient(180deg,#0c162d,#0a142b);color:#fff">
+    <form method="dialog" style="padding:18px;border-bottom:1px solid var(--line)"><strong>Emitir Certificado Digital</strong></form>
+    <form id="certForm" style="padding:18px" onsubmit="submitForm(event)" data-form="certificado">
+      <div class="form">
+        <select class="select" name="tipo" required><option value="">Tipo…</option><option>A1</option><option>A3</option></select>
+        <select class="select" name="pessoa" required><option value="">Pessoa…</option><option>PF</option><option>PJ</option></select>
+        <input class="input" name="nome" placeholder="Nome/Razão Social" required>
+        <input class="input" name="doc" placeholder="CPF/CNPJ (somente números)" maxlength="14" inputmode="numeric" required>
+        <input class="input" type="email" name="email" placeholder="E‑mail" required>
+        <input class="input" name="fone" placeholder="Telefone (WhatsApp)" required>
+        <select class="select" name="validade" required><option value="">Validade…</option><option>12</option><option>24</option><option>36</option></select>
+        <input class="input full" type="file" name="anexos" accept=".pdf,.jpg,.jpeg,.png">
+        <textarea class="textarea full" name="mensagem" placeholder="Observações"></textarea>
+        <div class="full" style="display:flex;gap:10px;justify-content:flex-end">
+          <button type="button" class="btn btn-ghost" onclick="closeCertModal()">Cancelar</button>
+          <button class="btn btn-brand" type="submit">Solicitar</button>
+        </div>
       </div>
     </form>
-  </div>
-</div>
+  </dialog>
 
-<div id="cert-modal" class="modal" aria-hidden="true">
-  <div class="box" role="dialog" aria-modal="true" aria-label="Emitir Certificado">
-    <h2>Emitir Certificado Digital</h2>
-    <form id="cert-form" onsubmit="CertModal.submit(event)">
-      <div class="row">
-        <div>
-          <label for="tipo">Tipo</label>
-          <select id="tipo" class="input" required>
-            <option value="">Selecione…</option>
-            <option value="A1">A1 (arquivo)</option>
-            <option value="A3">A3 (cartão/token)</option>
-          </select>
-        </div>
-        <div>
-          <label for="pessoa">Pessoa</label>
-          <select id="pessoa" class="input" required>
-            <option value="">Selecione…</option>
-            <option value="PF">Física (CPF)</option>
-            <option value="PJ">Jurídica (CNPJ)</option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div>
-          <label for="doc">CPF/CNPJ</label>
-          <input id="doc" class="input" placeholder="Somente números" inputmode="numeric" maxlength="14" required>
-        </div>
-        <div>
-          <label for="validade">Validade</label>
-          <select id="validade" class="input" required>
-            <option value="">Selecione…</option>
-            <option value="12">12 meses</option>
-            <option value="24">24 meses</option>
-            <option value="36">36 meses</option>
-          </select>
-        </div>
-      </div>
-      <label for="nome">Nome/Razão Social</label>
-      <input id="nome" class="input" required>
-      <div class="row">
-        <div>
-          <label for="email">E-mail</label>
-          <input id="email" type="email" class="input" required>
-        </div>
-        <div>
-          <label for="fone">Telefone (WhatsApp)</label>
-          <input id="fone" class="input" placeholder="(00) 00000-0000" required>
-        </div>
-      </div>
-      <label for="anexo">Documento (RG/Contrato Social) — opcional</label>
-      <input id="anexo" class="input" type="file" accept=".pdf,.jpg,.jpeg,.png">
-      <div class="actions">
-        <button type="button" class="btn" style="background:#fff;border:1px solid var(--line);color:#111" onclick="CertModal.close()">Cancelar</button>
-        <button class="btn" type="submit">Solicitar Emissão</button>
-      </div>
-    </form>
-  </div>
-</div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
-<button class="whats" onclick="window.open('https://wa.me/5599999999999','_blank')">WhatsApp</button>
+  <script>
+    // ====== CONFIG ======
+    // Substitua pela URL do seu Web App do Google Apps Script (Implantar > Como aplicativo da Web)
+    const GAS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID_AQUI/exec"; // << coloque sua URL aqui
+    const ACCOUNTING_WHATS = "https://wa.me/5599999999999"; // Whats de atendimento
 
-<script>
-/* ===== Helpers ===== */
-function toast(msg, ok=true){
-  const el=document.getElementById('toast');
-  el.textContent=msg;
-  el.style.background= ok ? '#111' : '#b91c1c';
-  el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),3200);
-}
+    // ====== Helpers UI ======
+    function toast(msg, ok=true){
+      const el=document.getElementById('toast');
+      el.textContent=msg; el.style.borderColor= ok? 'var(--line)':'#7f1d1d';
+      el.style.background= ok? '#0b1223':'#7f1d1d';
+      el.classList.add('show'); setTimeout(()=>el.classList.remove('show'), 3500);
+    }
+    function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
+    function openWhats(){window.open(ACCOUNTING_WHATS,'_blank')}
+    function openCertModal(){document.getElementById('certDialog').showModal()}
+    function closeCertModal(){document.getElementById('certDialog').close()}
 
-/* ===== Modais ===== */
-const Login={
-  open(){document.getElementById('login-modal').classList.add('open')},
-  close(){document.getElementById('login-modal').classList.remove('open')},
-  submit(e){e.preventDefault(); toast('Login enviado (exemplo)'); Login.close();}
-};
-const CertModal={
-  open(){document.getElementById('cert-modal').classList.add('open')},
-  close(){document.getElementById('cert-modal').classList.remove('open')},
-  async submit(e){
-    e.preventDefault();
-    const doc=(document.getElementById('doc').value||'').replace(/\D/g,'');
-    if(!/^\d{11}$|^\d{14}$/.test(doc)){ toast('Informe CPF (11) ou CNPJ (14).',false); return; }
-    toast('Solicitação enviada! 👌'); CertModal.close(); document.getElementById('cert-form').reset();
-  }
-};
+    // ====== Validações simples ======
+    function onlyDigits(s=''){return (s||'').replace(/\D/g,'')}
+    function validDoc(doc){const d=onlyDigits(doc);return /^\d{11}$/.test(d)||/^\d{14}$/.test(d)}
 
-/* ===== Slider do HERO ===== */
-const Hero=(()=>{
-  const root=document.getElementById('hero');
-  const slides=[...root.querySelectorAll('.slide')];
-  const dotsEl=document.getElementById('hero-dots');
-  let idx=0,timer=null,hold=false;
+    // ====== Envio genérico dos formulários ======
+    async function submitForm(e){
+      e.preventDefault();
+      const form = e.target.closest('form');
+      const kind = form.dataset.form || 'geral';
 
-  function buildDots(){
-    dotsEl.innerHTML='';
-    slides.forEach((_,i)=>{
-      const d=document.createElement('div');
-      d.className='dot'+(i===idx?' active':'');
-      d.onclick=()=>go(i);
-      dotsEl.appendChild(d);
-    });
-  }
-  function go(i){
-    idx=(i+slides.length)%slides.length;
-    slides.forEach((s,k)=>s.classList.toggle('active',k===idx));
-    [...dotsEl.children].forEach((d,k)=>d.classList.toggle('active',k===idx));
-  }
-  function next(){go(idx+1)} function prev(){go(idx-1)}
-  function autoplay(){clearInterval(timer); timer=setInterval(()=>{ if(!hold) next(); }, 5000);}
+      // Regra de CPF/CNPJ quando existir esses campos
+      const docInput = form.querySelector('[name="cpf_cnpj"], [name="doc"]');
+      if(docInput && !validDoc(docInput.value)){
+        toast('Informe um CPF (11) ou CNPJ (14) válido.', false); return;
+      }
 
-  root.addEventListener('mouseenter',()=>hold=true);
-  root.addEventListener('mouseleave',()=>hold=false);
-  buildDots(); go(0); autoplay();
+      const fd = new FormData(form);
+      fd.append('form', kind); // identifica o formulário no GAS
 
-  return {next,prev};
-})();
+      try{
+        const res = await fetch(GAS_ENDPOINT, { method:'POST', body: fd });
+        const data = await res.json();
+        if(!res.ok || data.status!=='ok'){ throw new Error(data.message||'Falha no envio'); }
+        toast('Solicitação enviada com sucesso! ✅');
+        form.reset();
+        if(form.id==='certForm') closeCertModal();
+      }catch(err){
+        console.error(err); toast('Não foi possível enviar. Tente novamente.', false);
+      }
+    }
 
-/* ===== Init ===== */
-document.getElementById('year').textContent=new Date().getFullYear();
-</script>
+    // Ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
