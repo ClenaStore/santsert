@@ -62,20 +62,45 @@
   .cat{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
   .cat.active{background:var(--wine);border-color:transparent;color:#fff}
 
-  /* documents library */
-  .docs-wrap{display:grid;grid-template-columns:280px 1fr;gap:16px}
-  @media(max-width:980px){.docs-wrap{grid-template-columns:1fr}}
-  .docs-side{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
+  /* documents library (3 colunas + banner lateral) */
+  .docs-wrap{display:grid;grid-template-columns:280px 1fr 260px;gap:16px}
+  @media(max-width:1200px){.docs-wrap{grid-template-columns:260px 1fr 240px}}
+  @media(max-width:980px){.docs-wrap{grid-template-columns:1fr}} /* empilha no mobile */
+
+  .docs-side{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow);height:fit-content;position:sticky;top:86px}
   .search{display:flex;gap:8px;margin-bottom:10px}
   .input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px}
-  .docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-  .doc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
+
+  /* grade dos docs + SCROLL para 6 cards visíveis */
+  .docs-holder{--row: 168px; /* altura mínima de um card */ 
+               max-height: calc(var(--row)*2 + 14px); /* 2 linhas (3 col) = 6 cards */
+               overflow-y:auto; padding-right:6px}
+  /* mobile: 2 colunas, 3 linhas = 6 cards */
+  @media(max-width:980px){
+    .docs-holder{max-height: calc(var(--row)*3 + 28px);}
+  }
+
+  .docs{display:grid;grid-template-columns:repeat(3, minmax(240px,1fr));gap:14px}
+  @media(max-width:1200px){.docs{grid-template-columns:repeat(3, minmax(220px,1fr));}}
+  @media(max-width:980px){.docs{grid-template-columns:repeat(2, minmax(200px,1fr));}}
+  .doc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:var(--row)}
   .doc small{color:var(--muted)}
   .doc .tags{display:flex;gap:6px;flex-wrap:wrap}
   .tag{font-size:12px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;background:#f9fafb}
   .empty{padding:20px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted)}
 
-  /* pricing block */
+  /* scrollbar leve */
+  .docs-holder::-webkit-scrollbar{width:10px}
+  .docs-holder::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:12px}
+  .docs-holder::-webkit-scrollbar-track{background:#f3f4f6;border-radius:12px}
+
+  /* banner lateral direito */
+  .side-banner{background:linear-gradient(180deg,var(--wine),var(--wine-2));color:#fff;border-radius:16px;border:1px solid rgba(255,255,255,.25);box-shadow:var(--shadow);padding:16px;position:sticky;top:86px;height:fit-content}
+  .side-banner h4{margin:0 0 6px}
+  .side-banner p{margin:0 0 10px;color:#ffecf2}
+  .side-banner .cta{background:linear-gradient(180deg,#ffd877,var(--gold));color:#5a3b00;border:none;border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer}
+
+  /* pricing */
   .price{font-size:28px;font-weight:800;color:var(--wine);margin:8px 0}
 
   /* forms */
@@ -151,9 +176,7 @@
       </div>
     </div>
 
-    <div class="grid" id="servicos-grid">
-      <!-- cards renderizados por JS -->
-    </div>
+    <div class="grid" id="servicos-grid"><!-- via JS --></div>
   </section>
 
   <!-- NOTAS FISCAIS -->
@@ -177,10 +200,11 @@
     </div>
   </section>
 
-  <!-- BIBLIOTECA DE DOCUMENTOS (downloads + busca) -->
+  <!-- BIBLIOTECA DE DOCUMENTOS -->
   <section class="section" id="docs">
     <div class="title"><h2>Modelos para baixar</h2><span class="subtitle">Pesquise por nome ou filtre por categoria</span></div>
     <div class="docs-wrap">
+      <!-- filtro esquerdo -->
       <aside class="docs-side">
         <div class="search">
           <input id="q" class="input" placeholder="Pesquise por nome, palavra-chave... (ex: contrato, procuração)"/>
@@ -198,9 +222,23 @@
         </div>
         <p class="subtitle" id="count" style="margin-top:10px">—</p>
       </aside>
-      <div>
+
+      <!-- centro: grade com SCROLL (6 cards visíveis) -->
+      <div class="docs-holder">
         <div class="docs" id="docs-grid"><div class="empty">Nenhum documento encontrado.</div></div>
       </div>
+
+      <!-- banner lateral direito -->
+      <aside class="side-banner">
+        <h4>Promo • Certificado Digital</h4>
+        <p>A1/A3 com liberação rápida e atendimento por vídeo.</p>
+        <ul style="margin:0 0 10px 18px">
+          <li>Parcelamento em até 12x</li>
+          <li>Validades 12–36 meses</li>
+          <li>Suporte especializado</li>
+        </ul>
+        <button class="cta press" data-ripple onclick="scrollToId('certificado')">Emitir agora</button>
+      </aside>
     </div>
   </section>
 
@@ -275,7 +313,7 @@
   // ====== CONFIG ======
   const GAS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID_DO_WEBAPP/exec"; // substitua
 
-  // ====== Microinterações (ripple nos botões) ======
+  // ====== Microinterações (ripple) ======
   document.addEventListener('click', e=>{
     const btn = e.target.closest('[data-ripple]');
     if(!btn) return;
@@ -293,7 +331,7 @@
   function scrollToId(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
   document.getElementById('year').textContent=new Date().getFullYear();
 
-  // ====== Dados: serviços (com categorias) ======
+  // ====== Serviços (com categorias) ======
   const SERVICOS = [
     {t:'Contabilidade Gerencial', d:'Indicadores, DRE e fluxo de caixa.', c:'bpo'},
     {t:'Fiscal & Tributário', d:'Planejamento, apuração e revisão.', c:'fiscal'},
@@ -321,7 +359,7 @@
     b.classList.add('active'); renderServ(b.dataset.cat);
   });
 
-  // ====== Biblioteca de documentos (busca + categorias) ======
+  // ====== Biblioteca de documentos (busca + categorias + SCROLL 6) ======
   const DOCS = [
     {id:1, nome:'Checklist de Abertura (PF/PJ)', cat:'societario', ext:'PDF', link:'#', tags:['abertura','empresa','documentos']},
     {id:2, nome:'Modelo de Contrato Social', cat:'societario', ext:'DOCX', link:'#', tags:['contrato','societario']},
@@ -331,14 +369,10 @@
     {id:6, nome:'Requerimento de Marca (INPI)', cat:'marcas', ext:'PDF', link:'#', tags:['marcas','inpi']},
     {id:7, nome:'Checklist Emissão NF-e', cat:'fiscal', ext:'PDF', link:'#', tags:['nfe','notas']},
     {id:8, nome:'Formulário de Validação – e-CPF/e-CNPJ', cat:'cert', ext:'PDF', link:'#', tags:['certificado','icp-brasil']},
-    {id:9, nome:'Checklist de Abertura (PF/PJ)', cat:'societario', ext:'PDF', link:'#', tags:['abertura','empresa','documentos']},
-    {id:10, nome:'Modelo de Contrato Social', cat:'societario', ext:'DOCX', link:'#', tags:['contrato','societario']},
-    {id:11, nome:'Procuração (Fiscal/Bancária)', cat:'fiscal', ext:'DOCX', link:'#', tags:['procuração','fisco']},
-    {id:12, nome:'Termo de Responsabilidade DP', cat:'dp', ext:'DOCX', link:'#', tags:['dp','pessoal']},
-    {id:13, nome:'Planilha – Contas a Pagar/Receber', cat:'financeiro', ext:'XLSX', link:'#', tags:['bpo','financeiro']},
-    {id:14, nome:'Requerimento de Marca (INPI)', cat:'marcas', ext:'PDF', link:'#', tags:['marcas','inpi']},
-    {id:15, nome:'Checklist Emissão NF-e', cat:'fiscal', ext:'PDF', link:'#', tags:['nfe','notas']},
-    {id:16, nome:'Formulário de Validação – e-CPF/e-CNPJ', cat:'cert', ext:'PDF', link:'#', tags:['certificado','icp-brasil']},
+    {id:9, nome:'Procuração p/ Receita Federal', cat:'fiscal', ext:'PDF', link:'#', tags:['procuração','rf']},
+    {id:10, nome:'Planilha Fluxo de Caixa', cat:'financeiro', ext:'XLSX', link:'#', tags:['fluxo','caixa']},
+    {id:11, nome:'Aditivo Contratual', cat:'societario', ext:'DOCX', link:'#', tags:['aditivo','contrato']},
+    {id:12, nome:'Ficha de Registro – DP', cat:'dp', ext:'DOCX', link:'#', tags:['registro','dp']},
   ];
   let DOC_CAT='todas', DOC_Q='';
   const docsGrid=document.getElementById('docs-grid');
