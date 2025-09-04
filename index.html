@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Visão Contabilidade Empresarial</title>
-<meta name="description" content="Consultoria contábil estratégica, emissão de notas, certificado digital, gestão de marcas e biblioteca de documentos modelo."/>
+<meta name="description" content="Consultoria contábil estratégica, emissão de notas fiscais, certificado digital, marcas & patentes e biblioteca de documentos modelo."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -19,8 +19,8 @@
   body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
   a{color:inherit;text-decoration:none}
 
-  /* header */
-  .header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--wine),var(--wine-2));color:#fff;box-shadow:var(--shadow)}
+  /* HEADER */
+  .header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,var(--wine),var(--wine-2));color:#fff;box-shadow:var(--shadow)}
   .bar{max-width:1200px;margin:auto;padding:12px 18px;display:flex;align-items:center;gap:14px;justify-content:space-between}
   .brand{display:flex;gap:10px;align-items:center;font-weight:800}
   .brand img{width:42px;height:42px;border-radius:10px;background:#fff;border:2px solid rgba(255,255,255,.9);object-fit:cover}
@@ -31,24 +31,33 @@
   .btn-brand{background:linear-gradient(180deg,#ffd877,var(--gold));color:#5a3b00;border:1px solid rgba(0,0,0,.08);box-shadow:0 3px 0 #a37714}
   .btn-ghost{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.35)}
 
-  /* ripple / click animations */
+  /* Ripple / Press */
   .ripple{position:absolute;border-radius:50%;transform:scale(0);animation:ripple .6s linear;opacity:.35;background:#fff}
   @keyframes ripple{to{transform:scale(4);opacity:0}}
   .press:active{transform:scale(.98)}
 
-  /* banner hero */
+  /* === TOP BANNER (abaixo do header) === */
+  .top-banner{background:linear-gradient(90deg,rgba(127,22,53,.95),rgba(160,33,70,.95));color:#fff;border-bottom:1px solid rgba(255,255,255,.2)}
+  .top-banner .inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 18px}
+  .top-banner .msg{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .top-banner img{height:44px;width:auto;border-radius:10px;border:2px solid rgba(255,255,255,.6);object-fit:cover}
+  .top-banner .cta{background:linear-gradient(180deg,#ffd877,var(--gold));color:#5a3b00;border:none;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
+  .top-banner .close{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
+  @media(max-width:700px){.top-banner .inner{grid-template-columns:1fr}}
+
+  /* HERO */
   .hero{background:
     linear-gradient(180deg,rgba(127,22,53,.85),rgba(160,33,70,.85)),
-    url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
-    color:#fff}
+    url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat; color:#fff}
   .hero .inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.2fr 1fr;gap:22px;padding:38px 18px}
   @media(max-width:980px){.hero .inner{grid-template-columns:1fr}}
   .headline{font-size:clamp(28px,5vw,48px);margin:0 0 10px}
   .chips{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
   .chip{background:rgba(255,255,255,.92);color:#111;border:1px solid rgba(0,0,0,.06);border-radius:999px;padding:6px 10px}
   .hero-card{background:#fff;color:#111;border-radius:16px;padding:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .price{font-size:28px;font-weight:800;color:var(--wine);margin:8px 0}
 
-  /* sections */
+  /* SEÇÕES GENÉRICAS */
   .section{max-width:1200px;margin:auto;padding:34px 18px}
   .title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   .subtitle{color:var(--muted)}
@@ -57,12 +66,12 @@
   @media(max-width:900px){.card{grid-column:span 12}}
   .card h3{margin:6px 0 8px;color:var(--wine)}
 
-  /* categories (pílulas) */
+  /* CATEGORIAS (pílulas) */
   .cats{display:flex;gap:8px;flex-wrap:wrap}
   .cat{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
   .cat.active{background:var(--wine);border-color:transparent;color:#fff}
 
-  /* documents library (3 colunas + banner lateral) */
+  /* DOCUMENTOS (com banner lateral e scroll p/ 6 cards) */
   .docs-wrap{display:grid;grid-template-columns:280px 1fr 260px;gap:16px}
   @media(max-width:1200px){.docs-wrap{grid-template-columns:260px 1fr 240px}}
   @media(max-width:980px){.docs-wrap{grid-template-columns:1fr}} /* empilha no mobile */
@@ -71,15 +80,9 @@
   .search{display:flex;gap:8px;margin-bottom:10px}
   .input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px}
 
-  /* grade dos docs + SCROLL para 6 cards visíveis */
-  .docs-holder{--row: 168px; /* altura mínima de um card */ 
-               max-height: calc(var(--row)*2 + 14px); /* 2 linhas (3 col) = 6 cards */
-               overflow-y:auto; padding-right:6px}
-  /* mobile: 2 colunas, 3 linhas = 6 cards */
-  @media(max-width:980px){
-    .docs-holder{max-height: calc(var(--row)*3 + 28px);}
-  }
-
+  /* 6 cards visíveis + scroll */
+  .docs-holder{--row: 168px; max-height: calc(var(--row)*2 + 14px); overflow-y:auto; padding-right:6px}
+  @media(max-width:980px){.docs-holder{max-height: calc(var(--row)*3 + 28px);}} /* no mobile: 2 col x 3 linhas = 6 */
   .docs{display:grid;grid-template-columns:repeat(3, minmax(240px,1fr));gap:14px}
   @media(max-width:1200px){.docs{grid-template-columns:repeat(3, minmax(220px,1fr));}}
   @media(max-width:980px){.docs{grid-template-columns:repeat(2, minmax(200px,1fr));}}
@@ -88,28 +91,18 @@
   .doc .tags{display:flex;gap:6px;flex-wrap:wrap}
   .tag{font-size:12px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;background:#f9fafb}
   .empty{padding:20px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted)}
-
   /* scrollbar leve */
   .docs-holder::-webkit-scrollbar{width:10px}
   .docs-holder::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:12px}
   .docs-holder::-webkit-scrollbar-track{background:#f3f4f6;border-radius:12px}
 
-  /* banner lateral direito */
+  /* BANNER LATERAL */
   .side-banner{background:linear-gradient(180deg,var(--wine),var(--wine-2));color:#fff;border-radius:16px;border:1px solid rgba(255,255,255,.25);box-shadow:var(--shadow);padding:16px;position:sticky;top:86px;height:fit-content}
   .side-banner h4{margin:0 0 6px}
   .side-banner p{margin:0 0 10px;color:#ffecf2}
   .side-banner .cta{background:linear-gradient(180deg,#ffd877,var(--gold));color:#5a3b00;border:none;border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer}
 
-  /* pricing */
-  .price{font-size:28px;font-weight:800;color:var(--wine);margin:8px 0}
-
-  /* forms */
-  form.grid{grid-template-columns:1fr 1fr}
-  form .full{grid-column:1/-1}
-  select, textarea{padding:12px;border:1px solid var(--line);border-radius:12px;width:100%}
-  .hint{color:var(--muted);font-size:12px}
-
-  /* footer */
+  /* FOOTER */
   .footer{background:#1a1a1a;color:#fff;margin-top:20px}
   .footer .inner{max-width:1200px;margin:auto;padding:28px 18px;display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:center}
   @media(max-width:900px){.footer .inner{grid-template-columns:1fr}}
@@ -120,7 +113,7 @@
   <header class="header">
     <div class="bar">
       <div class="brand">
-        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...TRUNCATED..." alt="Logo Visão">
+        <img src="https://dummyimage.com/42x42/ffffff/7f1635.png&text=V" alt="Logo Visão">
         <span>Visão Contabilidade Empresarial</span>
       </div>
       <nav class="nav">
@@ -135,7 +128,24 @@
     </div>
   </header>
 
-  <!-- BANNER / HERO -->
+  <!-- TOP BANNER (abaixo do header) -->
+  <section class="top-banner" id="topBanner">
+    <div class="inner">
+      <div class="msg">
+        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop" alt="Campanha Certificado Digital">
+        <div>
+          <strong>Promo • Certificado Digital A1/A3</strong><br>
+          <small>Liberação rápida • Atendimento por vídeo • até 12x</small>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="cta press" data-ripple onclick="scrollToId('certificado')">Emitir agora</button>
+        <button class="close press" data-ripple onclick="dismissTopBanner()">✕</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO -->
   <section class="hero" id="home">
     <div class="inner">
       <div>
@@ -175,8 +185,7 @@
         <button class="cat press" data-ripple data-cat="marcas">Marcas & Patentes</button>
       </div>
     </div>
-
-    <div class="grid" id="servicos-grid"><!-- via JS --></div>
+    <div class="grid" id="servicos-grid"></div>
   </section>
 
   <!-- NOTAS FISCAIS -->
@@ -200,11 +209,11 @@
     </div>
   </section>
 
-  <!-- BIBLIOTECA DE DOCUMENTOS -->
+  <!-- BIBLIOTECA DE DOCUMENTOS (downloads + busca + banner lateral) -->
   <section class="section" id="docs">
     <div class="title"><h2>Modelos para baixar</h2><span class="subtitle">Pesquise por nome ou filtre por categoria</span></div>
     <div class="docs-wrap">
-      <!-- filtro esquerdo -->
+      <!-- LADO ESQUERDO: filtro -->
       <aside class="docs-side">
         <div class="search">
           <input id="q" class="input" placeholder="Pesquise por nome, palavra-chave... (ex: contrato, procuração)"/>
@@ -223,12 +232,12 @@
         <p class="subtitle" id="count" style="margin-top:10px">—</p>
       </aside>
 
-      <!-- centro: grade com SCROLL (6 cards visíveis) -->
+      <!-- CENTRO: grade com SCROLL (6 cards visíveis) -->
       <div class="docs-holder">
         <div class="docs" id="docs-grid"><div class="empty">Nenhum documento encontrado.</div></div>
       </div>
 
-      <!-- banner lateral direito -->
+      <!-- DIREITA: banner lateral -->
       <aside class="side-banner">
         <h4>Promo • Certificado Digital</h4>
         <p>A1/A3 com liberação rápida e atendimento por vídeo.</p>
@@ -265,7 +274,7 @@
       </form>
     </article>
 
-    <!-- Certificado -->
+    <!-- Certificado Digital -->
     <article class="card">
       <h3>🔐 Certificado Digital</h3>
       <form class="grid" data-form="certificado" onsubmit="submitForm(event)">
@@ -311,9 +320,9 @@
 
 <script>
   // ====== CONFIG ======
-  const GAS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID_DO_WEBAPP/exec"; // substitua
+  const GAS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID_DO_WEBAPP/exec"; // substitua pela sua URL
 
-  // ====== Microinterações (ripple) ======
+  // ====== Ripple (microinteração) ======
   document.addEventListener('click', e=>{
     const btn = e.target.closest('[data-ripple]');
     if(!btn) return;
@@ -328,8 +337,23 @@
     setTimeout(()=>r.remove(),600);
   });
 
+  // ====== Util ======
   function scrollToId(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
   document.getElementById('year').textContent=new Date().getFullYear();
+
+  // ====== TOP BANNER: fechar e lembrar por 1 dia ======
+  const TOP_BANNER_KEY='visao.top.banner.hide';
+  function dismissTopBanner(){
+    const oneDay=24*60*60*1000;
+    localStorage.setItem(TOP_BANNER_KEY, String(Date.now()+oneDay));
+    document.getElementById('topBanner')?.remove();
+  }
+  (function restoreTopBanner(){
+    const until=Number(localStorage.getItem(TOP_BANNER_KEY)||0);
+    if(until && Date.now()<until){
+      document.getElementById('topBanner')?.remove();
+    }
+  })();
 
   // ====== Serviços (com categorias) ======
   const SERVICOS = [
@@ -353,13 +377,13 @@
     });
   }
   renderServ();
-  catServ.addEventListener('click',e=>{
+  catServ?.addEventListener('click',e=>{
     const b=e.target.closest('.cat'); if(!b) return;
     catServ.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
     b.classList.add('active'); renderServ(b.dataset.cat);
   });
 
-  // ====== Biblioteca de documentos (busca + categorias + SCROLL 6) ======
+  // ====== Biblioteca de Documentos (busca + categorias + scroll 6) ======
   const DOCS = [
     {id:1, nome:'Checklist de Abertura (PF/PJ)', cat:'societario', ext:'PDF', link:'#', tags:['abertura','empresa','documentos']},
     {id:2, nome:'Modelo de Contrato Social', cat:'societario', ext:'DOCX', link:'#', tags:['contrato','societario']},
@@ -380,6 +404,9 @@
   const q=document.getElementById('q');
   const count=document.getElementById('count');
 
+  function labelCat(c){
+    return {societario:'Societário', fiscal:'Fiscal', dp:'DP', financeiro:'Financeiro', cert:'Certificado', marcas:'Marcas'}[c]||'Outros';
+  }
   function renderDocs(){
     const qn = DOC_Q.trim().toLowerCase();
     const list = DOCS.filter(d=>{
@@ -403,22 +430,20 @@
       docsGrid.appendChild(el);
     });
   }
-  function labelCat(c){
-    return {societario:'Societário', fiscal:'Fiscal', dp:'DP', financeiro:'Financeiro', cert:'Certificado', marcas:'Marcas'}[c]||'Outros';
-  }
   function searchDocs(){ DOC_Q = q.value; renderDocs(); }
-  q.addEventListener('input', searchDocs);
-  catDocs.addEventListener('click', e=>{
+  q?.addEventListener('input', searchDocs);
+  catDocs?.addEventListener('click', e=>{
     const b=e.target.closest('.cat'); if(!b) return;
     catDocs.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
     b.classList.add('active'); DOC_CAT=b.dataset.cat; renderDocs();
   });
   function copyLink(link){
-    navigator.clipboard.writeText(location.origin+link).then(()=>alert('Link copiado!'));
+    const full = link.startsWith('http') ? link : (location.origin+link);
+    navigator.clipboard.writeText(full).then(()=>alert('Link copiado!'));
   }
   renderDocs();
 
-  // ====== Envio genérico de formulários (GAS) ======
+  // ====== Envio genérico p/ GAS ======
   async function submitForm(e){
     e.preventDefault();
     const form=e.target.closest('form');
