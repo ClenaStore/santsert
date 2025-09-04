@@ -77,9 +77,8 @@
   .cat{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
   .cat.active{background:var(--wine);border-color:transparent;color:#fff}
 
-  /* ===== Documentos (com banner lateral e scroll p/ 6 cards) ===== */
-  .docs-wrap{display:grid;grid-template-columns:280px 1fr 260px;gap:16px}
-  @media(max-width:1200px){.docs-wrap{grid-template-columns:260px 1fr 240px}}
+  /* ===== Documentos (SEM banner lateral; 6 visíveis + scroll) ===== */
+  .docs-wrap{display:grid;grid-template-columns:280px 1fr;gap:16px}
   @media(max-width:980px){.docs-wrap{grid-template-columns:1fr}}
   .docs-side{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);height:fit-content;position:sticky;top:86px}
   .search{display:flex;gap:8px;margin-bottom:10px}
@@ -94,15 +93,9 @@
   .doc .tags{display:flex;gap:6px;flex-wrap:wrap}
   .tag{font-size:12px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;background:#f9fafb}
   .empty{padding:20px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted)}
-  .docs-holder::-webkit-scrollbar{width:10px}
+  .docs-holder::-webkit-scrollbar{height:10px;width:10px}
   .docs-holder::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:12px}
   .docs-holder::-webkit-scrollbar-track{background:#f3f4f6;border-radius:12px}
-
-  /* ===== Banner Lateral ===== */
-  .side-banner{background:linear-gradient(180deg,var(--wine),var(--wine-2));color:#fff;border-radius:16px;border:1px solid rgba(255,255,255,.25);box-shadow:var(--shadow);padding:16px;position:sticky;top:86px;height:fit-content}
-  .side-banner h4{margin:0 0 6px}
-  .side-banner p{margin:0 0 10px;color:#ffecf2}
-  .side-banner .cta{background:linear-gradient(180deg,#ffd877,var(--gold));color:#5a3b00;border:none;border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer}
 
   /* ===== Footer ===== */
   .footer{background:#1a1a1a;color:#fff;margin-top:20px}
@@ -121,7 +114,7 @@
   form .full{grid-column:1/-1}
   input,select,textarea{padding:12px;border:1px solid var(--line);border-radius:12px;width:100%}
   textarea{min-height:100px;resize:vertical}
-  .hint{color:var(--muted);font-size:12px}
+  .hint{color:#6b7280;font-size:12px}
 
   /* Motion accessibility */
   @media (prefers-reduced-motion: reduce){
@@ -237,7 +230,7 @@
     </div>
   </section>
 
-  <!-- Biblioteca de Documentos -->
+  <!-- Biblioteca de Documentos (SEM banner lateral) -->
   <section class="section" id="docs">
     <div class="container">
       <div class="title"><h2>Modelos para baixar</h2><span class="subtitle">Pesquise por nome ou filtre por categoria</span></div>
@@ -260,23 +253,10 @@
           </div>
           <p class="subtitle" id="count" style="margin-top:10px">—</p>
         </aside>
-
         <!-- Centro: grade com SCROLL (6 cards visíveis) -->
         <div class="docs-holder">
           <div class="docs" id="docs-grid"><div class="empty">Nenhum documento encontrado.</div></div>
         </div>
-
-        <!-- Direita: banner lateral -->
-        <aside class="side-banner" aria-label="Promoção">
-          <h4>Promo • Certificado Digital</h4>
-          <p>A1/A3 com liberação rápida e atendimento por vídeo.</p>
-          <ul style="margin:0 0 10px 18px">
-            <li>Parcelamento em até 12x</li>
-            <li>Validades 12–36 meses</li>
-            <li>Suporte especializado</li>
-          </ul>
-          <button class="cta press" data-ripple onclick="scrollToId('certificado')">Emitir agora</button>
-        </aside>
       </div>
     </div>
   </section>
@@ -406,9 +386,8 @@
   catServ.addEventListener('click',e=>{ const b=e.target.closest('.cat'); if(!b) return; catServ.querySelectorAll('.cat').forEach(x=>x.classList.remove('active')); b.classList.add('active'); renderServ(b.dataset.cat); });
 
   // ===== Documentos (Drive) =====
-  // COMO FUNCIONA: Coloque os arquivos do Drive como "Qualquer pessoa com o link" e copie o ID.
-  // Exemplo de link compartilhado: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
-  // Abaixo, preencha o campo driveId para cada documento. O clique usa a URL de download do Drive.
+  // Coloque os arquivos do Drive como "Qualquer pessoa com o link" e copie o ID (FILE_ID).
+  // Abaixo, preencha o campo driveId para cada documento.
   const DOCS = [
     {id:1, nome:'Checklist de Abertura (PF/PJ)', cat:'societario', ext:'PDF', driveId:'1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', tags:['abertura','empresa','documentos']},
     {id:2, nome:'Modelo de Contrato Social', cat:'societario', ext:'DOCX', driveId:'1BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', tags:['contrato','societario']},
@@ -464,19 +443,15 @@
   function copyLink(link){ navigator.clipboard.writeText(link).then(()=>toast('Link copiado ✅')); }
   renderDocs();
 
-  // Pequena toast
-  function toast(msg){
-    let t=document.getElementById('toast');
-    if(!t){ t=document.createElement('div'); t.id='toast'; t.style.cssText='position:fixed;right:18px;bottom:18px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);z-index:90;opacity:0;transform:translateY(10px);transition:.25s'; document.body.appendChild(t); }
-    t.textContent=msg; t.style.opacity=1; t.style.transform='translateY(0)'; setTimeout(()=>{t.style.opacity=0; t.style.transform='translateY(10px)';}, 2400);
-  }
+  // Toast simples
+  function toast(msg){ let t=document.getElementById('toast'); if(!t){ t=document.createElement('div'); t.id='toast'; t.style.cssText='position:fixed;right:18px;bottom:18px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);z-index:90;opacity:0;transform:translateY(10px);transition:.25s'; document.body.appendChild(t); } t.textContent=msg; t.style.opacity=1; t.style.transform='translateY(0)'; setTimeout(()=>{t.style.opacity=0; t.style.transform='translateY(10px)';}, 2400); }
 
-  // ===== Modais (abrir/fechar) =====
+  // Modais
   function openModal(id){ const d=document.getElementById(id); if(!d) return; d.showModal(); }
   function closeModal(id){ const d=document.getElementById(id); if(!d) return; d.close(); }
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.querySelectorAll('dialog[open]')?.forEach(d=>d.close()); }});
 
-  // ===== GAS submit =====
+  // GAS submit
   async function submitForm(e){
     e.preventDefault();
     const form=e.target.closest('form');
@@ -486,12 +461,11 @@
       const data=await res.json().catch(()=>({}));
       if(!res.ok || data.status!=='ok') throw new Error(data.message||'Falha no envio');
       toast('Solicitação enviada! ✅'); form.reset();
-      // Fecha o modal se houver
       const modal=form.closest('dialog'); if(modal) modal.close();
     }catch(err){ console.error(err); toast('Não foi possível enviar. Tente novamente.'); }
   }
 
-  // ===== Helpers =====
+  // Helpers
   function throttle(fn, wait){ let last=0, t; return function(...args){ const now=Date.now(); const remain=wait-(now-last); clearTimeout(t); if(remain<=0){ last=now; fn.apply(this,args);} else { t=setTimeout(()=>{ last=Date.now(); fn.apply(this,args); }, remain); } } }
 </script>
 </body>
