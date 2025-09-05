@@ -51,17 +51,19 @@
   .top-banner .close{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
   @media(max-width:760px){.top-banner .inner{grid-template-columns:1fr}}
 
-  /* ===== Hero ===== */
-  .hero{color:#fff;background:
-    linear-gradient(180deg,rgba(127,22,53,.85),rgba(160,33,70,.85)),
-    url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1800&auto=format&fit=crop') center/cover no-repeat}
-  .hero .inner{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;padding:38px 0}
-  @media(max-width:980px){.hero .inner{grid-template-columns:1fr}}
-  .headline{font-size:clamp(28px,5vw,48px);margin:0 0 10px}
-  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
-  .chip{background:rgba(255,255,255,.92);color:#111;border:1px solid rgba(0,0,0,.06);border-radius:999px;padding:6px 10px}
-  .hero-card{background:#fff;color:#111;border-radius:16px;padding:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
-  .price{font-size:28px;font-weight:800;color:var(--wine);margin:8px 0}
+  /* ===== Hero (APENAS BANNER + TÍTULO) ===== */
+  .hero{
+    color:#fff;
+    background:
+      linear-gradient(180deg,rgba(127,22,53,.85),rgba(160,33,70,.85)),
+      url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1800&auto=format&fit=crop') center/cover no-repeat
+  }
+  .hero .inner{
+    display:block;           /* 1 coluna */
+    padding:64px 0;          /* mais respiro */
+  }
+  .headline{font-size:clamp(28px,5vw,48px);margin:0}
+  /* removidos: .chips, .hero-card, botões etc. */
 
   /* ===== Sections / Cards ===== */
   .section{padding:34px 0;border-top:1px solid var(--line)}
@@ -77,7 +79,7 @@
   .cat{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
   .cat.active{background:var(--wine);border-color:transparent;color:#fff}
 
-  /* ===== Documentos (SEM banner lateral; 6 visíveis + scroll) ===== */
+  /* ===== Documentos ===== */
   .docs-wrap{display:grid;grid-template-columns:280px 1fr;gap:16px}
   @media(max-width:980px){.docs-wrap{grid-template-columns:1fr}}
   .docs-side{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);height:fit-content;position:sticky;top:86px}
@@ -159,30 +161,11 @@
     </div>
   </section>
 
-  <!-- Hero -->
+  <!-- Hero (apenas título sobre o banner) -->
   <main id="home" class="hero">
     <div class="container inner">
       <section>
         <h1 class="headline">Contabilidade moderna, estratégica e acessível</h1>
-        <p class="subtitle">📌 Consultoria Contábil Estratégica • 📊 MEI • 🔐 Certificado Digital • ® Marcas & Patentes</p>
-        <div class="chips" aria-label="Diferenciais">
-          <span class="chip">DRE e dashboards</span>
-          <span class="chip">Obrigações em dia</span>
-          <span class="chip">Atendimento humano</span>
-          <span class="chip">LGPD</span>
-        </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
-          <button class="btn btn-brand press" data-ripple onclick="scrollToId('planos')">Ver planos</button>
-          <button class="btn btn-ghost press" data-ripple onclick="openModal('modalSocietario')">Solicitar agora</button>
-        </div>
-      </section>
-      <section>
-        <div class="hero-card">
-          <strong>Sistema de Emissão de Notas Fiscais</strong>
-          <p class="subtitle">Simples, rápido e seguro para produtos e serviços. Ideal para pequenos e médios negócios.</p>
-          <div class="price">A partir de R$ 31,99</div>
-          <button class="btn btn-brand press" data-ripple onclick="scrollToId('notas')">Quero emitir NF-e</button>
-        </div>
       </section>
     </div>
   </main>
@@ -230,7 +213,7 @@
     </div>
   </section>
 
-  <!-- Biblioteca de Documentos (SEM banner lateral) -->
+  <!-- Biblioteca de Documentos -->
   <section class="section" id="docs">
     <div class="container">
       <div class="title"><h2>Modelos para baixar</h2><span class="subtitle">Pesquise por nome ou filtre por categoria</span></div>
@@ -288,7 +271,7 @@
     </div>
   </footer>
 
-  <!-- ===== Modais (Forms em pop-up) ===== -->
+  <!-- ===== Modais ===== -->
   <dialog id="modalSocietario" aria-labelledby="socTitle">
     <div class="modal-head"><strong id="socTitle">🧾 Societário (Abertura/Alteração/Encerramento)</strong><button class="btn" onclick="closeModal('modalSocietario')" aria-label="Fechar">✕</button></div>
     <div class="modal-body">
@@ -386,8 +369,6 @@
   catServ.addEventListener('click',e=>{ const b=e.target.closest('.cat'); if(!b) return; catServ.querySelectorAll('.cat').forEach(x=>x.classList.remove('active')); b.classList.add('active'); renderServ(b.dataset.cat); });
 
   // ===== Documentos (Drive) =====
-  // Coloque os arquivos do Drive como "Qualquer pessoa com o link" e copie o ID (FILE_ID).
-  // Abaixo, preencha o campo driveId para cada documento.
   const DOCS = [
     {id:1, nome:'Checklist de Abertura (PF/PJ)', cat:'societario', ext:'PDF', driveId:'1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', tags:['abertura','empresa','documentos']},
     {id:2, nome:'Modelo de Contrato Social', cat:'societario', ext:'DOCX', driveId:'1BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', tags:['contrato','societario']},
