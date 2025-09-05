@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
 <style>
+  /* ===== Base / Design System ===== */
   :root{
     --wine:#7f1635; --wine-2:#a02146; --gold:#c89b2b;
     --bg:#f7f8fb; --text:#0f172a; --muted:#64748b;
@@ -22,8 +23,9 @@
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
   .container{max-width:var(--container);margin:0 auto;padding:0 18px}
+  .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
 
-  /* Header */
+  /* ===== Header ===== */
   .header{position:sticky;top:0;z-index:80;background:linear-gradient(180deg,var(--wine),var(--wine-2));color:#fff;box-shadow:var(--shadow)}
   .bar{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px}
   .brand{display:flex;gap:10px;align-items:center;font-weight:800}
@@ -40,7 +42,7 @@
   .ripple{position:absolute;border-radius:50%;transform:scale(0);animation:ripple .6s linear;opacity:.35;background:#fff;pointer-events:none}
   @keyframes ripple{to{transform:scale(4);opacity:0}}
 
-  /* Top Banner */
+  /* ===== Top Banner (abaixo do header) ===== */
   .top-banner{background:linear-gradient(90deg,rgba(127,22,53,.95),rgba(160,33,70,.95));color:#fff;border-bottom:1px solid rgba(255,255,255,.2)}
   .top-banner .inner{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 0}
   .top-banner .msg{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
@@ -49,27 +51,18 @@
   .top-banner .close{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
   @media(max-width:760px){.top-banner .inner{grid-template-columns:1fr}}
 
-  /* Hero */
-  .hero{
-    color:#fff;
-    background:
-      linear-gradient(180deg,rgba(127,22,53,.85),rgba(160,33,70,.85)),
-      url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1800&auto=format&fit=crop') center/cover no-repeat;
-  }
-  .hero .inner{
-    display:grid;
-    grid-template-columns:1.2fr 1fr;
-    gap:22px;
-    padding:38px 0;
-  }
-  @media(max-width:980px){
-    .hero .inner{grid-template-columns:1fr}
-  }
-  .headline{font-size:clamp(28px,5vw,48px);margin:0}
+  /* ===== Hero ===== */
+  .hero{color:#fff;background:
+    linear-gradient(180deg,rgba(127,22,53,.85),rgba(160,33,70,.85)),
+    url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=1800&auto=format&fit=crop') center/cover no-repeat}
+  .hero .inner{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;padding:38px 0}
+  @media(max-width:980px){.hero .inner{grid-template-columns:1fr}}
+  .headline{font-size:clamp(28px,5vw,48px);margin:0 0 0}
+  /* removidos: .chips, botões extras abaixo do título */
   .hero-card{background:#fff;color:#111;border-radius:16px;padding:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
   .price{font-size:28px;font-weight:800;color:var(--wine);margin:8px 0}
 
-  /* Sections */
+  /* ===== Sections / Cards ===== */
   .section{padding:34px 0;border-top:1px solid var(--line)}
   .title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   .subtitle{color:var(--muted)}
@@ -78,27 +71,73 @@
   @media(max-width:900px){.card{grid-column:span 12}}
   .card h3{margin:6px 0 8px;color:var(--wine)}
 
-  /* Footer */
+  /* ===== Categories (pílulas) ===== */
+  .cats{display:flex;gap:8px;flex-wrap:wrap}
+  .cat{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
+  .cat.active{background:var(--wine);border-color:transparent;color:#fff}
+
+  /* ===== Documentos (6 visíveis + scroll) ===== */
+  .docs-wrap{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:980px){.docs-wrap{grid-template-columns:1fr}}
+  .docs-side{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);height:fit-content;position:sticky;top:86px}
+  .search{display:flex;gap:8px;margin-bottom:10px}
+  .input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px}
+  .docs-holder{--row: 168px; max-height: calc(var(--row)*2 + 14px); overflow-y:auto; padding-right:6px}
+  @media(max-width:980px){.docs-holder{max-height: calc(var(--row)*3 + 28px);}}
+  .docs{display:grid;grid-template-columns:repeat(3, minmax(240px,1fr));gap:14px}
+  @media(max-width:1200px){.docs{grid-template-columns:repeat(3, minmax(220px,1fr));}}
+  @media(max-width:980px){.docs{grid-template-columns:repeat(2, minmax(200px,1fr));}}
+  .doc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:var(--row)}
+  .doc small{color:var(--muted)}
+  .doc .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .tag{font-size:12px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;background:#f9fafb}
+  .empty{padding:20px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted)}
+  .docs-holder::-webkit-scrollbar{height:10px;width:10px}
+  .docs-holder::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:12px}
+  .docs-holder::-webkit-scrollbar-track{background:#f3f4f6;border-radius:12px}
+
+  /* ===== Footer ===== */
   .footer{background:#1a1a1a;color:#fff;margin-top:20px}
   .footer .inner{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:center;padding:28px 0}
   @media(max-width:900px){.footer .inner{grid-template-columns:1fr}}
+
+  /* ===== Modais (Form pop-up) ===== */
+  dialog{border:none;border-radius:18px;max-width:min(680px,94vw);width:100%;box-shadow:var(--shadow);padding:0}
+  dialog::backdrop{background:rgba(0,0,0,.45)}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:linear-gradient(180deg,var(--wine),var(--wine-2));color:#fff;border-top-left-radius:18px;border-top-right-radius:18px}
+  .modal-body{padding:16px;background:#fff}
+  .modal-foot{padding:12px 16px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;background:#fff;border-bottom-left-radius:18px;border-bottom-right-radius:18px}
+
+  /* ===== Forms ===== */
+  form.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  form .full{grid-column:1/-1}
+  input,select,textarea{padding:12px;border:1px solid var(--line);border-radius:12px;width:100%}
+  textarea{min-height:100px;resize:vertical}
+  .hint{color:#6b7280;font-size:12px}
+
+  /* Motion accessibility */
+  @media (prefers-reduced-motion: reduce){
+    .press{transition:none}
+    .ripple{display:none}
+    html:focus-within{scroll-behavior:auto}
+  }
 </style>
 </head>
 <body>
   <header class="header">
     <div class="container bar">
-      <a class="brand" href="#home">
+      <a class="brand" href="#home" aria-label="Visão Contabilidade">
         <img src="https://dummyimage.com/42x42/ffffff/7f1635.png&text=V" alt="Logo Visão">
         <span>Visão Contabilidade Empresarial</span>
       </a>
-      <nav class="nav">
+      <nav class="nav" aria-label="Principal">
         <a href="#servicos">Serviços</a>
         <a href="#notas">Notas Fiscais</a>
         <a href="#certificado">Certificado</a>
         <a href="#docs">Modelos</a>
-        <a href="#planos">Planos</a>
         <a href="#contato">Contato</a>
       </nav>
+      <button class="btn btn-ghost press" data-ripple onclick="openModal('modalSocietario')">Abrir formulário</button>
     </div>
   </header>
 
@@ -113,27 +152,24 @@
         </div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        <button class="cta press" data-ripple>Emitir agora</button>
-        <button class="close press" data-ripple>✕</button>
+        <button class="cta press" data-ripple onclick="scrollToId('certificado')">Emitir agora</button>
+        <button class="close press" data-ripple onclick="dismissTopBanner()" aria-label="Fechar banner">✕</button>
       </div>
     </div>
   </section>
 
-  <!-- Hero -->
+  <!-- Hero (ajustado: título à esquerda + card à direita) -->
   <main id="home" class="hero">
     <div class="container inner">
-      <!-- Esquerda: título -->
       <section>
         <h1 class="headline">Contabilidade moderna, estratégica e acessível</h1>
       </section>
-
-      <!-- Direita: card sobreposto -->
       <section>
         <div class="hero-card">
           <strong>Sistema de Emissão de Notas Fiscais</strong>
           <p class="subtitle">Simples, rápido e seguro para produtos e serviços. Ideal para pequenos e médios negócios.</p>
           <div class="price">A partir de R$ 31,99</div>
-          <button class="btn btn-brand press" data-ripple>Quero emitir NF-e</button>
+          <button class="btn btn-brand press" data-ripple onclick="scrollToId('notas')">Quero emitir NF-e</button>
         </div>
       </section>
     </div>
@@ -142,13 +178,18 @@
   <!-- Serviços -->
   <section class="section" id="servicos">
     <div class="container">
-      <div class="title"><h2>Serviços</h2><span class="subtitle">Soluções completas para sua empresa</span></div>
-      <div class="grid">
-        <article class="card"><h3>Contabilidade Gerencial</h3><p>Indicadores, DRE e fluxo de caixa.</p></article>
-        <article class="card"><h3>Fiscal & Tributário</h3><p>Planejamento, apuração e revisão.</p></article>
-        <article class="card"><h3>Departamento Pessoal</h3><p>Folha, admissões, rescisões e benefícios.</p></article>
-        <article class="card"><h3>Regularizações</h3><p>Abertura/alteração/baixa e certidões.</p></article>
+      <div class="title"><h2>Serviços</h2>
+        <div class="cats" id="cat-servicos">
+          <button class="cat active press" data-ripple data-cat="todos">Todos</button>
+          <button class="cat press" data-ripple data-cat="societario">Societário</button>
+          <button class="cat press" data-ripple data-cat="fiscal">Fiscal/Tributário</button>
+          <button class="cat press" data-ripple data-cat="dp">Departamento Pessoal</button>
+          <button class="cat press" data-ripple data-cat="bpo">BPO Financeiro</button>
+          <button class="cat press" data-ripple data-cat="cert">Certificado Digital</button>
+          <button class="cat press" data-ripple data-cat="marcas">Marcas & Patentes</button>
+        </div>
       </div>
+      <div class="grid" id="servicos-grid"></div>
     </div>
   </section>
 
@@ -168,7 +209,7 @@
   <!-- Certificado Digital -->
   <section class="section" id="certificado">
     <div class="container">
-      <div class="title"><h2>Certificação Digital</h2><span class="subtitle">Atendimento presencial ou por videoconferência</span></div>
+      <div class="title"><h2>SantCert – Certificação Digital</h2><span class="subtitle">Atendimento presencial ou por videoconferência</span></div>
       <div class="grid">
         <article class="card"><h3>e-CPF (A1/A3)</h3><p>Assine documentos e acesse serviços online com validade jurídica.</p></article>
         <article class="card"><h3>e-CNPJ (A1/A3)</h3><p>Identidade digital da empresa; NF-e, Receita Federal, licitações e mais.</p></article>
@@ -177,14 +218,33 @@
     </div>
   </section>
 
-  <!-- Modelos de Documentos -->
+  <!-- Biblioteca de Documentos (com busca/Drive e 6 visíveis + scroll) -->
   <section class="section" id="docs">
     <div class="container">
-      <div class="title"><h2>Modelos para baixar</h2><span class="subtitle">Pesquise por nome ou categoria</span></div>
-      <div class="grid">
-        <article class="card"><h3>Checklist de Abertura</h3><p>Arquivo PDF pronto para baixar.</p></article>
-        <article class="card"><h3>Modelo de Contrato Social</h3><p>Arquivo DOCX para editar.</p></article>
-        <article class="card"><h3>Procuração Fiscal</h3><p>Documento padrão em Word.</p></article>
+      <div class="title"><h2>Modelos para baixar</h2><span class="subtitle">Pesquise por nome ou filtre por categoria</span></div>
+      <div class="docs-wrap">
+        <!-- Filtro esquerdo -->
+        <aside class="docs-side" aria-label="Filtros de documentos">
+          <div class="search">
+            <input id="q" class="input" placeholder="Pesquise por nome, palavra-chave... (ex: contrato, procuração)" aria-label="Pesquisar documentos"/>
+            <button class="btn btn-brand press" data-ripple onclick="searchDocs()">Buscar</button>
+          </div>
+          <strong>Categorias</strong>
+          <div class="cats" id="cat-docs" style="margin-top:8px">
+            <button class="cat active press" data-ripple data-cat="todas">Todas</button>
+            <button class="cat press" data-ripple data-cat="societario">Societário</button>
+            <button class="cat press" data-ripple data-cat="fiscal">Fiscal</button>
+            <button class="cat press" data-ripple data-cat="dp">DP</button>
+            <button class="cat press" data-ripple data-cat="financeiro">Financeiro</button>
+            <button class="cat press" data-ripple data-cat="cert">Certificado</button>
+            <button class="cat press" data-ripple data-cat="marcas">Marcas</button>
+          </div>
+          <p class="subtitle" id="count" style="margin-top:10px">—</p>
+        </aside>
+        <!-- Centro: grade com SCROLL (6 cards visíveis) -->
+        <div class="docs-holder">
+          <div class="docs" id="docs-grid"><div class="empty">Nenhum documento encontrado.</div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -211,13 +271,62 @@
         <p class="subtitle">© <span id="year"></span> Visão Contabilidade</p>
       </div>
       <div style="display:flex;gap:10px;justify-content:flex-end">
-        <button class="btn btn-brand press" data-ripple>Solicitar agora</button>
+        <button class="btn btn-brand press" data-ripple onclick="openModal('modalSocietario')">Solicitar agora</button>
       </div>
     </div>
   </footer>
 
+  <!-- ===== Modais (Forms em pop-up) ===== -->
+  <dialog id="modalSocietario" aria-labelledby="socTitle">
+    <div class="modal-head"><strong id="socTitle">🧾 Societário (Abertura/Alteração/Encerramento)</strong><button class="btn" onclick="closeModal('modalSocietario')" aria-label="Fechar">✕</button></div>
+    <div class="modal-body">
+      <form class="grid" data-form="societario" onsubmit="submitForm(event)">
+        <input class="input" name="nome" placeholder="Nome/Razão Social" required>
+        <input class="input" name="cnpj" placeholder="CNPJ" required>
+        <input class="input" type="email" name="email" placeholder="E-mail" required>
+        <input class="input" name="telefone" placeholder="Telefone (WhatsApp)" required>
+        <select class="input" name="tipo" required>
+          <option value="">Tipo…</option><option>Abertura</option><option>Alteração</option><option>Encerramento</option>
+        </select>
+        <textarea class="input full" name="mensagem" placeholder="Detalhes"></textarea>
+        <span class="hint full">Ao enviar, seus dados serão direcionados ao setor responsável (LGPD).</span>
+        <div class="full" style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn" type="button" onclick="closeModal('modalSocietario')">Cancelar</button>
+          <button class="btn btn-brand press" data-ripple type="submit">Enviar</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-foot"></div>
+  </dialog>
+
+  <dialog id="modalCert" aria-labelledby="certTitle">
+    <div class="modal-head"><strong id="certTitle">🔐 Certificado Digital</strong><button class="btn" onclick="closeModal('modalCert')" aria-label="Fechar">✕</button></div>
+    <div class="modal-body">
+      <form class="grid" data-form="certificado" onsubmit="submitForm(event)">
+        <select class="input" name="tipo" required><option value="">Tipo…</option><option value="A1">A1</option><option value="A3">A3</option></select>
+        <select class="input" name="pessoa" required><option value="">Pessoa…</option><option>PF</option><option>PJ</option></select>
+        <input class="input" name="nome" placeholder="Nome/Razão Social" required>
+        <input class="input" name="cnpj" placeholder="CPF/CNPJ" required>
+        <input class="input" type="email" name="email" placeholder="E-mail" required>
+        <input class="input" name="telefone" placeholder="Telefone (WhatsApp)" required>
+        <textarea class="input full" name="mensagem" placeholder="Observações"></textarea>
+        <div class="full" style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn" type="button" onclick="closeModal('modalCert')">Cancelar</button>
+          <button class="btn btn-brand press" data-ripple type="submit">Solicitar</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
 <script>
+  // ===== CONFIG =====
+  const GAS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID_DO_WEBAPP/exec"; // TODO: substitua pela sua URL do Web App
+
+  // ===== Util =====
+  function scrollToId(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
   document.getElementById('year').textContent=new Date().getFullYear();
+
+  // Ripple (microinteração)
   document.addEventListener('click', e=>{
     const btn = e.target.closest('[data-ripple]');
     if(!btn) return;
@@ -230,6 +339,121 @@
     r.style.top=(e.clientY-rect.top-d/2)+'px';
     btn.appendChild(r); setTimeout(()=>r.remove(),600);
   });
+
+  // Banner topo - lembrar ocultação por 1 dia
+  const TOP_BANNER_KEY='visao.top.banner.hide';
+  function dismissTopBanner(){ const oneDay=86400000; localStorage.setItem(TOP_BANNER_KEY, String(Date.now()+oneDay)); document.getElementById('topBanner')?.remove(); }
+  (function(){const until=Number(localStorage.getItem(TOP_BANNER_KEY)||0); if(until && Date.now()<until){ document.getElementById('topBanner')?.remove(); }})();
+
+  // ===== Serviços (com categorias) =====
+  const SERVICOS = [
+    {t:'Contabilidade Gerencial', d:'Indicadores, DRE e fluxo de caixa.', c:'bpo'},
+    {t:'Fiscal & Tributário', d:'Planejamento, apuração e revisão.', c:'fiscal'},
+    {t:'Departamento Pessoal', d:'Folha, admissões, rescisões e benefícios.', c:'dp'},
+    {t:'Regularizações', d:'Abertura/alteração/baixa e certidões.', c:'societario'},
+    {t:'Certificado Digital', d:'Emissão A1/A3 – presencial ou vídeo.', c:'cert'},
+    {t:'Marcas & Patentes', d:'Pesquisa, registro e acompanhamento.', c:'marcas'},
+  ];
+  const gridServ=document.getElementById('servicos-grid');
+  const catServ=document.getElementById('cat-servicos');
+  function renderServ(cat='todos'){
+    const frag=document.createDocumentFragment();
+    SERVICOS.filter(s=>cat==='todos'||s.c===cat).forEach(s=>{
+      const el=document.createElement('article');
+      el.className='card press'; el.setAttribute('data-ripple','');
+      el.innerHTML=`<h3>${s.t}</h3><p class="subtitle">${s.d}</p>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn btn-brand press" data-ripple onclick="openModal('${s.c==='cert'?'modalCert':'modalSocietario'}')">Solicitar</button>
+          <button class="btn press" data-ripple onclick="scrollToId('contato')">Falar</button>
+        </div>`;
+      frag.appendChild(el);
+    });
+    gridServ.innerHTML=''; gridServ.appendChild(frag);
+  }
+  renderServ();
+  catServ.addEventListener('click',e=>{ const b=e.target.closest('.cat'); if(!b) return; catServ.querySelectorAll('.cat').forEach(x=>x.classList.remove('active')); b.classList.add('active'); renderServ(b.dataset.cat); });
+
+  // ===== Documentos (Drive) =====
+  // Coloque os arquivos do Drive como "Qualquer pessoa com o link" e copie o ID (FILE_ID).
+  const DOCS = [
+    {id:1, nome:'Checklist de Abertura (PF/PJ)', cat:'societario', ext:'PDF', driveId:'1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', tags:['abertura','empresa','documentos']},
+    {id:2, nome:'Modelo de Contrato Social', cat:'societario', ext:'DOCX', driveId:'1BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', tags:['contrato','societario']},
+    {id:3, nome:'Procuração (Fiscal/Bancária)', cat:'fiscal', ext:'DOCX', driveId:'1CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', tags:['procuração','fisco']},
+    {id:4, nome:'Termo de Responsabilidade DP', cat:'dp', ext:'DOCX', driveId:'1DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', tags:['dp','pessoal']},
+    {id:5, nome:'Planilha – Contas a Pagar/Receber', cat:'financeiro', ext:'XLSX', driveId:'1EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', tags:['bpo','financeiro']},
+    {id:6, nome:'Requerimento de Marca (INPI)', cat:'marcas', ext:'PDF', driveId:'1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF', tags:['marcas','inpi']},
+    {id:7, nome:'Checklist Emissão NF-e', cat:'fiscal', ext:'PDF', driveId:'1GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG', tags:['nfe','notas']},
+    {id:8, nome:'Formulário de Validação – e-CPF/e-CNPJ', cat:'cert', ext:'PDF', driveId:'1HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', tags:['certificado','icp-brasil']},
+    {id:9, nome:'Procuração p/ Receita Federal', cat:'fiscal', ext:'PDF', driveId:'1IIIIIIIIIIIIIIIIIIIIIIIIIIIIIII', tags:['procuração','rf']},
+    {id:10, nome:'Planilha Fluxo de Caixa', cat:'financeiro', ext:'XLSX', driveId:'1JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ', tags:['fluxo','caixa']},
+    {id:11, nome:'Aditivo Contratual', cat:'societario', ext:'DOCX', driveId:'1KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK', tags:['aditivo','contrato']},
+    {id:12, nome:'Ficha de Registro – DP', cat:'dp', ext:'DOCX', driveId:'1LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL', tags:['registro','dp']},
+  ];
+  let DOC_CAT='todas', DOC_Q='';
+  const docsGrid=document.getElementById('docs-grid');
+  const catDocs=document.getElementById('cat-docs');
+  const q=document.getElementById('q');
+  const count=document.getElementById('count');
+
+  const driveDownloadUrl = (id)=> `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`;
+
+  function labelCat(c){ return {societario:'Societário', fiscal:'Fiscal', dp:'DP', financeiro:'Financeiro', cert:'Certificado', marcas:'Marcas'}[c]||'Outros'; }
+  function renderDocs(){
+    const qn = (DOC_Q||'').trim().toLowerCase();
+    const list = DOCS.filter(d=>{
+      const inCat = (DOC_CAT==='todas' || d.cat===DOC_CAT);
+      const str = (d.nome+' '+(d.tags||[]).join(' ')).toLowerCase();
+      const inQ = !qn || str.includes(qn);
+      return inCat && inQ;
+    });
+    count.textContent = `${list.length} documento(s)`;
+    docsGrid.innerHTML = list.length ? '' : `<div class="empty">Nenhum documento encontrado.</div>`;
+    const frag=document.createDocumentFragment();
+    list.forEach(d=>{
+      const el=document.createElement('article');
+      el.className='doc press'; el.setAttribute('data-ripple','');
+      const url = driveDownloadUrl(d.driveId);
+      el.innerHTML = `
+        <div><strong>${d.nome}</strong><small> ${labelCat(d.cat)} • ${d.ext}</small></div>
+        <div class="tags">${(d.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div style="margin-top:auto;display:flex;gap:8px">
+          <a class="btn btn-brand press" data-ripple href="${url}" target="_blank" rel="noopener">Baixar</a>
+          <button class="btn press" data-ripple data-url="${url}" onclick="copyLink(this.dataset.url)">Copiar link</button>
+        </div>`;
+      frag.appendChild(el);
+    });
+    docsGrid.appendChild(frag);
+  }
+  function searchDocs(){ DOC_Q = q.value; renderDocs(); }
+  q.addEventListener('input', throttle(searchDocs, 120));
+  catDocs.addEventListener('click', e=>{ const b=e.target.closest('.cat'); if(!b) return; catDocs.querySelectorAll('.cat').forEach(x=>x.classList.remove('active')); b.classList.add('active'); DOC_CAT=b.dataset.cat; renderDocs(); });
+  function copyLink(link){ navigator.clipboard.writeText(link).then(()=>toast('Link copiado ✅')); }
+  renderDocs();
+
+  // Toast simples
+  function toast(msg){ let t=document.getElementById('toast'); if(!t){ t=document.createElement('div'); t.id='toast'; t.style.cssText='position:fixed;right:18px;bottom:18px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);z-index:90;opacity:0;transform:translateY(10px);transition:.25s'; document.body.appendChild(t); } t.textContent=msg; t.style.opacity=1; t.style.transform='translateY(0)'; setTimeout(()=>{t.style.opacity=0; t.style.transform='translateY(10px)';}, 2400); }
+
+  // Modais
+  function openModal(id){ const d=document.getElementById(id); if(!d) return; d.showModal(); }
+  function closeModal(id){ const d=document.getElementById(id); if(!d) return; d.close(); }
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.querySelectorAll('dialog[open]')?.forEach(d=>d.close()); }});
+
+  // GAS submit
+  async function submitForm(e){
+    e.preventDefault();
+    const form=e.target.closest('form');
+    const fd=new FormData(form); fd.append('form', form.dataset.form||'geral');
+    try{
+      const res=await fetch(GAS_ENDPOINT,{method:'POST', body:fd});
+      const data=await res.json().catch(()=>({}));
+      if(!res.ok || data.status!=='ok') throw new Error(data.message||'Falha no envio');
+      toast('Solicitação enviada! ✅'); form.reset();
+      const modal=form.closest('dialog'); if(modal) modal.close();
+    }catch(err){ console.error(err); toast('Não foi possível enviar. Tente novamente.'); }
+  }
+
+  // Helpers
+  function throttle(fn, wait){ let last=0, t; return function(...args){ const now=Date.now(); const remain=wait-(now-last); clearTimeout(t); if(remain<=0){ last=now; fn.apply(this,args);} else { t=setTimeout(()=>{ last=Date.now(); fn.apply(this,args); }, remain); } } }
 </script>
 </body>
 </html>
