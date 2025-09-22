@@ -2,239 +2,172 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>Visão Contabilidade Empresarial</title>
-<meta name="description" content="Consultoria contábil estratégica, emissão de notas, certificado digital, marcas & patentes e biblioteca de documentos modelo."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-  /* ===== Base ===== */
-  :root{
-    --wine:#7f1635; --wine-2:#a02146; --gold:#c89b2b;
-    --bg:#f7f8fb; --text:#0f172a; --muted:#64748b;
-    --card:#ffffff; --line:#e5e7eb; --shadow:0 10px 30px rgba(2,6,23,.08);
-    --radius:16px; --container:1200px;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;max-width:100%;overflow-x:hidden}
-  body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
-  img{max-width:100%;display:block}
-  a{color:inherit;text-decoration:none}
-  .container{max-width:var(--container);margin:0 auto;padding:0 18px}
+:root {
+  --wine:#7f1635; --wine-2:#a02146; --gold:#c89b2b;
+  --bg:#f7f8fb; --text:#0f172a; --muted:#64748b;
+  --card:#fff; --line:#e5e7eb; --shadow:0 10px 25px rgba(0,0,0,.08);
+  --radius:16px; --container:1200px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:var(--container);margin:auto;padding:0 18px}
 
-  /* ===== Header ===== */
-  .header{position:sticky;top:0;z-index:80;background:linear-gradient(180deg,var(--wine),var(--wine-2));color:#fff;box-shadow:var(--shadow)}
-  .bar{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px}
-  .brand{display:flex;gap:10px;align-items:center;font-weight:800}
-  .brand img{width:42px;height:42px;border-radius:10px;background:#fff;border:2px solid rgba(255,255,255,.9);object-fit:cover}
-  .nav{display:flex;gap:8px;flex-wrap:wrap}
-  .nav a{padding:8px 10px;border-radius:10px;color:#fff}
-  .nav a:hover{background:rgba(255,255,255,.18)}
-  .btn{appearance:none;border:none;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;position:relative;overflow:hidden;transition:transform .08s ease}
-  .btn-brand{background:linear-gradient(180deg,#ffd877,var(--gold));color:#5a3b00}
-  .btn-ghost{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.35)}
-  .press:active{transform:scale(.98)}
-  .ripple{position:absolute;border-radius:50%;transform:scale(0);animation:ripple .6s linear;opacity:.35;background:#fff;pointer-events:none}
-  @keyframes ripple{to{transform:scale(4);opacity:0}}
+/* Header */
+header{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--wine),var(--wine-2));color:#fff;box-shadow:var(--shadow)}
+header .bar{display:flex;align-items:center;justify-content:space-between;padding:10px 18px}
+header nav{display:flex;gap:14px;flex-wrap:wrap}
+header nav a{padding:8px 12px;border-radius:8px}
+header nav a:hover{background:rgba(255,255,255,.15)}
 
-  /* ===== Banner Topo ===== */
-  .top-banner{background:linear-gradient(90deg,rgba(127,22,53,.95),rgba(160,33,70,.95));color:#fff}
-  .top-banner .inner{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 0}
-  .top-banner .msg{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .top-banner img{height:44px;width:auto;border-radius:10px;border:2px solid rgba(255,255,255,.6);object-fit:cover}
-  .top-banner .cta{background:linear-gradient(180deg,#ffd877,var(--gold));color:#5a3b00;border:none;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
-  .top-banner .close{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
-  @media(max-width:760px){.top-banner .inner{grid-template-columns:1fr}}
+/* Hero */
+.hero{min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;
+  background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('https://github.com/ClenaStore/santsert/blob/main/paste/Captura%20de%20tela%202025-09-22%20165329.png?raw=true') no-repeat center/cover;}
+.hero .inner{max-width:800px;padding:20px}
+.hero h1{font-size:clamp(28px,6vw,50px);margin-bottom:10px}
+.hero p{font-size:18px;color:#e2e8f0;margin-bottom:20px}
+.btn{border:none;cursor:pointer;font-weight:600;border-radius:10px;padding:12px 20px}
+.btn-brand{background:linear-gradient(180deg,#ffd877,var(--gold));color:#4a3300}
+.btn-ghost{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3)}
 
-  /* ===== Hero ===== */
-  .hero {
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    background:linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-      url('https://github.com/ClenaStore/santsert/blob/main/paste/Captura%20de%20tela%202025-09-22%20165329.png?raw=true') no-repeat top center;
-    background-size:cover;
-    color:#fff;
-  }
-  .hero .inner{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:32px;padding:38px 0}
-  @media(max-width:980px){.hero .inner{grid-template-columns:1fr;text-align:center}}
-  .headline{font-size:clamp(28px,5vw,48px);margin:0}
-  .hero-card{background:#fff;color:#111;border-radius:16px;padding:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
-  .price{font-size:28px;font-weight:800;color:var(--wine);margin:8px 0}
+/* Section */
+.section{padding:60px 0}
+.section h2{margin-bottom:10px;font-size:28px}
+.section .subtitle{color:var(--muted);margin-bottom:30px}
 
-  /* ===== Sections / Cards ===== */
-  .section{padding:34px 0;border-top:1px solid var(--line)}
-  .title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap}
-  .subtitle{color:var(--muted)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;min-height:180px}
-  .card h3{margin:6px 0 8px;color:var(--wine)}
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);transition:.3s}
+.card:hover{transform:translateY(-5px)}
+.card h3{margin:0 0 10px;color:var(--wine)}
 
-  /* ===== Categorias ===== */
-  .cats{display:flex;gap:8px;flex-wrap:wrap}
-  .cat{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
-  .cat.active{background:var(--wine);border-color:transparent;color:#fff}
+/* Form */
+form{display:grid;gap:12px}
+input,select,textarea{padding:12px;border-radius:10px;border:1px solid var(--line);width:100%}
+textarea{min-height:120px;resize:vertical}
+form button{margin-top:10px}
 
-  /* ===== Documentos ===== */
-  .docs-wrap{display:grid;grid-template-columns:280px 1fr;gap:16px}
-  @media(max-width:980px){.docs-wrap{grid-template-columns:1fr}}
-  .docs-side{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);height:fit-content;position:sticky;top:86px}
-  .search{display:flex;gap:8px;margin-bottom:10px}
-  .input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px}
-  .docs-holder{--row:168px;max-height:calc(var(--row)*2 + 14px);overflow-y:auto;padding-right:6px}
-  @media(max-width:980px){.docs-holder{max-height:calc(var(--row)*3 + 28px)}}
-  .docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-  .doc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:var(--row)}
-  .doc small{color:var(--muted)}
-  .doc .tags{display:flex;gap:6px;flex-wrap:wrap}
-  .tag{font-size:12px;border:1px solid var(--line);padding:3px 8px;border-radius:999px;background:#f9fafb}
-  .empty{padding:20px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted)}
-  .docs-holder::-webkit-scrollbar{height:10px;width:10px}
-  .docs-holder::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:12px}
-  .docs-holder::-webkit-scrollbar-track{background:#f3f4f6;border-radius:12px}
-
-  /* ===== Footer ===== */
-  .footer{background:#1a1a1a;color:#fff;margin-top:20px}
-  .footer .inner{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:center;padding:28px 0}
-  @media(max-width:900px){.footer .inner{grid-template-columns:1fr;text-align:center;gap:12px}}
+/* Footer */
+footer{background:#111;color:#fff;padding:30px 0;text-align:center}
+footer p{margin:6px 0;color:#bbb}
 </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container bar">
-      <a class="brand" href="#home">
-        <img src="https://github.com/ClenaStore/santsert/blob/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-20%20%C3%A0(s)%2016.21.40_26238e6c.jpg?raw=true" alt="Logo Visão">
-        <span>Visão Contabilidade Empresarial</span>
-      </a>
-      <nav class="nav">
-        <a href="#servicos">Serviços</a>
-        <a href="#notas">Notas Fiscais</a>
-        <a href="#certificado">Certificado</a>
-        <a href="#docs">Modelos</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <button class="btn btn-ghost press" data-ripple>Abrir formulário</button>
-    </div>
-  </header>
 
-  <!-- Banner topo -->
-  <section class="top-banner" id="topBanner">
-    <div class="container inner">
-      <div class="msg">
-        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop" alt="Campanha">
-        <div>
-          <strong>Promo • Certificado Digital A1/A3</strong><br>
-          <small>Liberação rápida • Atendimento por vídeo • até 12x</small>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button class="cta press" data-ripple>Emitir agora</button>
-        <button class="close press" data-ripple aria-label="Fechar banner">✕</button>
-      </div>
+<!-- Header -->
+<header>
+  <div class="bar container">
+    <div class="brand">
+      <img src="https://github.com/ClenaStore/santsert/blob/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-20%20%C3%A0(s)%2016.21.40_26238e6c.jpg?raw=true" alt="Logo" style="height:42px;border-radius:8px;border:2px solid #fff">
+      <strong>Visão Contabilidade</strong>
     </div>
-  </section>
+    <nav>
+      <a href="#servicos">Serviços</a>
+      <a href="#certificado">Certificado</a>
+      <a href="#marcas">Marcas</a>
+      <a href="#docs">Modelos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
 
-  <!-- Hero -->
-  <main id="home" class="hero">
-    <div class="container inner">
-      <section>
-        <h1 class="headline">Sistema de Emissão de Notas Fiscais</h1>
-      </section>
-      <section>
-        <div class="hero-card">
-          <strong>Sistema de Emissão de Notas Fiscais</strong>
-          <p class="subtitle">Simples, rápido e seguro para produtos e serviços. Ideal para pequenos e médios negócios.</p>
-          <div class="price">A partir de R$ 31,99</div>
-          <button class="btn btn-brand press" data-ripple>Quero emitir NF-e</button>
-        </div>
-      </section>
-    </div>
-  </main>
+<!-- Hero -->
+<section class="hero">
+  <div class="inner">
+    <h1>Consultoria Contábil Estratégica</h1>
+    <p>📊 Especializada em MEI, pequenas e médias empresas<br>🔐 Certificação Digital • ® Registro de Marcas & Patentes<br>📂 Modelos prontos para download</p>
+    <button class="btn btn-brand" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Solicitar Atendimento</button>
+  </div>
+</section>
 
-  <!-- Serviços -->
-  <section class="section" id="servicos">
-    <div class="container">
-      <div class="title"><h2>Serviços</h2>
-        <div class="cats"><button class="cat active">Todos</button></div>
-      </div>
-      <div class="grid">
-        <article class="card"><h3>Contabilidade Gerencial</h3><p>Indicadores, DRE e fluxo de caixa.</p></article>
-        <article class="card"><h3>Fiscal & Tributário</h3><p>Planejamento, apuração e revisão.</p></article>
-        <article class="card"><h3>Departamento Pessoal</h3><p>Folha, admissões, rescisões e benefícios.</p></article>
-      </div>
+<!-- Serviços -->
+<section class="section" id="servicos">
+  <div class="container">
+    <h2>Serviços</h2>
+    <p class="subtitle">Tudo que sua empresa precisa em um só lugar</p>
+    <div class="grid">
+      <div class="card"><h3>📊 Contabilidade Gerencial</h3><p>Indicadores, DRE e fluxo de caixa.</p></div>
+      <div class="card"><h3>🧾 Fiscal & Tributário</h3><p>Planejamento, apuração e revisão.</p></div>
+      <div class="card"><h3>👥 Departamento Pessoal</h3><p>Folha, admissões, rescisões e benefícios.</p></div>
+      <div class="card"><h3>💼 BPO Financeiro</h3><p>Contas a pagar e receber, conciliações e relatórios.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Notas Fiscais -->
-  <section class="section" id="notas">
-    <div class="container">
-      <div class="title"><h2>Notas Fiscais sem complicação</h2><span class="subtitle">Sistema intuitivo, suporte e integração</span></div>
-      <div class="grid">
-        <article class="card"><h3>Implantação</h3><p>Configuramos natureza de operações.</p></article>
-        <article class="card"><h3>Treinamento</h3><p>Passo a passo de emissão e cancelamento.</p></article>
-        <article class="card"><h3>Suporte</h3><p>Equipe pronta para dúvidas.</p></article>
-      </div>
+<!-- Certificado -->
+<section class="section" id="certificado">
+  <div class="container">
+    <h2>SantCert – Certificação Digital</h2>
+    <p class="subtitle">Segurança e praticidade para pessoas físicas e jurídicas</p>
+    <div class="grid">
+      <div class="card"><h3>e-CPF</h3><p>Assine documentos e acesse serviços online com validade jurídica.</p></div>
+      <div class="card"><h3>e-CNPJ</h3><p>Emita NF-e, acesse Receita Federal, participe de licitações e muito mais.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Certificado -->
-  <section class="section" id="certificado">
-    <div class="container">
-      <div class="title"><h2>SantCert – Certificação Digital</h2><span class="subtitle">Atendimento presencial ou por videoconferência</span></div>
-      <div class="grid">
-        <article class="card"><h3>e-CPF (A1/A3)</h3><p>Assine documentos com validade jurídica.</p></article>
-        <article class="card"><h3>e-CNPJ (A1/A3)</h3><p>Identidade digital da empresa.</p></article>
-      </div>
-    </div>
-  </section>
+<!-- Marcas -->
+<section class="section" id="marcas">
+  <div class="container">
+    <h2>® Registro de Marcas & Patentes</h2>
+    <p class="subtitle">Proteja sua marca e seu negócio com segurança</p>
+    <div class="card"><p>Pesquisamos, registramos e acompanhamos processos no INPI, garantindo exclusividade e proteção para sua marca.</p></div>
+  </div>
+</section>
 
-  <!-- Documentos -->
-  <section class="section" id="docs">
-    <div class="container">
-      <div class="title"><h2>Modelos para baixar</h2></div>
-      <div class="docs-wrap">
-        <aside class="docs-side">
-          <div class="search"><input class="input" placeholder="Pesquisar documentos"></div>
-        </aside>
-        <div class="docs-holder">
-          <div class="docs">
-            <div class="doc"><strong>Checklist</strong><small>Societário • PDF</small></div>
-          </div>
-        </div>
-      </div>
+<!-- Modelos -->
+<section class="section" id="docs">
+  <div class="container">
+    <h2>📂 Modelos para Download</h2>
+    <p class="subtitle">Procura contratos, procurações e planilhas? Baixe grátis</p>
+    <div class="grid" id="docs-grid">
+      <div class="card"><h3>Contrato Social</h3><a class="btn btn-brand" href="#">Baixar</a></div>
+      <div class="card"><h3>Procuração Fiscal</h3><a class="btn btn-brand" href="#">Baixar</a></div>
+      <div class="card"><h3>Planilha Fluxo de Caixa</h3><a class="btn btn-brand" href="#">Baixar</a></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="footer" id="contato">
-    <div class="container inner">
-      <div>
-        <h3>Fale com a Visão</h3>
-        <p class="subtitle">(00) 00000-0000 • atendimento@visaocontabil.com.br</p>
-        <p class="subtitle">Av. Exemplo, 123 – Centro – Sua Cidade/UF</p>
-        <p class="subtitle">© <span id="year"></span> Visão Contabilidade</p>
-      </div>
-      <div style="display:flex;gap:10px;justify-content:flex-end">
-        <button class="btn btn-brand press">Solicitar agora</button>
-      </div>
-    </div>
-  </footer>
+<!-- Contato -->
+<section class="section" id="contato">
+  <div class="container">
+    <h2>📞 Entre em Contato</h2>
+    <p class="subtitle">Receba um diagnóstico gratuito</p>
+    <form onsubmit="submitForm(event)">
+      <input type="text" name="nome" placeholder="Nome completo" required>
+      <input type="email" name="email" placeholder="E-mail" required>
+      <input type="tel" name="telefone" placeholder="WhatsApp" required>
+      <textarea name="mensagem" placeholder="Mensagem"></textarea>
+      <button class="btn btn-brand" type="submit">Enviar</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© <span id="year"></span> Visão Contabilidade Empresarial</p>
+  <p>Av. Exemplo, 123 – Centro – Sua Cidade/UF</p>
+</footer>
 
 <script>
-  document.getElementById('year').textContent=new Date().getFullYear();
-  document.addEventListener('click', e=>{
-    const btn=e.target.closest('[data-ripple]');
-    if(!btn) return;
-    const r=document.createElement('span');
-    const d=Math.max(btn.clientWidth,btn.clientHeight);
-    const rect=btn.getBoundingClientRect();
-    r.className='ripple'; r.style.width=r.style.height=d+'px';
-    r.style.left=(e.clientX-rect.left-d/2)+'px';
-    r.style.top=(e.clientY-rect.top-d/2)+'px';
-    btn.appendChild(r); setTimeout(()=>r.remove(),600);
-  });
+const GAS_ENDPOINT = "https://script.google.com/macros/s/SEU_ID_DO_WEBAPP/exec"; // coloque aqui sua URL do Google Apps Script
+
+function submitForm(e){
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  fetch(GAS_ENDPOINT, {method:"POST", body:fd})
+    .then(r=>r.json()).then(data=>{
+      alert("Enviado com sucesso!");
+      e.target.reset();
+    }).catch(()=>alert("Erro ao enviar, tente novamente."));
+}
+document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
